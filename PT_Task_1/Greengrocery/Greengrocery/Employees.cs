@@ -8,8 +8,15 @@ namespace Greengrocery
 {
     internal class Employees : User
     {
-        int employeeId;
-        int salary;
+        private int employeeId;
+        private int salary;
+
+        public Employees(string surname, string name, int phone, string email, int employeeId, int salary)
+            : base(surname, name, phone, email)
+        {
+            this.employeeId = employeeId;
+            this.salary = salary;
+        }
 
         public int getEmployeeId()
         {
@@ -24,7 +31,7 @@ namespace Greengrocery
         public int getSalary() { return this.salary; }
 
         public void setSalary(int value) {
-            this.setSalary(value);
+            this.salary = value;
         }
     }
 }

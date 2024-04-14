@@ -6,7 +6,31 @@ using System.Threading.Tasks;
 
 namespace Greengrocery
 {
-    internal class Customers
+    internal class Customers : User
     {
+        private int customerId;
+        private int balance;
+
+        // Constructor to initialize the Customers object
+        public Customers(string surname, string name, int phone, string email, int customerId, int balance)
+            : base(surname, name, phone, email)
+        {
+            this.customerId = customerId;
+            this.balance = balance;
+        }
+
+        public int getCustomerId()
+        {
+            return this.customerId;
+        }
+
+        public void setCustomerId(int value)
+        {
+            this.customerId = value;
+        }
+        
+        public int getBalance() {return this.balance;}
+
+        public void setBalance(int value) { this.balance = value; }
     }
 }
