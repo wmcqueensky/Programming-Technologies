@@ -4,10 +4,10 @@ namespace Greengrocery
 {
     public class Product
     {
-        private int product_id;
-        private string name;
+        private readonly int product_id;
+        private readonly string name;
         private float price;
-        private string type;
+        private readonly string type;
         public Product(int productId, string name, float price, string type)
         {
             this.product_id = productId;
