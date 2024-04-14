@@ -16,6 +16,11 @@ namespace Greengrocery
             products.Add(product);
         }
 
+        public void RemoveProduct(Product product)
+        {
+            products.Remove(product);
+        }
+
         public List<Product> GetProducts()
         {
             return products;

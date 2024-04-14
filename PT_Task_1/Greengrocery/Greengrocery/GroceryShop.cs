@@ -29,5 +29,25 @@ namespace Greengrocery
         {
             return initialBalance;
         }
+
+        public void AddUser(User user)
+        {
+            users.Add(user);
+        }
+
+        public void DeleteUser(User user)
+        {
+            users.Remove(user);
+        }
+
+        public void AddProduct(Product product)
+        {
+            catalog.AddProduct(product);
+        }
+
+        public void DeleteProduct(Product product)
+        {
+            catalog.RemoveProduct(product);
+        }
     }
 }

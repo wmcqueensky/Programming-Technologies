@@ -31,6 +31,15 @@ namespace Greengrocery
             return price;
         }
 
+        public void SetPrice(float newPrice)
+        {
+            if (newPrice < 0)
+            {
+                throw new ArgumentException("Price cannot be negative.");
+            }
+            price = newPrice;
+        }
+
         public string GetType()
         {
             return type;

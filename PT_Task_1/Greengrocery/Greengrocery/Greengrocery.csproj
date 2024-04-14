@@ -46,6 +46,7 @@
     <Compile Include="Catalog.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="State.cs" />
     <Compile Include="Supplier.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
