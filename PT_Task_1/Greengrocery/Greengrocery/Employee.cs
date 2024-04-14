@@ -6,31 +6,31 @@ using System.Threading.Tasks;
 
 namespace Greengrocery
 {
-    internal class Employees : User
+    public class Employee : User
     {
         private int employeeId;
         private int salary;
 
-        public Employees(string surname, string name, int phone, string email, int employeeId, int salary)
+        public Employee(string surname, string name, int phone, string email, int employeeId, int salary)
             : base(surname, name, phone, email)
         {
             this.employeeId = employeeId;
             this.salary = salary;
         }
 
-        public int getEmployeeId()
+        public int GetEmployeeId()
         {
             return this.employeeId;
         }
 
-        public void setEmployeeId(int value)
+        public void SetEmployeeId(int value)
         {
             this.employeeId = value;
         }
 
-        public int getSalary() { return this.salary; }
+        public int GetSalary() { return this.salary; }
 
-        public void setSalary(int value) {
+        public void SetSalary(int value) {
             this.salary = value;
         }
     }

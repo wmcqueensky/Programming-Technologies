@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Greengrocery
 {
-    internal class Customers : User
+    public class Customers : User
     {
         private int customerId;
         private int balance;

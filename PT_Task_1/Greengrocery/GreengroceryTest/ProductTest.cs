@@ -19,7 +19,7 @@ namespace GreengroceryTest
             Assert.AreEqual(productId, product.Id);
             Assert.AreEqual(productName, product.GetName());
             Assert.AreEqual(productPrice, product.GetPrice());
-            Assert.AreEqual(productType, product.GetType());
+            Assert.AreEqual(productType, product.GetTypeOfProdcut());
         }
     }
 }
