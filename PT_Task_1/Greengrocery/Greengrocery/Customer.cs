@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Greengrocery
 {
-    internal class Customers : User
+    public class Customer : User
     {
         private int customerId;
         private int balance;
 
         // Constructor to initialize the Customers object
-        public Customers(string surname, string name, int phone, string email, int customerId, int balance)
+        public Customer(string surname, string name, int phone, string email, int customerId, int balance)
             : base(surname, name, phone, email)
         {
             this.customerId = customerId;

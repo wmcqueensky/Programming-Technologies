@@ -54,7 +54,11 @@
     <Compile Include="ProductTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateTest.cs" />
+    <Compile Include="EmployeeTest.cs" />
+    <Compile Include="SupplierTest.cs" />
+    <Compile Include="CustomerTest.cs" />
     <Compile Include="UserTest.cs" />
+	<Compile Include="EventsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

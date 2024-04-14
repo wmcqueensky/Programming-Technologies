@@ -18,9 +18,9 @@ namespace GreengroceryTest
             Product product = new Product(productId, productName, productPrice, productType);
 
             Assert.AreEqual(productId, product.Id);
-            Assert.AreEqual(productName, product.GetName());
-            Assert.AreEqual(productPrice, product.GetPrice());
-            Assert.AreEqual(productType, product.GetType());
+            Assert.AreEqual(productName, product.getName());
+            Assert.AreEqual(productPrice, product.getPrice());
+            Assert.AreEqual(productType, product.getTypeOfProdcut());
         }
 
         [TestMethod]
@@ -33,9 +33,9 @@ namespace GreengroceryTest
             Product product = new Product(productId, productName, productPrice, productType);
 
             float newPrice = 2.00f;
-            product.SetPrice(newPrice);
+            product.setPrice(newPrice);
 
-            Assert.AreEqual(newPrice, product.GetPrice());
+            Assert.AreEqual(newPrice, product.getPrice());
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@ namespace GreengroceryTest
             string productType = "Fruit";
             Product product = new Product(productId, productName, productPrice, productType);
 
-            product.SetPrice(-1.00f);
+            product.setPrice(-1.00f);
 
         }
     }

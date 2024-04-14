@@ -7,13 +7,13 @@ namespace Greengrocery
         private readonly int product_id;
         private readonly string name;
         private float price;
-        private readonly string type;
+        private readonly string typeOfProduct;
         public Product(int productId, string name, float price, string type)
         {
             this.product_id = productId;
             this.name = name;
             this.price = price;
-            this.type = type;
+            this.typeOfProduct = type;
         }
 
         public int Id
@@ -21,17 +21,17 @@ namespace Greengrocery
             get { return product_id; }
         }
 
-        public string GetName()
+        public string getName()
         {
             return name;
         }
 
-        public float GetPrice()
+        public float getPrice()
         {
             return price;
         }
 
-        public void SetPrice(float newPrice)
+        public void setPrice(float newPrice)
         {
             if (newPrice < 0)
             {
@@ -40,9 +40,9 @@ namespace Greengrocery
             price = newPrice;
         }
 
-        public string GetType()
+        public string getTypeOfProdcut()
         {
-            return type;
+            return typeOfProduct;
         }
     }
 }

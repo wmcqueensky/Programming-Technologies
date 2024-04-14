@@ -7,27 +7,37 @@ using System.Threading.Tasks;
 
 namespace Greengrocery
 {
-    internal class Suppliers : User
+    public class Supplier : User
     {
         private int supplierId;
-        //private Product[] products;
+        private Product[] products;
 
         // Constructor to initialize the Suppliers object
-        public Suppliers(string surname, string name, int phone, string email, int supplierId)
+        public Supplier(string surname, string name, int phone, string email, int supplierId)
             : base(surname, name, phone, email)
         {
             this.supplierId = supplierId;
 
         }
 
-        public int getSupplierId()
+        public int GetSupplierId()
         {
             return this.supplierId;
         }
 
-        public void setSupplierId(int value)
+        public void SetSupplierId(int value)
         {
             this.supplierId = value;
+        }
+
+        public Product[] GetProducts()
+        {
+            return this.products;
+        }
+
+        public void SetProducts(Product[] value)
+        {
+            this.products = value;
         }
     }
 }

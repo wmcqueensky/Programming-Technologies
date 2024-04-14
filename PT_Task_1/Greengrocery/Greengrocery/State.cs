@@ -13,7 +13,7 @@ namespace Greengrocery
             this.currentCatalog = new Catalog();
             foreach (var product in shop.GetCatalog().GetProducts())
             {
-                this.currentCatalog.AddProduct(new Product(product.Id, product.GetName(), product.GetPrice(), product.GetType()));
+                this.currentCatalog.AddProduct(new Product(product.Id, product.getName(), product.getPrice(), product.getTypeOfProdcut()));
             }
 
             this.currentUsers = new List<User>();
