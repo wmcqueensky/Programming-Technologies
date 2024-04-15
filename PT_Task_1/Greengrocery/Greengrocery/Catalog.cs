@@ -4,26 +4,26 @@ namespace Greengrocery
 {
     public class Catalog
     {
-        private List<Product> products;
+        private Dictionary<int, Product> products;
 
-        public Catalog(List<Product> initialProducts = null)
+        public Catalog(Dictionary<int, Product> initialProducts = null)
         {
-            products = initialProducts ?? new List<Product>();
+            products = initialProducts ?? new Dictionary<int, Product>();
         }
 
         public void AddProduct(Product product)
         {
-            products.Add(product);
+            products.Add(product.Id, product);
         }
 
         public void RemoveProduct(Product product)
         {
-            products.Remove(product);
+            products.Remove(product.Id);
         }
 
         public List<Product> GetProducts()
         {
-            return new List<Product>(products);
+            return new List<Product>(products.Values);
         }
     }
 }

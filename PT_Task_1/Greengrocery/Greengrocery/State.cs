@@ -42,8 +42,14 @@ namespace Greengrocery
 
         public Catalog GetCurrentCatalog()
         {
-            return new Catalog(currentCatalog.GetProducts());
+            Dictionary<int, Product> productDictionary = new Dictionary<int, Product>();
+            foreach (var product in currentCatalog.GetProducts())
+            {
+                productDictionary.Add(product.Id, product);
+            }
+            return new Catalog(productDictionary);
         }
+
 
         public void SetCurrentCatalog(Catalog catalog)
         {
