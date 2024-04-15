@@ -22,7 +22,7 @@ namespace GreengroceryTest
         public void TestAddUser()
         {
             GroceryShop shop = new GroceryShop(100.00);
-            User user = new User("Doe", "John", 123456789, "john@example.com");
+            Customer user = new Customer("Doe", "John", 123456789, "john@example.com", 1, 0); // Creating a Customer instance for testing
 
             shop.AddUser(user);
 
@@ -33,7 +33,7 @@ namespace GreengroceryTest
         public void TestDeleteUser()
         {
             GroceryShop shop = new GroceryShop(100.00);
-            User user = new User("Doe", "John", 123456789, "john@example.com");
+            Customer user = new Customer("Doe", "John", 123456789, "john@example.com", 1, 0); // Creating a Customer instance for testing
             shop.AddUser(user);
 
             shop.DeleteUser(user);
@@ -75,7 +75,7 @@ namespace GreengroceryTest
             shop.AddProduct(product1);
             shop.AddProduct(product2);
 
-            User user = new User("Doe", "John", 123456789, "john@example.com");
+            Customer user = new Customer("Doe", "John", 123456789, "john@example.com", 1, 0); // Creating a Customer instance for testing
             shop.AddUser(user);
 
             State state = new State(shop);

@@ -26,7 +26,22 @@ namespace Greengrocery
             this.users = new List<User>();
             foreach (var user in state.GetCurrentUsers())
             {
-                this.users.Add(new User(user.GetSurname(), user.GetName(), user.GetPhone(), user.GetEmail()));
+                // Determine the type of user and create an instance accordingly
+                if (user is Employee)
+                {
+                    Employee employee = (Employee)user;
+                    this.users.Add(new Employee(employee.GetSurname(), employee.GetName(), employee.GetPhone(), employee.GetEmail(), employee.GetEmployeeId(), employee.GetSalary()));
+                }
+                else if (user is Supplier)
+                {
+                    Supplier supplier = (Supplier)user;
+                    this.users.Add(new Supplier(supplier.GetSurname(), supplier.GetName(), supplier.GetPhone(), supplier.GetEmail(), supplier.GetSupplierId()));
+                }
+                else if (user is Customer)
+                {
+                    Customer customer = (Customer)user;
+                    this.users.Add(new Customer(customer.GetSurname(), customer.GetName(), customer.GetPhone(), customer.GetEmail(), customer.GetCustomerId(), customer.GetBalance()));
+                }
             }
 
             this.initialBalance = state.GetCurrentBalance();

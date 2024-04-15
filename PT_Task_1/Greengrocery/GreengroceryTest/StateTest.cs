@@ -13,8 +13,8 @@ namespace GreengroceryTest
             Catalog catalog = shop.GetCatalog(); // Get the initial catalog
             catalog.AddProduct(new Product(1, "Apple", 1.50f, "Fruit"));
             catalog.AddProduct(new Product(2, "Banana", 0.75f, "Fruit"));
-            shop.AddUser(new User("Doe", "John", 123456789, "john@example.com"));
-            shop.AddUser(new User("Doe", "Alice", 987654321, "alice@example.com"));
+            shop.AddUser(new Customer("Doe", "John", 123456789, "john@example.com", 1, 0)); // Creating a Customer instance for testing
+            shop.AddUser(new Customer("Doe", "Alice", 987654321, "alice@example.com", 2, 0)); // Creating a Customer instance for testing
 
             State state = new State(shop);
             var currentCatalog = state.GetCurrentCatalog();

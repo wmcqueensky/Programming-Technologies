@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Greengrocery
 {
-    public class User
+    public abstract class User
     {
         private string surname;
         private string name;

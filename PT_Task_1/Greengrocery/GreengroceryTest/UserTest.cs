@@ -17,7 +17,7 @@ namespace GreengroceryTest
             string expectedEmail = "john.doe@example.com";
 
             // Act
-            User user = new User(expectedSurname, expectedName, expectedPhone, expectedEmail);
+            Customer user = new Customer(expectedSurname, expectedName, expectedPhone, expectedEmail, 1, 0); // Creating a Customer instance for testing
 
             // Assert
             Assert.AreEqual(expectedSurname, user.GetSurname());
@@ -30,7 +30,7 @@ namespace GreengroceryTest
         public void User_SetSurname_ChangesSurnameCorrectly()
         {
             // Arrange
-            User user = new User("Doe", "John", 123456789, "john.doe@example.com");
+            Customer user = new Customer("Doe", "John", 123456789, "john.doe@example.com", 1, 0); // Creating a Customer instance for testing
             string newSurname = "Smith";
 
             // Act
@@ -44,7 +44,7 @@ namespace GreengroceryTest
         public void User_SetName_ChangesNameCorrectly()
         {
             // Arrange
-            User user = new User("Doe", "John", 123456789, "john.doe@example.com");
+            Customer user = new Customer("Doe", "John", 123456789, "john.doe@example.com", 1, 0); // Creating a Customer instance for testing
             string newName = "Alice";
 
             // Act
@@ -58,7 +58,7 @@ namespace GreengroceryTest
         public void User_SetPhone_ChangesPhoneCorrectly()
         {
             // Arrange
-            User user = new User("Doe", "John", 123456789, "john.doe@example.com");
+            Customer user = new Customer("Doe", "John", 123456789, "john.doe@example.com", 1, 0); // Creating a Customer instance for testing
             int newPhone = 987654321;
 
             // Act
@@ -72,7 +72,7 @@ namespace GreengroceryTest
         public void User_SetEmail_ChangesEmailCorrectly()
         {
             // Arrange
-            User user = new User("Doe", "John", 123456789, "john.doe@example.com");
+            Customer user = new Customer("Doe", "John", 123456789, "john.doe@example.com", 1, 0); // Creating a Customer instance for testing
             string newEmail = "john.smith@example.com";
 
             // Act
@@ -82,5 +82,4 @@ namespace GreengroceryTest
             Assert.AreEqual(newEmail, user.GetEmail());
         }
     }
-
 }
