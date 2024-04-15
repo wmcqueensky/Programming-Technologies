@@ -41,20 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GroceryShop.cs" />
-    <Compile Include="Product.cs" />
-    <Compile Include="Catalog.cs" />
-    <Compile Include="Customer.cs" />
-    <Compile Include="Employee.cs" />
-    <Compile Include="State.cs" />
-    <Compile Include="Supplier.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="Events.cs" />
+    <Compile Include="Logic\DataContext\GroceryShop.cs" />
+    <Compile Include="Data\Catalog\Product.cs" />
+    <Compile Include="Data\Catalog\Catalog.cs" />
+    <Compile Include="Data\Users\Customer.cs" />
+    <Compile Include="Data\Users\Employee.cs" />
+    <Compile Include="Logic\State.cs" />
+    <Compile Include="Data\Users\Supplier.cs" />
+    <Compile Include="Data\Users\User.cs" />
+    <Compile Include="Logic\Events.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Logic\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
