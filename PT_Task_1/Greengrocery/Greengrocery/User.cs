@@ -21,40 +21,40 @@ namespace Greengrocery
             this.email = email;
         }
 
-        public string getSurname()
+        public string GetSurname()
         {
             return this.surname;
         }
 
-        public void setSurname(string value)
+        public void SetSurname(string value)
         {
             this.surname = value;
         } 
 
-        public string getName()
+        public string GetName()
         {
             return this.name;
         }
 
-        public void setName(string value)
+        public void SetName(string value)
         {
             this.name = value;
         }
 
-        public int getPhone() { 
+        public int GetPhone() { 
             return this.phone;
         }
 
-        public void setPhone(int value) { 
+        public void SetPhone(int value) { 
             this.phone = value;
         }
 
-        public string getEmail()
+        public string GetEmail()
         {
             return this.email;
         }
 
-        public void setEmail(string value) {
+        public void SetEmail(string value) {
             this.email = value;
         }
     }

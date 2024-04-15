@@ -21,10 +21,10 @@ namespace GreengroceryTest
             Employee employee = new Employee(expectedSurname, expectedName, expectedPhone, expectedEmail, expectedEmployeeId, expectedSalary);
 
             // Assert
-            Assert.AreEqual(expectedSurname, employee.getSurname());
-            Assert.AreEqual(expectedName, employee.getName());
-            Assert.AreEqual(expectedPhone, employee.getPhone());
-            Assert.AreEqual(expectedEmail, employee.getEmail());
+            Assert.AreEqual(expectedSurname, employee.GetSurname());
+            Assert.AreEqual(expectedName, employee.GetName());
+            Assert.AreEqual(expectedPhone, employee.GetPhone());
+            Assert.AreEqual(expectedEmail, employee.GetEmail());
             Assert.AreEqual(expectedEmployeeId, employee.GetEmployeeId());
             Assert.AreEqual(expectedSalary, employee.GetSalary());
         }
@@ -60,6 +60,6 @@ namespace GreengroceryTest
 
     }
 
-    
+
 
 }

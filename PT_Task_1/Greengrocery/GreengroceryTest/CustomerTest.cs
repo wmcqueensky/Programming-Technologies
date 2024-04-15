@@ -22,12 +22,12 @@ namespace GreengroceryTest
             Customer customer = new Customer(expectedSurname, expectedName, expectedPhone, expectedEmail, expectedCustomerId, expectedBalance);
 
             // Assert
-            Assert.AreEqual(expectedSurname, customer.getSurname());
-            Assert.AreEqual(expectedName, customer.getName());
-            Assert.AreEqual(expectedPhone, customer.getPhone());
-            Assert.AreEqual(expectedEmail, customer.getEmail());
-            Assert.AreEqual(expectedCustomerId, customer.getCustomerId());
-            Assert.AreEqual(expectedBalance, customer.getBalance());
+            Assert.AreEqual(expectedSurname, customer.GetSurname());
+            Assert.AreEqual(expectedName, customer.GetName());
+            Assert.AreEqual(expectedPhone, customer.GetPhone());
+            Assert.AreEqual(expectedEmail, customer.GetEmail());
+            Assert.AreEqual(expectedCustomerId, customer.GetCustomerId());
+            Assert.AreEqual(expectedBalance, customer.GetBalance());
         }
 
         [TestMethod]
@@ -38,10 +38,10 @@ namespace GreengroceryTest
             int newCustomerId = 456;
 
             // Act
-            customer.setCustomerId(newCustomerId);
+            customer.SetCustomerId(newCustomerId);
 
             // Assert
-            Assert.AreEqual(newCustomerId, customer.getCustomerId());
+            Assert.AreEqual(newCustomerId, customer.GetCustomerId());
         }
 
         [TestMethod]
@@ -52,10 +52,10 @@ namespace GreengroceryTest
             int newBalance = 200;
 
             // Act
-            customer.setBalance(newBalance);
+            customer.SetBalance(newBalance);
 
             // Assert
-            Assert.AreEqual(newBalance, customer.getBalance());
+            Assert.AreEqual(newBalance, customer.GetBalance());
         }
     }
 }

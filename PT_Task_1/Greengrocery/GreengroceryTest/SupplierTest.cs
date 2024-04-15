@@ -21,10 +21,10 @@ namespace GreengroceryTest
             Supplier supplier = new Supplier(expectedSurname, expectedName, expectedPhone, expectedEmail, expectedSupplierId);
 
             // Assert
-            Assert.AreEqual(expectedSurname, supplier.getSurname());
-            Assert.AreEqual(expectedName, supplier.getName());
-            Assert.AreEqual(expectedPhone, supplier.getPhone());
-            Assert.AreEqual(expectedEmail, supplier.getEmail());
+            Assert.AreEqual(expectedSurname, supplier.GetSurname());
+            Assert.AreEqual(expectedName, supplier.GetName());
+            Assert.AreEqual(expectedPhone, supplier.GetPhone());
+            Assert.AreEqual(expectedEmail, supplier.GetEmail());
             Assert.AreEqual(expectedSupplierId, supplier.GetSupplierId());
         }
 

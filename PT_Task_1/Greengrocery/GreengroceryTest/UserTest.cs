@@ -20,10 +20,10 @@ namespace GreengroceryTest
             User user = new User(expectedSurname, expectedName, expectedPhone, expectedEmail);
 
             // Assert
-            Assert.AreEqual(expectedSurname, user.getSurname());
-            Assert.AreEqual(expectedName, user.getName());
-            Assert.AreEqual(expectedPhone, user.getPhone());
-            Assert.AreEqual(expectedEmail, user.getEmail());
+            Assert.AreEqual(expectedSurname, user.GetSurname());
+            Assert.AreEqual(expectedName, user.GetName());
+            Assert.AreEqual(expectedPhone, user.GetPhone());
+            Assert.AreEqual(expectedEmail, user.GetEmail());
         }
 
         [TestMethod]
@@ -34,10 +34,10 @@ namespace GreengroceryTest
             string newSurname = "Smith";
 
             // Act
-            user.setSurname(newSurname);
+            user.SetSurname(newSurname);
 
             // Assert
-            Assert.AreEqual(newSurname, user.getSurname());
+            Assert.AreEqual(newSurname, user.GetSurname());
         }
 
         [TestMethod]
@@ -48,10 +48,10 @@ namespace GreengroceryTest
             string newName = "Alice";
 
             // Act
-            user.setName(newName);
+            user.SetName(newName);
 
             // Assert
-            Assert.AreEqual(newName, user.getName());
+            Assert.AreEqual(newName, user.GetName());
         }
 
         [TestMethod]
@@ -62,10 +62,10 @@ namespace GreengroceryTest
             int newPhone = 987654321;
 
             // Act
-            user.setPhone(newPhone);
+            user.SetPhone(newPhone);
 
             // Assert
-            Assert.AreEqual(newPhone, user.getPhone());
+            Assert.AreEqual(newPhone, user.GetPhone());
         }
 
         [TestMethod]
@@ -76,10 +76,10 @@ namespace GreengroceryTest
             string newEmail = "john.smith@example.com";
 
             // Act
-            user.setEmail(newEmail);
+            user.SetEmail(newEmail);
 
             // Assert
-            Assert.AreEqual(newEmail, user.getEmail());
+            Assert.AreEqual(newEmail, user.GetEmail());
         }
     }
 

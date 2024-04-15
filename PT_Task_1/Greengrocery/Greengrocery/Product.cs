@@ -21,17 +21,17 @@ namespace Greengrocery
             get { return product_id; }
         }
 
-        public string getName()
+        public string GetName()
         {
             return name;
         }
 
-        public float getPrice()
+        public float GetPrice()
         {
             return price;
         }
 
-        public void setPrice(float newPrice)
+        public void SetPrice(float newPrice)
         {
             if (newPrice < 0)
             {
@@ -40,7 +40,7 @@ namespace Greengrocery
             price = newPrice;
         }
 
-        public string getTypeOfProdcut()
+        public string GetTypeOfProdcut()
         {
             return typeOfProduct;
         }

@@ -13,13 +13,13 @@ namespace Greengrocery
             this.currentCatalog = new Catalog();
             foreach (var product in shop.GetCatalog().GetProducts())
             {
-                this.currentCatalog.AddProduct(new Product(product.Id, product.getName(), product.getPrice(), product.getTypeOfProdcut()));
+                this.currentCatalog.AddProduct(new Product(product.Id, product.GetName(), product.GetPrice(), product.GetTypeOfProdcut()));
             }
 
             this.currentUsers = new List<User>();
             foreach (var user in shop.GetUsers())
             {
-                this.currentUsers.Add(new User(user.getSurname(), user.getName(), user.getPhone(), user.getEmail()));
+                this.currentUsers.Add(new User(user.GetSurname(), user.GetName(), user.GetPhone(), user.GetEmail()));
             }
 
             this.currentBalance = shop.GetBalance();
@@ -30,14 +30,29 @@ namespace Greengrocery
             return currentCatalog;
         }
 
+        public void SetCurrentCatalog(Catalog catalog)
+        {
+            this.currentCatalog = catalog;
+        }
+
         public List<User> GetCurrentUsers()
         {
             return currentUsers;
         }
 
+        public void SetCurrentUsers(List<User> users)
+        {
+            this.currentUsers = users;
+        }
+
         public double GetCurrentBalance()
         {
             return currentBalance;
+        }
+
+        public void SetCurrentBalance(double value)
+        {
+            this.currentBalance = value;
         }
     }
 }

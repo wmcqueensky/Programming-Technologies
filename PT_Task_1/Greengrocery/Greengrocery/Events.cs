@@ -9,14 +9,14 @@ namespace Greengrocery
     public class Events
     {
 
-        void sellProducts(Product[] products)
+        public void SellProducts(Product[] products, State state)
         {
             // Check if products are available in the catalog
             foreach (var product in products)
             {
-                if (!State.CurrentCatalog.Contains(product))
+                if (!state.GetCurrentCatalog().GetProducts().Contains(product))
                 {
-                    throw new InvalidOperationException($"Product '{product.Name}' is not available in the catalog.");
+                    throw new InvalidOperationException($"Product '{product.GetName()}' is not available in the catalog.");
                 }
             }
 
@@ -31,36 +31,36 @@ namespace Greengrocery
             // For simplicity, let's assume we are deducting from inventory directly
             foreach (var product in products)
             {
-                State.CurrentCatalog.Remove(product);
+                state.GetCurrentCatalog().RemoveProduct(product);
             }
 
             // Update current balance
-            State.CurrentBalance += totalPrice;
+            state.SetCurrentBalance(state.GetCurrentBalance() + totalPrice);
         }
 
-        void takeDelivery(Product[] products)
+        public void TakeDelivery(Product[] products, State state)
         {
             foreach (var product in products)
             {
-                State.CurrentCatalog.Add(product);
+                state.GetCurrentCatalog().AddProduct(product);
             }
         }
 
-        void payEmployee(Employee employee)
+        public void PayEmployee(Employee employee, State state)
         {
-            if (!State.CurrentUsers.Contains(employee))
+            if (!state.GetCurrentUsers().Contains(employee))
             {
                 throw new InvalidOperationException($"Employee '{employee.GetName()}' is not found in current users.");
             }
 
             // Deduct employee's salary from current balance
-            State.CurrentBalance -= employee.GetSalary();
+            state.SetCurrentBalance(state.GetCurrentBalance() - employee.GetSalary());
         }
 
-        void payTaxes(float taxAmount)
+        public void PayTaxes(float taxAmount, State state)
         {
-            State.CurrentBalance -= taxAmount;
+            // Deduct taxes from current balance
+            state.SetCurrentBalance(state.GetCurrentBalance() - taxAmount);
         }
-
     }
 }

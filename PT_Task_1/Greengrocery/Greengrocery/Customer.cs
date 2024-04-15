@@ -19,18 +19,18 @@ namespace Greengrocery
             this.balance = balance;
         }
 
-        public int getCustomerId()
+        public int GetCustomerId()
         {
             return this.customerId;
         }
 
-        public void setCustomerId(int value)
+        public void SetCustomerId(int value)
         {
             this.customerId = value;
         }
         
-        public int getBalance() {return this.balance;}
+        public int GetBalance() {return this.balance;}
 
-        public void setBalance(int value) { this.balance = value; }
+        public void SetBalance(int value) { this.balance = value; }
     }
 }
