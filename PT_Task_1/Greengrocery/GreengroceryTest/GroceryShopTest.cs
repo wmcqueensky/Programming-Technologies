@@ -67,11 +67,9 @@ namespace GreengroceryTest
         [TestMethod]
         public void TestUpdateGroceryShopState()
         {
-            // Arrange
             double initialBalance = 100.00;
             GroceryShop shop = new GroceryShop(initialBalance);
 
-            // Create some products and users for the shop
             Product product1 = new Product(1, "Apple", 1.50f, "Fruit");
             Product product2 = new Product(2, "Banana", 0.75f, "Fruit");
             shop.AddProduct(product1);
@@ -80,26 +78,24 @@ namespace GreengroceryTest
             User user = new User("Doe", "John", 123456789, "john@example.com");
             shop.AddUser(user);
 
-            // Create a state with the initial state of the shop
             State state = new State(shop);
 
-            // Perform some changes to the shop
             shop.DeleteProduct(product1);
             shop.DeleteUser(user);
             shop.AddProduct(new Product(3, "Orange", 2.00f, "Fruit"));
 
-            // Act
             shop.UpdateGroceryShopState(state);
 
-            // Assert
-            // Check if the catalog in the shop has been updated
-            //CollectionAssert.AreEqual(state.GetCurrentCatalog().GetProducts(), shop.GetCatalog().GetProducts());
+            int expectedProductCount = state.GetCurrentCatalog().GetProducts().Count;
+            int actualProductCount = shop.GetCatalog().GetProducts().Count;
+            Assert.AreEqual(expectedProductCount, actualProductCount, $"Expected {expectedProductCount} products, but found {actualProductCount} products.");
 
-            // Check if the users in the shop have been updated
-            //CollectionAssert.AreEqual(state.GetCurrentUsers(), shop.GetUsers());
+            int expectedUserCount = state.GetCurrentUsers().Count;
+            int actualUserCount = shop.GetUsers().Count;
+            Assert.AreEqual(expectedUserCount, actualUserCount, $"Expected {expectedUserCount} users, but found {actualUserCount} users.");
 
-            // Check if the balance in the shop has been updated
             Assert.AreEqual(state.GetCurrentBalance(), shop.GetBalance());
         }
+
     }
 }

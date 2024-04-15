@@ -6,9 +6,9 @@ namespace Greengrocery
     {
         private List<Product> products;
 
-        public Catalog()
+        public Catalog(List<Product> initialProducts = null)
         {
-            products = new List<Product>();
+            products = initialProducts ?? new List<Product>();
         }
 
         public void AddProduct(Product product)
@@ -23,7 +23,7 @@ namespace Greengrocery
 
         public List<Product> GetProducts()
         {
-            return products;
+            return new List<Product>(products);
         }
     }
 }

@@ -49,8 +49,12 @@
     <Compile Include="State.cs" />
     <Compile Include="Supplier.cs" />
     <Compile Include="User.cs" />
-	<Compile Include="Events.cs" />
+    <Compile Include="Events.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Logic\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

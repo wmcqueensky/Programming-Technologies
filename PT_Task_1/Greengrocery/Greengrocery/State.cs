@@ -27,7 +27,7 @@ namespace Greengrocery
 
         public Catalog GetCurrentCatalog()
         {
-            return currentCatalog;
+            return new Catalog(currentCatalog.GetProducts());
         }
 
         public void SetCurrentCatalog(Catalog catalog)
@@ -37,7 +37,7 @@ namespace Greengrocery
 
         public List<User> GetCurrentUsers()
         {
-            return currentUsers;
+            return new List<User>(currentUsers);
         }
 
         public void SetCurrentUsers(List<User> users)
