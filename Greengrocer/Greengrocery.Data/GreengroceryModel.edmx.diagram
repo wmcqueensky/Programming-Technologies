@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="greengroceryModel.customersGrocery" Width="1.5" PointX="0.625" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="greengroceryModel.employeesGrocery" Width="1.5" PointX="0.875" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="greengroceryModel.orders" Width="2.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="greengroceryModel.productsGrocery" Width="1.5" PointX="6.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="greengroceryModel.productsGrocery" Width="3" PointX="6.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="greengroceryModel.suppliersGrocery" Width="1.5" PointX="7" PointY="4" IsExpanded="true" />
         <AssociationConnector Association="greengroceryModel.FK__orders__customer__7E37BEF6" ManuallyRouted="false" />
         <AssociationConnector Association="greengroceryModel.FK__orders__employee__7B5B524B" ManuallyRouted="false" />

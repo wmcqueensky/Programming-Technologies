@@ -24,7 +24,12 @@ namespace Greengrocery.Data
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
+        public void Detach(productsGrocery e)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual DbSet<customersGrocery> customersGrocery { get; set; }
         public virtual DbSet<employeesGrocery> employeesGrocery { get; set; }
         public virtual DbSet<orders> orders { get; set; }
