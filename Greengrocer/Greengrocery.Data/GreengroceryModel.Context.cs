@@ -25,6 +25,11 @@ namespace Greengrocery.Data
             throw new UnintentionalCodeFirstException();
         }
 
+        public void Attach(customersGrocery customer)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Detach(productsGrocery e)
         {
             throw new NotImplementedException();
@@ -35,5 +40,6 @@ namespace Greengrocery.Data
         public virtual DbSet<orders> orders { get; set; }
         public virtual DbSet<productsGrocery> productsGrocery { get; set; }
         public virtual DbSet<suppliersGrocery> suppliersGrocery { get; set; }
+        public object ObjectStateManager { get; set; }
     }
 }

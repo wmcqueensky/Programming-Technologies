@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greengrocery.Data", "Greeng
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greengrocery.DataService", "Greengrocery.DataService\Greengrocery.DataService.csproj", "{F95D979C-9DEB-4B64-A2FF-D4C7156BCC17}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greengrocery.FullClient", "Greengrocery.FullClient\Greengrocery.FullClient.csproj", "{59B1252D-116A-4B33-927A-F44742391D69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F95D979C-9DEB-4B64-A2FF-D4C7156BCC17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F95D979C-9DEB-4B64-A2FF-D4C7156BCC17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F95D979C-9DEB-4B64-A2FF-D4C7156BCC17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59B1252D-116A-4B33-927A-F44742391D69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59B1252D-116A-4B33-927A-F44742391D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59B1252D-116A-4B33-927A-F44742391D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59B1252D-116A-4B33-927A-F44742391D69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
