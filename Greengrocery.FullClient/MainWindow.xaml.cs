@@ -1,5 +1,4 @@
-﻿using Greengrocery.UI.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,18 +20,9 @@ namespace Greengrocery.FullClient
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        private MaintenanceFormViewModel viewModel = new MaintenanceFormViewModel();
-
         public MainWindow()
         {
             InitializeComponent();
-            this.Loaded += (s, e) => { this.DataContext = this.viewModel; };
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

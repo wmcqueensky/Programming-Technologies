@@ -25,16 +25,16 @@ namespace Greengrocery.DataService
         }
 
 
-      /*  [OperationContract]
-        public IEnumerable<customersGrocery> GetCustomers(Guid productIdFilter)
+        [OperationContract]
+        public IEnumerable<orders> GetOrders(int productIdFilter)
         {
             using (var context = new GreengroceryEntities())
             {
-                var result = context.customersGrocery.Include("");
+                var result = context.orders.Include("Products").Where(c => c.product_id == productIdFilter).ToList();
                 result.ForEach(e => context.Detach(e));
                 return result;
             }
-        } */
+        }
 
         [OperationContract]
 

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{59B1252D-116A-4B33-927A-F44742391D69}</ProjectGuid>
+    <ProjectGuid>{A917B904-A714-4DEF-A7CA-7C7DA79F2864}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Greengrocery.UI</RootNamespace>
     <AssemblyName>Greengrocery.FullClient</AssemblyName>
@@ -37,8 +37,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -57,12 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connected Services\GreengroceryService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModel\MaintenanceFormViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -94,19 +86,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\GreengroceryService\Greengrocery.UI.GreengroceryService.productsGrocery.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\GreengroceryService\GreengroceryService.wsdl" />
-    <None Include="Connected Services\GreengroceryService\GreengroceryService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\GreengroceryService\GreengroceryService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\GreengroceryService\GreengroceryService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -114,27 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\GreengroceryService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GreengroceryService\GreengroceryService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GreengroceryService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GreengroceryService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\GreengroceryService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

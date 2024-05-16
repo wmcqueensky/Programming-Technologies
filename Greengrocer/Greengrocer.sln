@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greengrocery.DataService", "Greengrocery.DataService\Greengrocery.DataService.csproj", "{F95D979C-9DEB-4B64-A2FF-D4C7156BCC17}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greengrocery.FullClient", "Greengrocery.FullClient\Greengrocery.FullClient.csproj", "{59B1252D-116A-4B33-927A-F44742391D69}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F95D979C-9DEB-4B64-A2FF-D4C7156BCC17} = {F95D979C-9DEB-4B64-A2FF-D4C7156BCC17}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

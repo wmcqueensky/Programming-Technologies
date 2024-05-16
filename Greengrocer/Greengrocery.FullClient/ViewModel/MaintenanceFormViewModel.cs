@@ -7,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Greengrocery.UI.ViewModel
 {
+
     public class MaintenanceFormViewModel : INotifyPropertyChanged
     {
         private GreengroceryServiceClient serviceClient = new GreengroceryServiceClient();
@@ -17,17 +19,20 @@ namespace Greengrocery.UI.ViewModel
             this.RefreshProducts();
         }
 
-        private void RefreshProducts()
+        /*private void RefreshProducts()
         {
             this.serviceClient.GetProductsCompleted += (s, e) =>
             {
-                this.products = e.Result;
-            }
+                this.Products = e.Result;
+            };
             this.serviceClient.GetProductsAsync();
-        }
+        }*/
 
         private IEnumerable<productsGrocery> products;
-        public IEnumerable<productsGrocery> Products;
+
+        
+
+        public IEnumerable<productsGrocery> Products
         {
             get
             {
@@ -37,7 +42,7 @@ namespace Greengrocery.UI.ViewModel
             set
             {
                 this.products = value;
-                this.OnPropertyChanged("Products")
+                this.OnPropertyChanged("Products");
             }
         }
 
@@ -49,6 +54,6 @@ namespace Greengrocery.UI.ViewModel
             }
         }
 
-        private event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
