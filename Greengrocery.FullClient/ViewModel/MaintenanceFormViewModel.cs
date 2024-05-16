@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Greengrocery.UI.ViewModel
 {
-    internal class MaintenanceFormViewModel
+    public class MaintenanceFormViewModel
     {
     }
 }
