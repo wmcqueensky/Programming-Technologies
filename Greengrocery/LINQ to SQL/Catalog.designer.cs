@@ -42,6 +42,9 @@ namespace Greengrocery.LINQ_to_SQL
     partial void Insertsupplier(supplier instance);
     partial void Updatesupplier(supplier instance);
     partial void Deletesupplier(supplier instance);
+    partial void Insertcatalog(catalog instance);
+    partial void Updatecatalog(catalog instance);
+    partial void Deletecatalog(catalog instance);
     partial void Insertstate(state instance);
     partial void Updatestate(state instance);
     partial void Deletestate(state instance);
@@ -109,6 +112,14 @@ namespace Greengrocery.LINQ_to_SQL
 			get
 			{
 				return this.GetTable<supplier>();
+			}
+		}
+		
+		public System.Data.Linq.Table<catalog> catalogs
+		{
+			get
+			{
+				return this.GetTable<catalog>();
 			}
 		}
 		
@@ -897,6 +908,120 @@ namespace Greengrocery.LINQ_to_SQL
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.catalog")]
+	public partial class catalog : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _catalog_id;
+		
+		private string _name;
+		
+		private EntitySet<state> _states;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oncatalog_idChanging(int value);
+    partial void Oncatalog_idChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    #endregion
+		
+		public catalog()
+		{
+			this._states = new EntitySet<state>(new Action<state>(this.attach_states), new Action<state>(this.detach_states));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_catalog_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int catalog_id
+		{
+			get
+			{
+				return this._catalog_id;
+			}
+			set
+			{
+				if ((this._catalog_id != value))
+				{
+					this.Oncatalog_idChanging(value);
+					this.SendPropertyChanging();
+					this._catalog_id = value;
+					this.SendPropertyChanged("catalog_id");
+					this.Oncatalog_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="catalog_state", Storage="_states", ThisKey="catalog_id", OtherKey="catalog_id")]
+		public EntitySet<state> states
+		{
+			get
+			{
+				return this._states;
+			}
+			set
+			{
+				this._states.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_states(state entity)
+		{
+			this.SendPropertyChanging();
+			entity.catalog = this;
+		}
+		
+		private void detach_states(state entity)
+		{
+			this.SendPropertyChanging();
+			entity.catalog = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.states")]
 	public partial class state : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -908,6 +1033,8 @@ namespace Greengrocery.LINQ_to_SQL
 		private int _catalog_id;
 		
 		private EntitySet<@event> _events;
+		
+		private EntityRef<catalog> _catalog;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -922,6 +1049,7 @@ namespace Greengrocery.LINQ_to_SQL
 		public state()
 		{
 			this._events = new EntitySet<@event>(new Action<@event>(this.attach_events), new Action<@event>(this.detach_events));
+			this._catalog = default(EntityRef<catalog>);
 			OnCreated();
 		}
 		
@@ -956,6 +1084,10 @@ namespace Greengrocery.LINQ_to_SQL
 			{
 				if ((this._catalog_id != value))
 				{
+					if (this._catalog.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.Oncatalog_idChanging(value);
 					this.SendPropertyChanging();
 					this._catalog_id = value;
@@ -975,6 +1107,40 @@ namespace Greengrocery.LINQ_to_SQL
 			set
 			{
 				this._events.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="catalog_state", Storage="_catalog", ThisKey="catalog_id", OtherKey="catalog_id", IsForeignKey=true)]
+		public catalog catalog
+		{
+			get
+			{
+				return this._catalog.Entity;
+			}
+			set
+			{
+				catalog previousValue = this._catalog.Entity;
+				if (((previousValue != value) 
+							|| (this._catalog.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._catalog.Entity = null;
+						previousValue.states.Remove(this);
+					}
+					this._catalog.Entity = value;
+					if ((value != null))
+					{
+						value.states.Add(this);
+						this._catalog_id = value.catalog_id;
+					}
+					else
+					{
+						this._catalog_id = default(int);
+					}
+					this.SendPropertyChanged("catalog");
+				}
 			}
 		}
 		
