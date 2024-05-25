@@ -8,7 +8,7 @@
       <Column Name="phone" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="email" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="balance" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
-      <Association Name="customer_order" Member="orders" ThisKey="customer_id" OtherKey="customer_id" Type="order" />
+      <Association Name="customer_order" Member="events" Storage="_orders" ThisKey="customer_id" OtherKey="customer_id" Type="event" />
     </Type>
   </Table>
   <Table Name="dbo.employees" Member="employees">
@@ -19,12 +19,12 @@
       <Column Name="phone" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="email" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="salary" Type="System.Decimal" DbType="Decimal(15,2)" CanBeNull="true" />
-      <Association Name="employee_order" Member="orders" ThisKey="employee_id" OtherKey="employee_id" Type="order" />
+      <Association Name="employee_order" Member="events" Storage="_orders" ThisKey="employee_id" OtherKey="employee_id" Type="event" />
     </Type>
   </Table>
-  <Table Name="dbo.orders" Member="orders">
-    <Type Name="order">
-      <Column Name="order_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+  <Table Name="dbo.orders" Member="events">
+    <Type Name="event">
+      <Column Name="order_id" Member="event_id" Storage="_order_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="employee_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="product_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="supplier_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -41,7 +41,7 @@
       <Column Name="name" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="price" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
       <Column Name="type" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="product_order" Member="orders" ThisKey="product_id" OtherKey="product_id" Type="order" />
+      <Association Name="product_order" Member="events" Storage="_orders" ThisKey="product_id" OtherKey="product_id" Type="event" />
     </Type>
   </Table>
   <Table Name="dbo.suppliers" Member="suppliers">
@@ -51,7 +51,7 @@
       <Column Name="surname" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="phone" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="email" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="supplier_order" Member="orders" ThisKey="supplier_id" OtherKey="supplier_id" Type="order" />
+      <Association Name="supplier_order" Member="events" Storage="_orders" ThisKey="supplier_id" OtherKey="supplier_id" Type="event" />
     </Type>
   </Table>
 </Database>
