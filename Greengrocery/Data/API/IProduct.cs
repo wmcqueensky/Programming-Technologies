@@ -8,5 +8,11 @@ namespace Greengrocery.Data.API
 {
     internal interface IProduct
     {
+        int ProductId { get; set; }
+        string Name { get; set; }
+        double Price { get; set; }
+
+        string Type { get; set; }
+
     }
 }
