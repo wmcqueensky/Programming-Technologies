@@ -61,6 +61,8 @@
   <ItemGroup>
     <Compile Include="Data\API\ICatalog.cs" />
     <Compile Include="Data\API\ICustomer.cs" />
+    <Compile Include="Data\API\IDataContext.cs" />
+    <Compile Include="Data\API\IDataRepository.cs" />
     <Compile Include="Data\API\IEmployee.cs" />
     <Compile Include="Data\API\IEvent.cs" />
     <Compile Include="Data\API\IProduct.cs" />
@@ -69,6 +71,8 @@
     <Compile Include="Data\API\IUser.cs" />
     <Compile Include="Data\Implementation\Catalog\Catalog.cs" />
     <Compile Include="Data\Implementation\Catalog\Product.cs" />
+    <Compile Include="Data\Implementation\DataContext.cs" />
+    <Compile Include="Data\Implementation\DataRepository.cs" />
     <Compile Include="Data\Implementation\Users\Customer.cs" />
     <Compile Include="Data\Implementation\Users\Employee.cs" />
     <Compile Include="Data\Implementation\Users\Supplier.cs" />
