@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Greengrocery.Data.API
 {
-    internal interface IState
+    public interface IState
     {
         
         int state_id { get; set; }

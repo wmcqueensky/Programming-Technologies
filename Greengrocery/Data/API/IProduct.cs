@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Greengrocery.Data.API
 {
-    internal interface IProduct
+    public interface IProduct
     {
         int ProductId { get; set; }
         string Name { get; set; }

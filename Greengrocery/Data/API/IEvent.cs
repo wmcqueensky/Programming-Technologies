@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Greengrocery.Data.API
 {
-    internal interface IEvent
+    public interface IEvent
     {
         int event_id { get; }
         int employee_id { get; }

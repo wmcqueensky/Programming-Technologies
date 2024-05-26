@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Greengrocery.Data.API
 {
-    internal interface ISupplier : IUser
+    public interface ISupplier : IUser
     {
         int SupplierId { get; set; }
         Product[] Products { get; set; }
