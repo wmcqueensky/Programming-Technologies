@@ -3,7 +3,7 @@ using System;
 
 namespace Greengrocery
 {
-    public class Product
+    public class Product : IProduct
     {
         private readonly int product_id;
         private readonly string name;
@@ -21,6 +21,11 @@ namespace Greengrocery
         {
             get { return product_id; }
         }
+
+        public int ProductId { get; set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
+        public string Type { get; set; }
 
         public string GetName()
         {
