@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Greengrocery.Data.Implementation
 {
-    public class DataRepository : IDataRepository
+    public class DataRepository
     {
 
     }
