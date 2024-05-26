@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Greengrocery.Data.API;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,32 +7,36 @@ using System.Threading.Tasks;
 
 namespace Greengrocery
 {
-    public class Employee : User
+    public class Employee : IEmployee
     {
-        private int employeeId;
-        private int salary;
+        // Implementing properties from the interface
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public int EmployeeId { get; set; }
+        public decimal Salary { get; set; }
 
-        public Employee(string surname, string name, int phone, string email, int employeeId, int salary)
-            : base(surname, name, phone, email)
+        // Constructor to initialize properties
+        public Employee(string surname, string name, string phone, string email, int employeeId, decimal salary)
         {
-            this.employeeId = employeeId;
-            this.salary = salary;
+            this.Surname = surname;
+            this.Name = name;
+            this.Phone = phone;
+            this.Email = email;
+            this.EmployeeId = employeeId;
+            this.Salary = salary;
         }
 
-        public int GetEmployeeId()
-        {
-            return this.employeeId;
-        }
-
+        // Methods to set employeeId and salary
         public void SetEmployeeId(int value)
         {
-            this.employeeId = value;
+            this.EmployeeId = value;
         }
 
-        public int GetSalary() { return this.salary; }
-
-        public void SetSalary(int value) {
-            this.salary = value;
+        public void SetSalary(decimal value)
+        {
+            this.Salary = value;
         }
     }
 }

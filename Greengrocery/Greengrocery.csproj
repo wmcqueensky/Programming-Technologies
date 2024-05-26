@@ -46,7 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
@@ -57,19 +59,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\API\ICatalog.cs" />
+    <Compile Include="Data\API\ICustomer.cs" />
+    <Compile Include="Data\API\IEmployee.cs" />
+    <Compile Include="Data\API\IEvent.cs" />
+    <Compile Include="Data\API\IProduct.cs" />
+    <Compile Include="Data\API\IState.cs" />
+    <Compile Include="Data\API\ISupplier.cs" />
+    <Compile Include="Data\API\IUser.cs" />
+    <Compile Include="Data\Implementation\Catalog\Catalog.cs" />
+    <Compile Include="Data\Implementation\Catalog\Product.cs" />
+    <Compile Include="Data\Implementation\Users\Customer.cs" />
+    <Compile Include="Data\Implementation\Users\Employee.cs" />
+    <Compile Include="Data\Implementation\Users\Supplier.cs" />
+    <Compile Include="Data\Implementation\Users\User.cs" />
     <Compile Include="LINQ to SQL\Catalog.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Catalog.dbml</DependentUpon>
     </Compile>
     <Compile Include="Logic\DataContext\GroceryShop.cs" />
-    <Compile Include="Data\Catalog\Product.cs" />
-    <Compile Include="Data\Catalog\Catalog.cs" />
-    <Compile Include="Data\Users\Customer.cs" />
-    <Compile Include="Data\Users\Employee.cs" />
     <Compile Include="Logic\State.cs" />
-    <Compile Include="Data\Users\Supplier.cs" />
-    <Compile Include="Data\Users\User.cs" />
     <Compile Include="Logic\Events.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

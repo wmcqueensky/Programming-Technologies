@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Greengrocery.Data.API;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,31 +7,39 @@ using System.Threading.Tasks;
 
 namespace Greengrocery
 {
-    public class Customer : User
+    public class Customer : ICustomer
     {
-        private int customerId;
-        private int balance;
+        // Implementing properties from IUser
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
 
-        // Constructor to initialize the Customers object
-        public Customer(string surname, string name, int phone, string email, int customerId, int balance)
-            : base(surname, name, phone, email)
+        // Implementing properties from ICustomer
+        public int CustomerId { get; set; }
+        public double Balance { get; set; }
+
+        // Constructor to initialize properties
+        public Customer(string surname, string name, string phone, string email, int customerId, double balance)
         {
-            this.customerId = customerId;
-            this.balance = balance;
+            this.Surname = surname;
+            this.Name = name;
+            this.Phone = phone;
+            this.Email = email;
+            this.CustomerId = customerId;
+            this.Balance = balance;
         }
 
-        public int GetCustomerId()
-        {
-            return this.customerId;
-        }
-
+        // Method to set CustomerId
         public void SetCustomerId(int value)
         {
-            this.customerId = value;
+            this.CustomerId = value;
         }
-        
-        public int GetBalance() {return this.balance;}
 
-        public void SetBalance(int value) { this.balance = value; }
+        // Method to set Balance
+        public void SetBalance(double value)
+        {
+            this.Balance = value;
+        }
     }
 }

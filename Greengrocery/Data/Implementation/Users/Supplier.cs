@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Greengrocery.Data.API;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -7,37 +8,39 @@ using System.Threading.Tasks;
 
 namespace Greengrocery
 {
-    public class Supplier : User
+    public class Supplier : ISupplier
     {
-        private int supplierId;
-        private Product[] products;
+        // Implementing properties from IUser
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
 
-        // Constructor to initialize the Suppliers object
-        public Supplier(string surname, string name, int phone, string email, int supplierId)
-            : base(surname, name, phone, email)
+        // Implementing properties from ISupplier
+        public int SupplierId { get; set; }
+        public Product[] Products { get; set; }
+
+        // Constructor to initialize properties
+        public Supplier(string surname, string name, string phone, string email, int supplierId, Product[] products)
         {
-            this.supplierId = supplierId;
-
+            this.Surname = surname;
+            this.Name = name;
+            this.Phone = phone;
+            this.Email = email;
+            this.SupplierId = supplierId;
+            this.Products = products;
         }
 
-        public int GetSupplierId()
-        {
-            return this.supplierId;
-        }
-
+        // Method to set SupplierId
         public void SetSupplierId(int value)
         {
-            this.supplierId = value;
+            this.SupplierId = value;
         }
 
-        public Product[] GetProducts()
-        {
-            return this.products;
-        }
-
+        // Method to set Products
         public void SetProducts(Product[] value)
         {
-            this.products = value;
+            this.Products = value;
         }
     }
 }
