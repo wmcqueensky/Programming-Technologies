@@ -76,7 +76,6 @@
     <Compile Include="Data\Implementation\Users\Customer.cs" />
     <Compile Include="Data\Implementation\Users\Employee.cs" />
     <Compile Include="Data\Implementation\Users\Supplier.cs" />
-    <Compile Include="Data\Implementation\Users\User.cs" />
     <Compile Include="LINQ to SQL\Catalog.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
