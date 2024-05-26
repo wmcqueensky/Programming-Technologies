@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using Greengrocery.Data.API;
+using System.Collections.Generic;
 
 namespace Greengrocery
 {
-    public class Catalog
+    public class Catalog : ICatalog
     {
         private Dictionary<int, Product> products;
+
+        public int Id { get; set; }
+        public string Name { get; set; }
 
         public Catalog(Dictionary<int, Product> initialProducts = null)
         {
