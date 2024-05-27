@@ -59,6 +59,7 @@ namespace DataLayer.API
         Task<bool> CheckIfCustomerExists(int id);
         Task<bool> CheckIfProductExists(int id);
         Task<bool> CheckIfStateExists(int id);
+        Task<bool> CheckIfCatalogExists(int id);
         Task<bool> CheckIfEventExists(int id);
     }
 }

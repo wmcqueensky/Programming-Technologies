@@ -573,5 +573,10 @@ namespace DataLayer.Implementation
         {
             return (await this.GetEvent(id)) != null;
         }
+
+        public async Task<bool> CheckIfCatalogExists(int id)
+        {
+            return (await this.GetCatalog(id)) != null;
+        }
     }
 }

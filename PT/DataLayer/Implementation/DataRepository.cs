@@ -12,74 +12,130 @@ namespace DataLayer.Implementation
         }
 
 
-        public async Task AddUser(int id, string firstName, string lastName)
+        public async Task AddEmployee(int id, string firstName, string lastName)
         {
-            IUser user = new Employee(id, firstName, lastName);
+            IEmployee employee = new Employee(id, firstName, lastName);
 
-            await this._context.AddUser(user);
+            await this._context.AddEmployee(employee);
         }
 
-        public async Task<IUser> GetUser(int id)
+        public async Task<IEmployee> GetEmployee(int id)
         {
-            IUser? user = await this._context.GetUserAsyncQuerySyntax(id);
+            IEmployee? employee = await this._context.GetEmployeeAsyncQuerySyntax(id);
 
-            if (user is null)
+            if (employee is null)
                 throw new Exception("This user does not exist!");
 
-            return user;
+            return employee;
         }
 
-        public async Task<IUser> GetUserAsyncMethodSyntax(int id)
+        public async Task<IEmployee> GetEmployeeAsyncMethodSyntax(int id)
         {
-            IUser? user = await this._context.GetUserAsyncMethodSyntax(id);
+            IEmployee? employee = await this._context.GetEmployeeAsyncMethodSyntax(id);
 
-            if (user is null)
+            if (employee is null)
                 throw new Exception("This user does not exist!");
 
-            return user;
+            return employee;
         }
 
-        public async Task UpdateUser(int id, string firstName, string lastName)
+        public async Task UpdateEmployee(int id, string firstName, string lastName)
         {
-            IUser user = new Employee(id, firstName, lastName);
+            IEmployee employee = new Employee(id, firstName, lastName);
 
-            if (!await this.CheckIfUserExists(user.id))
+            if (!await this.CheckIfEmployeeExists(employee.EmployeeId))
                 throw new Exception("This user does not exist");
 
-            await this._context.UpdateUser(user);
+            await this._context.UpdateEmployee(employee);
         }
 
-        public async Task DeleteUser(int id)
+        public async Task DeleteEmployee(int id)
         {
-            if (!await this.CheckIfUserExists(id))
+            if (!await this.CheckIfEmployeeExists(id))
                 throw new Exception("This user does not exist");
 
-            await this._context.DeleteUser(id);
+            await this._context.DeleteEmployee(id);
         }
 
-        public async Task<Dictionary<int, IUser>> GetAllUsers()
+        public async Task<Dictionary<int, IEmployee>> GetAllEmployees()
         {
-            return await this._context.GetAllUsers();
+            return await this._context.GetAllEmployees();
         }
 
-        public async Task<int> GetUsersCount()
+        public async Task<int> GetEmployeesCount()
         {
-            return await this._context.GetUsersCount();
+            return await this._context.GetEmployeesCount();
         }
 
 
 
-
-        public async Task AddProduct(int id, string name, string description, float price)
+        public async Task AddCustomer(int id, string firstName, string lastName, decimal balance)
         {
-            IProduct product = new Product(id, name, description, price);
+            ICustomer customer = new Customer(id, firstName, lastName, balance);
+
+            await this._context.AddCustomer(customer);
+        }
+
+        public async Task<ICustomer> GetCustomer(int id)
+        {
+            ICustomer? customer = await this._context.GetCustomerAsyncQuerySyntax(id);
+
+            if (customer is null)
+                throw new Exception("This customer does not exist!");
+
+            return customer;
+        }
+
+        public async Task<ICustomer> GetCustomerAsyncMethodSyntax(int id)
+        {
+            ICustomer? customer = await this._context.GetCustomerAsyncMethodSyntax(id);
+
+            if (customer is null)
+                throw new Exception("This customer does not exist!");
+
+            return customer;
+        }
+
+        public async Task UpdateCustomer(int id, string firstName, string lastName, decimal balance)
+        {
+            ICustomer customer = new Customer(id, firstName, lastName, balance);
+
+            if (!await this.CheckIfCustomerExists(customer.CustomerId))
+                throw new Exception("This customer does not exist");
+
+            await this._context.UpdateCustomer(customer);
+        }
+
+        public async Task DeleteCustomer(int id)
+        {
+            if (!await this.CheckIfCustomerExists(id))
+                throw new Exception("This customer does not exist");
+
+            await this._context.DeleteCustomer(id);
+        }
+
+        public async Task<Dictionary<int, ICustomer>> GetAllCustomers()
+        {
+            return await this._context.GetAllCustomers();
+        }
+
+        public async Task<int> GetCustomersCount()
+        {
+            return await this._context.GetCustomersCount();
+        }
+
+
+
+        public async Task AddProduct(int productId, string name)
+        {
+            IProduct product = new Product(productId, name);
 
             await this._context.AddProduct(product);
         }
 
-        public async Task<IProduct> GetProduct(int id)
+        public async Task<IProduct> GetProduct(int productId)
         {
-            IProduct? product = await this._context.GetProduct(id);
+            IProduct? product = await this._context.GetProduct(productId);
 
             if (product is null)
                 throw new Exception("This product does not exist!");
@@ -87,22 +143,22 @@ namespace DataLayer.Implementation
             return product;
         }
 
-        public async Task UpdateProduct(int id, string name, string description, float price)
+        public async Task UpdateProduct(int productId, string name)
         {
-            IProduct product = new Product(id, name, description, price);
+            IProduct product = new Product(productId, name);
 
-            if (!await this.CheckIfProductExists(product.id))
+            if (!await this.CheckIfProductExists(productId))
                 throw new Exception("This product does not exist");
 
             await this._context.UpdateProduct(product);
         }
 
-        public async Task DeleteProduct(int id)
+        public async Task DeleteProduct(int productId)
         {
-            if (!await this.CheckIfProductExists(id))
+            if (!await this.CheckIfProductExists(productId))
                 throw new Exception("This product does not exist");
 
-            await this._context.DeleteProduct(id);
+            await this._context.DeleteProduct(productId);
         }
 
         public async Task<Dictionary<int, IProduct>> GetAllProducts()
@@ -118,19 +174,17 @@ namespace DataLayer.Implementation
 
 
 
-        public async Task AddState(int id, int productId, bool available)
-        {
-            if (!await this._context.CheckIfProductExists(productId))
-                throw new Exception("This product does not exist!");
 
-            IState state = new State(id, productId, available);
+        public async Task AddState(int stateId, int catalogId, int quantity)
+        {
+            IState state = new State(stateId, catalogId, quantity);
 
             await this._context.AddState(state);
         }
 
-        public async Task<IState> GetState(int id)
+        public async Task<IState> GetState(int stateId)
         {
-            IState? state = await this._context.GetState(id);
+            IState? state = await this._context.GetState(stateId);
 
             if (state is null)
                 throw new Exception("This state does not exist!");
@@ -138,25 +192,22 @@ namespace DataLayer.Implementation
             return state;
         }
 
-        public async Task UpdateState(int id, int productId, bool available)
+        public async Task UpdateState(int stateId, int catalogId, int quantity)
         {
-            if (!await this._context.CheckIfProductExists(productId))
-                throw new Exception("This product does not exist!");
+            IState state = new State(stateId, catalogId, quantity);
 
-            IState state = new State(id, productId, available);
-
-            if (!await this.CheckIfStateExists(state.stateId))
+            if (!await this.CheckIfStateExists(stateId))
                 throw new Exception("This state does not exist");
 
             await this._context.UpdateState(state);
         }
 
-        public async Task DeleteState(int id)
+        public async Task DeleteState(int stateId)
         {
-            if (!await this.CheckIfStateExists(id))
+            if (!await this.CheckIfStateExists(stateId))
                 throw new Exception("This state does not exist");
 
-            await this._context.DeleteState(id);
+            await this._context.DeleteState(stateId);
         }
 
         public async Task<Dictionary<int, IState>> GetAllStates()
@@ -172,44 +223,95 @@ namespace DataLayer.Implementation
 
 
 
-        public async Task AddEvent(int id, int stateId, int userId, string type)
+        public async Task AddCatalog(int catalogId, decimal price)
         {
+            ICatalog catalog = new Catalog(catalogId, price);
 
-            IUser user = await this.GetUser(userId);
+            await this._context.AddCatalog(catalog);
+        }
+
+        public async Task<ICatalog> GetCatalog(int catalogId)
+        {
+            ICatalog? catalog = await this._context.GetCatalog(catalogId);
+
+            if (catalog is null)
+                throw new Exception("This catalog does not exist!");
+
+            return catalog;
+        }
+
+        public async Task UpdateCatalog(int catalogId, decimal price)
+        {
+            ICatalog catalog = new Catalog(catalogId, price);
+
+            if (!await this.CheckIfCatalogExists(catalogId))
+                throw new Exception("This catalog does not exist");
+
+            await this._context.UpdateCatalog(catalog);
+        }
+
+        public async Task DeleteCatalog(int catalogId)
+        {
+            if (!await this.CheckIfCatalogExists(catalogId))
+                throw new Exception("This catalog does not exist");
+
+            await this._context.DeleteCatalog(catalogId);
+        }
+
+        public async Task<Dictionary<int, ICatalog>> GetAllCatalogs()
+        {
+            return await this._context.GetAllCatalogs();
+        }
+
+        public async Task<int> GetCatalogsCount()
+        {
+            return await this._context.GetCatalogsCount();
+        }
+
+
+
+
+
+
+
+        public async Task AddEvent(int eventId, int stateId, int employeeId, int customerId, int productId)
+        {
+            IEmployee employee = await this.GetEmployee(employeeId);
+            ICustomer customer = await this.GetCustomer(customerId);
             IState state = await this.GetState(stateId);
-            IProduct product = await this.GetProduct(state.productId);
+            IProduct product = await this.GetProduct(productId);
 
-            IEvent newEvent = new Event(id, stateId, userId, type);
+            IEvent newEvent = new Event(eventId, stateId, employeeId, customerId, productId);
 
             await this._context.AddEvent(newEvent);
         }
 
-        public async Task<IEvent> GetEvent(int id)
+        public async Task<IEvent> GetEvent(int eventId)
         {
-            IEvent? even = await this._context.GetEvent(id);
+            IEvent? evnt = await this._context.GetEvent(eventId);
 
-            if (even is null)
+            if (evnt is null)
                 throw new Exception("This event does not exist!");
 
-            return even;
+            return evnt;
         }
 
-        public async Task UpdateEvent(int id, int stateId, int userId, string type)
+        public async Task UpdateEvent(int eventId, int stateId, int employeeId, int customerId, int productId)
         {
-            IEvent newEvent = new Event(id, stateId, userId, type);
+            IEvent newEvent = new Event(eventId, stateId, employeeId, customerId, productId);
 
-            if (!await this.CheckIfEventExists(newEvent.eventId))
+            if (!await this.CheckIfEventExists(eventId))
                 throw new Exception("This event does not exist");
 
             await this._context.UpdateEvent(newEvent);
         }
 
-        public async Task DeleteEvent(int id)
+        public async Task DeleteEvent(int eventId)
         {
-            if (!await this.CheckIfEventExists(id))
+            if (!await this.CheckIfEventExists(eventId))
                 throw new Exception("This event does not exist");
 
-            await this._context.DeleteEvent(id);
+            await this._context.DeleteEvent(eventId);
         }
 
         public async Task<Dictionary<int, IEvent>> GetAllEvents()
@@ -225,9 +327,15 @@ namespace DataLayer.Implementation
 
 
 
-        public async Task<bool> CheckIfUserExists(int id)
+
+        public async Task<bool> CheckIfEmployeeExists(int id)
         {
-            return await this._context.CheckIfUserExists(id);
+            return await this._context.CheckIfEmployeeExists(id);
+        }
+
+        public async Task<bool> CheckIfCustomerExists(int id)
+        {
+            return await this._context.CheckIfCustomerExists(id);
         }
 
         public async Task<bool> CheckIfProductExists(int id)
@@ -238,6 +346,11 @@ namespace DataLayer.Implementation
         public async Task<bool> CheckIfStateExists(int id)
         {
             return await this._context.CheckIfStateExists(id);
+        }
+
+        public async Task<bool> CheckIfCatalogExists(int id)
+        {
+            return await this._context.CheckIfCatalogExists(id);
         }
 
         public async Task<bool> CheckIfEventExists(int id)
