@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Service.API
 {
-    public interface ICustomerDTO
+    public interface ICustomerDTO : IUserDTO
     {
+        int CustomerId { get; set; }
+        decimal Balance { get; set; }
     }
 }
