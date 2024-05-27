@@ -36,14 +36,9 @@ namespace ServiceTest.FakeItems
             return await _dataRepository.GetEventsCount();
         }
 
-        public async Task UpdateEvent(int id, int stateId, int userId, string type)
+        public async Task UpdateEvent(int id, int stateId, int employeeId, int customerid, int productide)
         {
-            await _dataRepository.UpdateEvent(id, stateId, userId, type);
-        }
-
-        public Task UpdateEvent(int id, int stateId, int employeeId, int customerid, int productid)
-        {
-            throw new NotImplementedException();
+            await _dataRepository.UpdateEvent(id, stateId, employeeId, customerid, productide);
         }
     }
 }

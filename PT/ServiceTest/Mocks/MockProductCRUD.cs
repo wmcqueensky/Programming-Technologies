@@ -6,9 +6,9 @@ namespace ServiceTest.FakeItems
     {
         private MockDataRepository _dataRepository = new MockDataRepository();
 
-        public async Task AddProduct(int id, string productName, string productDescription, float price)
+        public async Task AddProduct(int id, string name)
         {
-            await _dataRepository.AddProduct(id, productName, productDescription, price);
+            await _dataRepository.AddProduct(id, name);
         }
 
         public async Task DeleteProduct(int id)
@@ -31,9 +31,9 @@ namespace ServiceTest.FakeItems
             return await _dataRepository.GetProductsCount();
         }
 
-        public async Task UpdateProduct(int id, string productName, string productDescription, float price)
+        public async Task UpdateProduct(int id, string name)
         {
-            await _dataRepository.UpdateProduct(id, productName, productDescription, price);
+            await _dataRepository.UpdateProduct(id, name);
         }
     }
 }

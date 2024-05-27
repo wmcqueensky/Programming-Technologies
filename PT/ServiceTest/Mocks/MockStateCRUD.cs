@@ -6,9 +6,9 @@ namespace ServiceTest.FakeItems
     {
         private MockDataRepository _dataRepository = new MockDataRepository();
 
-        public async Task AddState(int id, int productId, bool available)
+        public async Task AddState(int id, int catalogid, int quantity)
         {
-            await _dataRepository.AddState(id, productId, available);
+            await _dataRepository.AddState(id, catalogid, quantity);
         }
 
         public async Task DeleteState(int id)
@@ -31,9 +31,9 @@ namespace ServiceTest.FakeItems
             return await _dataRepository.GetStatesCount();
         }
 
-        public async Task UpdateState(int id, int productId, bool available)
+        public async Task UpdateState(int id, int catalogid, int quantity)
         {
-            await _dataRepository.UpdateState(id, productId, available);
+            await _dataRepository.UpdateState(id, catalogid, quantity);
         }
     }
 }
