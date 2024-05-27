@@ -32,9 +32,9 @@ namespace DataLayer.API
         Task<Dictionary<int, IProduct>> GetAllProducts();
         Task<int> GetProductsCount();
 
-        Task AddState(int id, int catalogid, decimal price);
+        Task AddState(int id, int catalogid, int quantity);
         Task<IState> GetState(int id);
-        Task UpdateState(int id, int catalogid, decimal price);
+        Task UpdateState(int id, int catalogid, int quantity);
         Task DeleteState(int id);
         Task<Dictionary<int, IState>> GetAllStates();
         Task<int> GetStatesCount();

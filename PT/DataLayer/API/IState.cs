@@ -4,6 +4,6 @@
     {
         int StateId { get; set; }
         int CatalogId { get; set; }
-        decimal Price { get; set; }
+        int Quantity { get; set; }
     }
 }

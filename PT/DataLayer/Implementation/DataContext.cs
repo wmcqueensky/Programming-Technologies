@@ -1,5 +1,6 @@
 ﻿using DataLayer.API;
 using DataLayer.Instrumentation;
+using Microsoft.Extensions.Logging;
 
 namespace DataLayer.Implementation
 {
@@ -12,138 +13,199 @@ namespace DataLayer.Implementation
 
         private readonly string ConnectionString;
 
-        public Task AddEmployee(IEmployee employee)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEmployee?> GetEmployeeAsyncQuerySyntax(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEmployee?> GetEmployeeAsyncMethodSyntax(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateEmployee(IEmployee employee)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteEmployee(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Dictionary<int, IEmployee>> GetAllEmployees()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> GetEmployeesCount()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task AddUser(IUser user)
+        public async Task AddEmployee(IEmployee employee)
         {
             using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
             {
-                Instrumentation.User entity = new Instrumentation.User()
+                Instrumentation.Employee entity = new Instrumentation.Employee()
                 {
-                    Id = user.id,
-                    FirstName = user.firstName,
-                    LastName = user.lastName,
+                    EmployeeId = employee.EmployeeId,
+                    Name = employee.Name,
+                    Surname = employee.Surname,
                 };
 
-                context.Users.InsertOnSubmit(entity);
+                context.Employees.InsertOnSubmit(entity);
 
                 await Task.Run(() => context.SubmitChanges());
             }
         }
 
-        public async Task<IUser?> GetUserAsyncQuerySyntax(int id)
+        public async Task<IEmployee?> GetEmployeeAsyncQuerySyntax(int id)
         {
             using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
             {
-                Instrumentation.User? user = await Task.Run(() =>
+                Instrumentation.Employee? employee = await Task.Run(() =>
                 {
-                    IQueryable<Instrumentation.User> query =
-                        from u in context.Users
-                        where u.Id == id
-                        select u;
+                    IQueryable<Instrumentation.Employee> query =
+                        from e in context.Employees
+                        where e.EmployeeId == id
+                        select e;
 
                     return query.FirstOrDefault();
                 });
 
-                return user is not null ? new User(user.Id, user.FirstName, user.LastName) : null;
+                return employee is not null ? new Employee(employee.EmployeeId, employee.Name, employee.Surname) : null;
             }
         }
 
-        public async Task<IUser?> GetUserAsyncMethodSyntax(int id)
+        public async Task<IEmployee?> GetEmployeeAsyncMethodSyntax(int id)
         {
             using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
             {
-                Instrumentation.User? user = await Task.Run(() =>
+                Instrumentation.Employee? employee = await Task.Run(() =>
                 {
-                    IQueryable<Instrumentation.User> query = context.Users.Where(u => u.Id == id);
+                    IQueryable<Instrumentation.Employee> query = context.Employees.Where(e => e.EmployeeId == id);
 
                     return query.FirstOrDefault();
                 });
 
-                return user is not null ? new User(user.Id, user.FirstName, user.LastName) : null;
+                return employee is not null ? new Employee(employee.EmployeeId, employee.Name, employee.Surname) : null;
             }
         }
 
-        public async Task UpdateUser(IUser user)
+        public async Task UpdateEmployee(IEmployee employee)
         {
             using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
             {
-                Instrumentation.User toUpdate = (from u in context.Users where u.Id == user.id select u).FirstOrDefault()!;
+                Instrumentation.Employee toUpdate = (from e in context.Employees where e.EmployeeId == employee.EmployeeId select e).FirstOrDefault()!;
 
-                toUpdate.Id = user.id;
-                toUpdate.FirstName = user.firstName;
-                toUpdate.LastName = user.lastName;
+                toUpdate.EmployeeId = employee.EmployeeId;
+                toUpdate.Name = employee.Name;
+                toUpdate.Surname = employee.Surname;
 
                 await Task.Run(() => context.SubmitChanges());
             }
         }
 
-        public async Task DeleteUser(int id)
+        public async Task DeleteEmployee(int id)
         {
             using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
             {
-                Instrumentation.User toDelete = (from u in context.Users where u.Id == id select u).FirstOrDefault()!;
+                Instrumentation.Employee toDelete = (from e in context.Employees where e.EmployeeId == id select e).FirstOrDefault()!;
 
-                context.Users.DeleteOnSubmit(toDelete);
+                context.Employees.DeleteOnSubmit(toDelete);
 
                 await Task.Run(() => context.SubmitChanges());
             }
         }
 
-        public async Task<Dictionary<int, IUser>> GetAllUsers()
+        public async Task<Dictionary<int, IEmployee>> GetAllEmployees()
         {
             using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
             {
-                IQueryable<IUser> usersQuery = from u in context.Users
+                IQueryable<IEmployee> usersQuery = from e in context.Employees
                                                select
-                                                   new User(u.Id, u.FirstName, u.LastName) as IUser;
+                                                   new Employee(e.EmployeeId, e.Name, e.Surname) as IEmployee;
 
-                return await Task.Run(() => usersQuery.ToDictionary(k => k.id));
+                return await Task.Run(() => usersQuery.ToDictionary(k => k.EmployeeId));
             }
         }
 
-        public async Task<int> GetUsersCount()
+        public async Task<int> GetEmployeesCount()
         {
             using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
             {
-                return await Task.Run(() => context.Users.Count());
+                return await Task.Run(() => context.Employees.Count());
             }
         }
 
+        public async Task AddCustomer(ICustomer customer)
+        {
+            using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
+            {
+                Instrumentation.Customer entity = new Instrumentation.Customer()
+                {
+                    CustomerId = customer.CustomerId,
+                    Name = customer.Name,
+                    Surname = customer.Surname,
+                    Balance = customer.Balance
+                };
 
+                context.Customers.InsertOnSubmit(entity);
+
+                await Task.Run(() => context.SubmitChanges());
+            }
+        }
+
+        public async Task<ICustomer?> GetCustomerAsyncQuerySyntax(int id)
+        {
+            using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
+            {
+                Instrumentation.Customer? customer = await Task.Run(() =>
+                {
+                    IQueryable<Instrumentation.Customer> query =
+                        from c in context.Customers
+                        where c.CustomerId == id
+                        select c;
+
+                    return query.FirstOrDefault();
+                });
+
+                return customer is not null ? new Customer(customer.CustomerId, customer.Name, customer.Surname, customer.Balance) : null;
+            }
+        }
+
+        public async Task<ICustomer?> GetCustomerAsyncMethodSyntax(int id)
+        {
+            using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
+            {
+                Instrumentation.Customer? customer = await Task.Run(() =>
+                {
+                    IQueryable<Instrumentation.Customer> query = context.Customers.Where(c => c.CustomerId == id);
+
+                    return query.FirstOrDefault();
+                });
+
+                return customer is not null ? new Customer(customer.CustomerId, customer.Name, customer.Surname, customer.Balance) : null;
+            }
+        }
+
+        public async Task UpdateCustomer(ICustomer customer)
+        {
+            using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
+            {
+                Instrumentation.Customer toUpdate = (from c in context.Customers where c.CustomerId == customer.CustomerId select c).FirstOrDefault()!;
+
+                toUpdate.CustomerId = customer.CustomerId;
+                toUpdate.Name = customer.Name;
+                toUpdate.Surname = customer.Surname;
+                toUpdate.Balance = customer.Balance;
+
+                await Task.Run(() => context.SubmitChanges());
+            }
+        }
+
+        public async Task DeleteCustomer(int id)
+        {
+            using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
+            {
+                Instrumentation.Customer toDelete = (from c in context.Customers where c.CustomerId == id select c).FirstOrDefault()!;
+
+                context.Customers.DeleteOnSubmit(toDelete);
+
+                await Task.Run(() => context.SubmitChanges());
+            }
+        }
+
+        public async Task<Dictionary<int, ICustomer>> GetAllCustomers()
+        {
+            using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
+            {
+                IQueryable<ICustomer> customersQuery = from c in context.Customers
+                                                       select
+                                                           new Customer(c.CustomerId, c.Name, c.Surname, c.Balance) as ICustomer;
+
+                return await Task.Run(() => customersQuery.ToDictionary(k => k.CustomerId));
+            }
+        }
+
+        public async Task<int> GetCustomersCount()
+        {
+            using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
+            {
+                return await Task.Run(() => context.Customers.Count());
+            }
+        }
 
 
         public async Task AddProduct(IProduct product)
@@ -152,10 +214,8 @@ namespace DataLayer.Implementation
             {
                 Instrumentation.Product entity = new Instrumentation.Product()
                 {
-                    Id = product.id,
-                    ProductName = product.productName,
-                    ProductDescription = product.productDescription,
-                    Price = product.price,
+                    ProductId = product.ProductId,
+                    Name = product.Name,
                 };
 
                 context.Products.InsertOnSubmit(entity);
@@ -172,13 +232,13 @@ namespace DataLayer.Implementation
                 {
                     IQueryable<Instrumentation.Product> query =
                         from p in context.Products
-                        where p.Id == id
+                        where p.ProductId == id
                         select p;
 
                     return query.FirstOrDefault();
                 });
 
-                return product is not null ? new Product(product.Id, product.ProductName, product.ProductDescription, (float)product.Price) : null;
+                return product is not null ? new Product(product.ProductId, product.Name) : null;
             }
         }
 
@@ -186,11 +246,9 @@ namespace DataLayer.Implementation
         {
             using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
             {
-                Instrumentation.Product toUpdate = (from p in context.Products where p.Id == product.id select p).FirstOrDefault()!;
+                Instrumentation.Product toUpdate = (from p in context.Products where p.ProductId == product.ProductId select p).FirstOrDefault()!;
 
-                toUpdate.ProductName = product.productName;
-                toUpdate.ProductDescription = product.productDescription;
-                toUpdate.Price = product.price;
+                toUpdate.Name = product.Name;
 
                 await Task.Run(() => context.SubmitChanges());
             }
@@ -200,7 +258,7 @@ namespace DataLayer.Implementation
         {
             using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
             {
-                Instrumentation.Product toDelete = (from p in context.Products where p.Id == id select p).FirstOrDefault()!;
+                Instrumentation.Product toDelete = (from p in context.Products where p.ProductId == id select p).FirstOrDefault()!;
 
                 context.Products.DeleteOnSubmit(toDelete);
 
@@ -214,9 +272,9 @@ namespace DataLayer.Implementation
             {
                 IQueryable<IProduct> productQuery = from p in context.Products
                                                     select
-                                                        new Product(p.Id, p.ProductName, p.ProductDescription, (float)p.Price) as IProduct;
+                                                        new Product(p.ProductId, p.Name) as IProduct;
 
-                return await Task.Run(() => productQuery.ToDictionary(k => k.id));
+                return await Task.Run(() => productQuery.ToDictionary(k => k.ProductId));
             }
         }
 
@@ -237,9 +295,9 @@ namespace DataLayer.Implementation
             {
                 Instrumentation.State entity = new Instrumentation.State()
                 {
-                    StateId = state.stateId,
-                    ProductId = state.productId,
-                    Availavle = state.available,
+                    StateId = state.StateId,
+                    CatalogId = state.CatalogId,
+                    Quantity = state.Quantity,
                 };
 
                 context.States.InsertOnSubmit(entity);
@@ -262,7 +320,7 @@ namespace DataLayer.Implementation
                     return query.FirstOrDefault();
                 });
 
-                return state is not null ? new State(state.StateId, state.ProductId, state.Availavle) : null;
+                return state is not null ? new State(state.StateId, (int)state.CatalogId, (int)state.Quantity) : null;
             }
         }
 
@@ -270,10 +328,10 @@ namespace DataLayer.Implementation
         {
             using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
             {
-                Instrumentation.State toUpdate = (from s in context.States where s.StateId == state.stateId select s).FirstOrDefault()!;
+                Instrumentation.State toUpdate = (from s in context.States where s.StateId == state.StateId select s).FirstOrDefault()!;
 
-                toUpdate.ProductId = state.productId;
-                toUpdate.Availavle = state.available;
+                toUpdate.CatalogId = state.CatalogId;
+                toUpdate.Quantity = state.Quantity;
 
                 await Task.Run(() => context.SubmitChanges());
             }
@@ -297,9 +355,9 @@ namespace DataLayer.Implementation
             {
                 IQueryable<IState> stateQuery = from s in context.States
                                                 select
-                                                    new State(s.StateId, s.ProductId, s.Availavle) as IState;
+                                                    (new State(s.StateId, (int)s.CatalogId, (int)s.Quantity) as IState);
 
-                return await Task.Run(() => stateQuery.ToDictionary(k => k.stateId));
+                return await Task.Run(() => stateQuery.ToDictionary(k => k.StateId));
             }
         }
 
@@ -320,12 +378,12 @@ namespace DataLayer.Implementation
             {
                 Instrumentation.Event entity = new Instrumentation.Event()
                 {
-                    Id = e.eventId,
-                    StateId = e.stateId,
-                    UserId = e.userId,
-                    EventDate = e.eventDate,
-                    Type = e.type
-
+                    EventId = e.EventId,
+                    StateId = e.StateId,
+                    EmployeeId = e.EmployeeId,
+                    CustomerId = e.CustomerId,
+                    ProductId = e.ProductId,
+                    EventDate = e.EventDate,
                 };
 
                 context.Events.InsertOnSubmit(entity);
@@ -338,31 +396,31 @@ namespace DataLayer.Implementation
         {
             using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
             {
-                Instrumentation.Event? even = await Task.Run(() =>
+                Instrumentation.Event? evend = await Task.Run(() =>
                 {
                     IQueryable<Instrumentation.Event> query =
                         from e in context.Events
-                        where e.Id == id
+                        where e.EventId == id
                         select e;
 
                     return query.FirstOrDefault();
                 });
 
-                return even is not null ? new Event(even.Id, even.StateId, even.UserId, even.Type) : null;
+                return evend is not null ? new Event(evend.EventId, evend.StateId, evend.EmployeeId, evend.CustomerId, (int)evend.ProductId) : null;
             }
-
         }
 
-        public async Task UpdateEvent(IEvent even)
+        public async Task UpdateEvent(IEvent evend)
         {
             using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
             {
-                Instrumentation.Event toUpdate = (from e in context.Events where e.Id == even.eventId select e).FirstOrDefault()!;
-
-                toUpdate.StateId = even.stateId;
-                toUpdate.UserId = even.userId;
-                toUpdate.Id = even.eventId;
-                toUpdate.Type = even.type;
+                Instrumentation.Event toUpdate = (from e in context.Events where e.EventId == evend.EventId select e).FirstOrDefault()!;
+                
+                toUpdate.EventId = evend.EventId;
+                toUpdate.StateId = evend.StateId;
+                toUpdate.EmployeeId = evend.EmployeeId;
+                toUpdate.CustomerId = evend.CustomerId;
+                toUpdate.ProductId = evend.ProductId;
 
                 await Task.Run(() => context.SubmitChanges());
             }
@@ -372,7 +430,7 @@ namespace DataLayer.Implementation
         {
             using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
             {
-                Instrumentation.Event toDelete = (from e in context.Events where e.Id == id select e).FirstOrDefault()!;
+                Instrumentation.Event toDelete = (from e in context.Events where e.EventId == id select e).FirstOrDefault()!;
 
                 context.Events.DeleteOnSubmit(toDelete);
 
@@ -386,9 +444,9 @@ namespace DataLayer.Implementation
             {
                 IQueryable<IEvent> eventQuery = from e in context.Events
                                                 select
-                                                    new Event(e.Id, e.StateId, e.UserId, e.Type) as IEvent;
+                                                    (new Event(e.EventId, e.StateId, e.EmployeeId, e.CustomerId, (int)e.ProductId) as IEvent);
 
-                return await Task.Run(() => eventQuery.ToDictionary(k => k.eventId));
+                return await Task.Run(() => eventQuery.ToDictionary(k => k.EventId));
             }
         }
 
@@ -403,9 +461,102 @@ namespace DataLayer.Implementation
 
 
 
-        public async Task<bool> CheckIfUserExists(int id)
+
+
+
+        public async Task AddCatalog(ICatalog catalog)
         {
-            return (await this.GetUserAsyncQuerySyntax(id)) != null;
+            using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
+            {
+                Instrumentation.Catalog entity = new Instrumentation.Catalog()
+                {
+                    CatalogId = catalog.CatalogId,
+                    Price = catalog.Price
+                };
+
+                context.Catalogs.InsertOnSubmit(entity);
+
+                await Task.Run(() => context.SubmitChanges());
+            }
+        }
+
+        public async Task<ICatalog?> GetCatalog(int id)
+        {
+            using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
+            {
+                Instrumentation.Catalog? catalog = await Task.Run(() =>
+                {
+                    IQueryable<Instrumentation.Catalog> query =
+                        from c in context.Catalogs
+                        where c.CatalogId == id
+                        select c;
+
+                    return query.FirstOrDefault();
+                });
+
+                return catalog is not null ? new Catalog(catalog.CatalogId, (decimal)catalog.Price) : null;
+            }
+        }
+
+        public async Task UpdateCatalog(ICatalog catalog)
+        {
+            using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
+            {
+                Instrumentation.Catalog toUpdate = (from c in context.Catalogs where c.CatalogId == catalog.CatalogId select c).FirstOrDefault()!;
+
+                toUpdate.Price = catalog.Price;
+
+                await Task.Run(() => context.SubmitChanges());
+            }
+        }
+
+        public async Task DeleteCatalog(int id)
+        {
+            using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
+            {
+                Instrumentation.Catalog toDelete = (from c in context.Catalogs where c.CatalogId == id select c).FirstOrDefault()!;
+
+                context.Catalogs.DeleteOnSubmit(toDelete);
+
+                await Task.Run(() => context.SubmitChanges());
+            }
+        }
+
+        public async Task<Dictionary<int, ICatalog>> GetAllCatalogs()
+        {
+            using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
+            {
+                IQueryable<ICatalog> catalogQuery = from c in context.Catalogs
+                                                    select
+                                                        (new Catalog(c.CatalogId, (decimal)c.Price) as ICatalog);
+
+                return await Task.Run(() => catalogQuery.ToDictionary(k => k.CatalogId));
+            }
+        }
+
+        public async Task<int> GetCatalogsCount()
+        {
+            using (GreengrocersDataContext context = new GreengrocersDataContext(this.ConnectionString))
+            {
+                return await Task.Run(() => context.Catalogs.Count());
+            }
+        }
+
+
+
+
+
+
+
+
+        public async Task<bool> CheckIfCustomerExists(int id)
+        {
+            return (await this.GetCustomerAsyncQuerySyntax(id)) != null;
+        }
+
+        public async Task<bool> CheckIfEmployeeExists(int id)
+        {
+            return (await this.GetEmployeeAsyncQuerySyntax(id)) != null;
         }
 
         public async Task<bool> CheckIfProductExists(int id)
@@ -421,76 +572,6 @@ namespace DataLayer.Implementation
         public async Task<bool> CheckIfEventExists(int id)
         {
             return (await this.GetEvent(id)) != null;
-        }
-
-        public Task AddCustomer(ICustomer customer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ICustomer?> GetCustomerAsyncQuerySyntax(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ICustomer?> GetCustomerAsyncMethodSyntax(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateCustomer(ICustomer customer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteCustomer(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Dictionary<int, ICustomer>> GetAllCustomers()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> GetCustomersCount()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task AddCatalog(ICatalog catalog)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ICatalog?> GetCatalog(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateCatalog(ICatalog catalog)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteCatalog(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Dictionary<int, ICatalog>> GetAllCatalogs()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> GetCatalogsCount()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> CheckIfEmployeeExists(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

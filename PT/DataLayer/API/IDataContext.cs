@@ -56,7 +56,7 @@ namespace DataLayer.API
         Task<int> GetEventsCount();
 
         Task<bool> CheckIfEmployeeExists(int id);
-        Task<bool> CheckIfUserExists(int id);
+        Task<bool> CheckIfCustomerExists(int id);
         Task<bool> CheckIfProductExists(int id);
         Task<bool> CheckIfStateExists(int id);
         Task<bool> CheckIfEventExists(int id);
