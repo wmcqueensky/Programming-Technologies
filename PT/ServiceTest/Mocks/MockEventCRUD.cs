@@ -6,11 +6,6 @@ namespace ServiceTest.FakeItems
     {
         private MockDataRepository _dataRepository = new MockDataRepository();
 
-        //public async Task AddEvent(int id, int stateId, int userId, string type)
-        //{
-        //    await _dataRepository.AddEvent(id, stateId, userId, type);
-        //}
-
         public async Task AddEvent(int id, int stateId, int employeeId, int customerid, int productid)
         {
             await _dataRepository.AddEvent(id, stateId, employeeId, customerid, productid);

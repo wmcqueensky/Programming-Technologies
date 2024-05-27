@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Service.API;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ServiceTest.Mocks
 {
-    internal class MockCatalogDTO
+    internal class MockCatalogDTO : ICatalogDTO
     {
         public MockCatalogDTO(int id, decimal price)
         {

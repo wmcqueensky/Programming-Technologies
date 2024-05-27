@@ -1,5 +1,6 @@
 ﻿using DataLayer.API;
 using Service.API;
+using ServiceTest.Mocks;
 
 namespace ServiceTest.FakeItems
 {
@@ -32,6 +33,11 @@ namespace ServiceTest.FakeItems
             States.Add(id, new MockStateDTO(id, catalogid, quantity));
         }
 
+        public async Task AddCatalog(int id, decimal price)
+        {
+            Catalogs.Add(id, new MockCatalogDTO(id, price));
+        }
+
         public async Task AddEmployee(int id, string firstName, string lastName)
         {
             Employees.Add(id, new MockEmployeeDTO(id, firstName, lastName));
@@ -57,6 +63,11 @@ namespace ServiceTest.FakeItems
             States.Remove(id);
         }
 
+        public async Task DeleteCatalog(int id)
+        {
+            Catalogs.Remove(id);
+        }
+
         public async Task DeleteCustomer(int id)
         {
             Customers.Remove(id);
@@ -80,6 +91,11 @@ namespace ServiceTest.FakeItems
         public async Task<Dictionary<int, IStateDTO>> GetAllStates()
         {
             return await Task.FromResult(States);
+        }
+
+        public async Task<Dictionary<int, ICatalogDTO>> GetAllCatalogs()
+        {
+            return await Task.FromResult(Catalogs);
         }
 
         public async Task<Dictionary<int, IEmployeeDTO>> GetAllEmployees()
@@ -122,6 +138,16 @@ namespace ServiceTest.FakeItems
             return await Task.FromResult(States.Count);
         }
 
+        public async Task<ICatalogDTO> GetCatalog(int id)
+        {
+            return await Task.FromResult(Catalogs[id]);
+        }
+
+        public async Task<int> GetCatalogsCount()
+        {
+            return await Task.FromResult(Catalogs.Count);
+        }
+
         public async Task<IEmployeeDTO> GetEmployee(int id)
         {
             return await Task.FromResult(Employees[id]);
@@ -159,6 +185,11 @@ namespace ServiceTest.FakeItems
         {
             States[id].CatalogId = catalogid;
             States[id].Quantity = quantity;
+        }
+
+        public async Task UpdateCatalog(int id, decimal price)
+        {
+            Catalogs[id].Price = price;
         }
 
         public async Task UpdateEmployee(int id, string firstName, string lastName)

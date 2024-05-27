@@ -9,54 +9,38 @@ using System.Threading.Tasks;
 
 namespace ServiceTest.Mocks
 {
-    internal class MockCatalogCRUD
+    internal class MockCatalogCRUD : ICatalogCRUD
     {
-        private MockDataRepository _repository;
+        private MockDataRepository _dataRepository = new MockDataRepository();
 
-        public MockCatalogCRUD(MockDataRepository repository)
-        {
-            this._repository = repository;
-        }
-
-        public ICatalogDTO Map(ICatalog currentEvent)
-        {
-            return new CatalogDTO(currentEvent.CatalogId, currentEvent.Price);
-        }
         public async Task AddCatalog(int id, decimal price)
         {
-            await this._repository.UpdateCatalog(id, price);
+            await _dataRepository.AddCatalog(id, price);
         }
 
         public async Task DeleteCatalog(int id)
         {
-            await this._repository.DeleteCatalog(id);
+            await _dataRepository.DeleteCatalog(id);
         }
 
         public async Task<Dictionary<int, ICatalogDTO>> GetAllCatalogs()
         {
-            Dictionary<int, ICatalogDTO> result = new Dictionary<int, ICatalogDTO>();
-
-            foreach (ICatalog currentEvent in (await this._repository.GetAllCatalogs()).Values)
-            {
-                result.Add(currentEvent.CatalogId, this.Map(currentEvent));
-            }
-
-            return result;
+            return await _dataRepository.GetAllCatalogs();
         }
 
         public async Task<ICatalogDTO> GetCatalog(int id)
         {
-            return this.Map(await this._repository.GetCatalog(id));
+            return await _dataRepository.GetCatalog(id);
         }
 
         public async Task<int> GetCatalogsCount()
         {
-            return await this._repository.GetCatalogsCount();
+            return await _dataRepository.GetCatalogsCount();
         }
 
         public async Task UpdateCatalog(int id, decimal price)
         {
-            await this._repository.UpdateCatalog(id, price);
+            await _dataRepository.UpdateCatalog(id, price);
         }
     }
 }
