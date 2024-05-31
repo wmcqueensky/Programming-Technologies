@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataLayer.API;
+using Service.API;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ServiceTest.Mocks
 {
-    internal class MockEmployeeDTO
+    internal class MockEmployeeDTO : IEmployeeDTO
     {
         public MockEmployeeDTO(int id, string firstName, string lastName)
         {
