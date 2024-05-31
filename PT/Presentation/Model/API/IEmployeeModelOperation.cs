@@ -16,11 +16,11 @@ namespace Presentation.Model.API
         }
 
         Task AddEmployee(int id, string firstName, string lastName);
-        Task<IEmployeeDTO> GetEmployee(int id);
-        Task<IEmployeeDTO> GetEmployeeAsyncMethodSyntax(int id);
+        Task<IEmployeeModel> GetEmployee(int id);
+        Task<IEmployeeModel> GetEmployeeAsyncMethodSyntax(int id);
         Task UpdateEmployee(int id, string firstName, string lastName);
         Task DeleteEmployee(int id);
-        Task<Dictionary<int, IEmployeeDTO>> GetAllEmployees();
+        Task<Dictionary<int, IEmployeeModel>> GetAllEmployees();
         Task<int> GetEmployeesCount();
     }
 }

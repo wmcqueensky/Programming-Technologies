@@ -13,7 +13,7 @@ internal class StateModelOperation : IStateModelOperation
         this._stateCrud = stateCrud ?? IStateCRUD.CreateStateCRUD();
     }
 
-    private IStateModel Map(IStateModel state)
+    private IStateModel Map(IStateDTO state)
     {
         return new StateModel(state.StateId, state.CatalogId, state.Quantity);
     }

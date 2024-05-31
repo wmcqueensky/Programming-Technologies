@@ -13,7 +13,7 @@ internal class ProductModelOperation : IProductModelOperation
         this._productCRUD = stateCrud ?? IProductCRUD.CreateProductCRUD();
     }
 
-    private IProductModel Map(IProduct product)
+    private IProductModel Map(IProductDTO product)
     {
         return new ProductModel(product.ProductId, product.Name);
     }
@@ -33,11 +33,16 @@ internal class ProductModelOperation : IProductModelOperation
         await this._productCRUD.DeleteProduct(id);
     }
 
+    public async Task<IProductModel> GetProduct(int id)
+    {
+        return this.Map(await this._productCRUD.GetProduct(id));
+    }
+
     public async Task<Dictionary<int, IProductModel>> GetAllProducts()
     {
         Dictionary<int, IProductModel> result = new Dictionary<int, IProductModel>();
 
-        foreach (IProduct product in (await this._productCRUD.GetAllProducts()).Values)
+        foreach (IProductDTO product in (await this._productCRUD.GetAllProducts()).Values)
         {
             result.Add(product.ProductId, this.Map(product));
         }

@@ -19,7 +19,7 @@ namespace Presentation.Model.Implementation
             this._customerCrud = customerCrud ?? ICustomerCRUD.CreateCustomerCRUD();
         }
 
-        private ICustomerModel Map(ICustomer customer)
+        private ICustomerModel Map(ICustomerDTO customer)
         {
             return new CustomerModel(customer.CustomerId, customer.Name, customer.Surname, customer.Balance);
         }
@@ -38,7 +38,7 @@ namespace Presentation.Model.Implementation
         {
             Dictionary<int, ICustomerModel> result = new Dictionary<int, ICustomerModel>();
 
-            foreach (ICustomer customer in (await this._customerCrud.GetAllCustomers()).Values)
+            foreach (ICustomerDTO customer in (await this._customerCrud.GetAllCustomers()).Values)
             {
                 result.Add(customer.CustomerId, this.Map(customer));
             }

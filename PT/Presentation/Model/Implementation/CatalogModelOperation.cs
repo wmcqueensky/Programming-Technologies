@@ -19,7 +19,7 @@ namespace Presentation.Model.Implementation
             this._catalogCrud = catalogCrud ?? ICatalogCRUD.CreateCatalogCRUD();
         }
 
-        private ICatalogModel Map(ICatalogModel catalog)
+        private ICatalogModel Map(ICatalogDTO catalog)
         {
             return new CatalogModel(catalog.CatalogId, catalog.Price);
         }
@@ -38,7 +38,7 @@ namespace Presentation.Model.Implementation
         {
             Dictionary<int, ICatalogModel> result = new Dictionary<int, ICatalogModel>();
 
-            foreach (ICatalogModel catalog in (await this._catalogCrud.GetAllCatalogs()).Values)
+            foreach (ICatalogDTO catalog in (await this._catalogCrud.GetAllCatalogs()).Values)
             {
                 result.Add(catalog.CatalogId, this.Map(catalog));
             }
