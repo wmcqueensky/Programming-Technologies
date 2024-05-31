@@ -10,7 +10,7 @@ namespace Service.API
 {
     public interface ICustomerCRUD
     {
-        static ICustomerCRUD CreateUserCRUD(IDataRepository? dataRepository = null)
+        static ICustomerCRUD CreateCustomerCRUD(IDataRepository? dataRepository = null)
         {
             return new CustomerCRUD(dataRepository ?? IDataRepository.CreateDatabase(ConnectionString.GetConnectionString()));
         }

@@ -1,18 +1,18 @@
 ﻿using DataLayer.API;
-using Service.Implementation;
+using Service.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.API
+namespace Presentation.Model.API
 {
-    public interface IEmployeeCRUD
+    public interface IEmployeeModelOperation
     {
-        static IEmployeeCRUD CreateEmployeeCRUD(IDataRepository? dataRepository = null)
+        static IEmployeeModelOperation CreateModelOperation(IEmployeeCRUD? employeeCrud = null)
         {
-            return new EmployeeCRUD(dataRepository ?? IDataRepository.CreateDatabase(ConnectionString.GetConnectionString()));
+            return new EmployeeModelOperation(employeeCrud ?? IEmployeeCRUD.CreateEmployeeCRUD());
         }
 
         Task AddEmployee(int id, string firstName, string lastName);
