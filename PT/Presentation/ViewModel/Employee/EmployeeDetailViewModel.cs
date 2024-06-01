@@ -11,7 +11,6 @@ internal class EmployeeDetailViewModel : IViewModel, IEmployeeDetailViewModel
     private readonly IErrorInformer _informer;
 
     private int _employeeId;
-
     public int EmployeeId
     {
         get => _employeeId;

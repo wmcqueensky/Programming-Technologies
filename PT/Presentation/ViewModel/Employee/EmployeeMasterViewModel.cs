@@ -172,7 +172,7 @@ internal class EmployeeMasterViewModel : IViewModel, IEmployeeMasterViewModel
         {
             this._employees.Clear();
 
-            foreach (IUserModel e in Employees.Values)
+            foreach (IEmployeeModel e in Employees.Values)
             {
                 this._employees.Add(new EmployeeDetailViewModel(e.EmployeeId, e.Name, e.Surname));
             }
