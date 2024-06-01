@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.Model.API
 {
-    internal interface ICatalogModelOperation
+    public interface ICatalogModelOperation
     {
         static ICatalogModelOperation CreateModelOperation(ICatalogCRUD? catalogCrud = null)
         {

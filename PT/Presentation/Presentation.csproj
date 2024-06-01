@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ViewModel\Catalog - Copy\" />
     <Folder Include="View\Customer\" />
   </ItemGroup>
 

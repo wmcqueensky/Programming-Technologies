@@ -9,11 +9,23 @@
         <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
             <views:HomeView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:UserDetailViewModel}">
-            <views:UserDetailView/>
+        <DataTemplate DataType="{x:Type viewmodels:EmployeeDetailViewModel}">
+            <views:EmployeeDetailView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:UserMasterViewModel}">
-            <views:UserMasterView/>
+        <DataTemplate DataType="{x:Type viewmodels:EmployeeMasterViewModel}">
+            <views:EmployeeMasterView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:CustomerDetailViewModel}">
+            <views:CustomerDetailView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:CustomerMasterViewModel}">
+            <views:CustomerMasterView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:CatalogMasterViewModel}">
+            <views:CatalogMasterView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:CatalogDetailViewModel}">
+            <views:CatalogDetailView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:EventMasterViewModel}">
             <views:EventMasterView/>
