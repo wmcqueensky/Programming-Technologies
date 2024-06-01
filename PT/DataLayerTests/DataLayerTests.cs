@@ -39,3 +39,27 @@ namespace DataLayerTests
 
             await _dataRepository.DeleteProduct(productId);
         }
+
+        [TestMethod]
+        public async Task StateTests()
+        {
+            int catalogId = 3;
+            int stateId = 3;
+
+            await _dataRepository.AddCatalog(catalogId, 49.99m);
+
+            await _dataRepository.AddState(stateId, catalogId, 100);
+
+            IState state = await _dataRepository.GetState(stateId);
+
+            Assert.IsNotNull(state);
+            Assert.AreEqual(stateId, state.StateId);
+            Assert.AreEqual(catalogId, state.CatalogId);
+            Assert.AreEqual(100, state.Quantity);
+
+            Assert.IsNotNull(await _dataRepository.GetAllStates());
+            //Assert.IsTrue(await _dataRepository.GetStatesCount() > 0);
+
+            await _dataRepository.DeleteState(stateId);
+            await _dataRepository.DeleteCatalog(catalogId);
+        }
