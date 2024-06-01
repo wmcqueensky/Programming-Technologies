@@ -22,22 +22,26 @@
             </UserControl.DataContext>
 
             <Grid Background="White" Margin="0,0,0,0">
+                <Button Content="Catalogs" Margin="636,0,74,0" VerticalAlignment="Top" Height="50"
+Command="{Binding SwitchToStateMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
                 <Button Content="States" Margin="636,0,74,0" VerticalAlignment="Top" Height="50"
-                    Command="{Binding SwitchToStateMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+Command="{Binding SwitchToCustomerMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
                 <Button Content="Events" Margin="446,0,264,0" VerticalAlignment="Top" Height="50"
-                    Command="{Binding SwitchToEventMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
-                <Button Content="Products" HorizontalAlignment="Left" Margin="264,0,0,0" VerticalAlignment="Top" Width="90" Height="50" />
-                <Button Content="Users" HorizontalAlignment="Left" Margin="74,0,0,0" VerticalAlignment="Top" Width="90" Height="50"
-                    Command="{Binding SwitchToUserMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+Command="{Binding SwitchToEventMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                <Button Content="Products" HorizontalAlignment="Left" Margin="264,0,0,0" VerticalAlignment="Top" Width="90" Height="50"
+Command="{Binding SwitchToProductMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                <Button Content="Customers" HorizontalAlignment="Left" Margin="264,0,0,0" VerticalAlignment="Top" Width="90" Height="50"
+Command="{Binding SwitchToCustomersMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                <Button Content="Employees" HorizontalAlignment="Left" Margin="264,0,0,0" VerticalAlignment="Top" Width="90" Height="50"
+Command="{Binding SwitchToEmployeesMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
                 <ListView Margin="10,127,450,40" 
                     ItemsSource="{Binding Products, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     SelectedItem="{Binding SelectedDetailViewModel}" Height="340"
                     >
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Id" Width="110" DisplayMemberBinding="{Binding Id}"/>
-                            <GridViewColumn Header="ProductName" Width="110" DisplayMemberBinding="{Binding ProductName}" />
-                            <GridViewColumn Header="Price" Width="110" DisplayMemberBinding="{Binding Price}" />
+                            <GridViewColumn Header="Id" Width="110" DisplayMemberBinding="{Binding ProductId}"/>
+                            <GridViewColumn Header="ProductName" Width="110" DisplayMemberBinding="{Binding Name}" />
 
                         </GridView>
                     </ListView.View>
@@ -53,6 +57,7 @@
                 <StackPanel Margin="594,142,0,0"
                     VerticalAlignment="Top"
                     Background="White" Height="145" HorizontalAlignment="Left" Width="186">
+                    
                     <Label Content="Product name:" FontSize="10" Width="76"/>
                     <TextBox Height="20" Width="120"
                         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
@@ -68,34 +73,7 @@
                         </Validation.ErrorTemplate>
                     </TextBox>
 
-                    <Label Content="Description:" FontSize="10" Width="65"/>
-                    <TextBox Height="20" Width="120"
-                        Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                        TextWrapping="Wrap"
-                        BorderBrush="Gray">
-                        <Validation.ErrorTemplate>
-                            <ControlTemplate>
-                                <StackPanel>
-                                    <AdornedElementPlaceholder x:Name="placeholder"/>
-                                    <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                                </StackPanel>
-                            </ControlTemplate>
-                        </Validation.ErrorTemplate>
-                    </TextBox>
-                    <Label Content="Price:" FontSize="10" Width="65"/>
-                    <TextBox Height="20" Width="120"
-                        Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                        TextWrapping="Wrap"
-                        BorderBrush="Gray">
-                        <Validation.ErrorTemplate>
-                            <ControlTemplate>
-                                <StackPanel>
-                                    <AdornedElementPlaceholder x:Name="placeholder"/>
-                                    <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                                </StackPanel>
-                            </ControlTemplate>
-                        </Validation.ErrorTemplate>
-                    </TextBox>
+                  
 
                 </StackPanel>
 

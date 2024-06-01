@@ -41,9 +41,9 @@
                     </Validation.ErrorTemplate>
                 </TextBox>
 
-                <Label Content="Available:" HorizontalAlignment="Center"/>
+                <Label Content="Quantity:" HorizontalAlignment="Center"/>
                 <TextBox Height="20" Width="120"
-                            Text="{Binding Available, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                            Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                             TextWrapping="Wrap"
                             BorderBrush="Gray">
                     <Validation.ErrorTemplate>

@@ -34,21 +34,27 @@
                             Margin="355,92,217,48"
                             DataContext="{Binding SelectedDetailViewModel}" Height="340" Width="220"
                         />
-                        <Button Content="States" Margin="636,0,74,0" VerticalAlignment="Top" Height="50"/>
+                        <Button Content="Catalogs" Margin="636,0,74,0" VerticalAlignment="Top" Height="50"
+Command="{Binding SwitchToStateMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                        <Button Content="States" Margin="636,0,74,0" VerticalAlignment="Top" Height="50"
+Command="{Binding SwitchToCustomerMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
                         <Button Content="Events" Margin="446,0,264,0" VerticalAlignment="Top" Height="50"
-                            Command="{Binding SwitchToEventMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+Command="{Binding SwitchToEventMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
                         <Button Content="Products" HorizontalAlignment="Left" Margin="264,0,0,0" VerticalAlignment="Top" Width="90" Height="50"
-                            Command="{Binding SwitchToProductMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
-                        <Button Content="Users" HorizontalAlignment="Left" Margin="74,0,0,0" VerticalAlignment="Top" Width="90" Height="50"
-                            Command="{Binding SwitchToUserMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+Command="{Binding SwitchToProductMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                        <Button Content="Customers" HorizontalAlignment="Left" Margin="264,0,0,0" VerticalAlignment="Top" Width="90" Height="50"
+Command="{Binding SwitchToCustomersMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                        <Button Content="Employees" HorizontalAlignment="Left" Margin="264,0,0,0" VerticalAlignment="Top" Width="90" Height="50"
+Command="{Binding SwitchToEmployeesMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                        
                         <ListView Margin="10,127,450,40" 
                             ItemsSource="{Binding States, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             SelectedItem="{Binding SelectedDetailViewModel}" d:ItemsSource="{d:SampleData ItemCount=5}" Height="340">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Id" Width="110" DisplayMemberBinding="{Binding Id}"/>
+                                    <GridViewColumn Header="StateId" Width="110" DisplayMemberBinding="{Binding StateId}"/>
                                     <GridViewColumn Header="ProductId" Width="110" DisplayMemberBinding="{Binding ProductId}" />
-                                    <GridViewColumn Header="Available" Width="110" DisplayMemberBinding="{Binding Available}" />
+                                    <GridViewColumn Header="Quantity" Width="110" DisplayMemberBinding="{Binding Quantity}" />
 
                                 </GridView>
                             </ListView.View>
@@ -77,9 +83,9 @@
                                 </Validation.ErrorTemplate>
                             </TextBox>
 
-                            <Label Content="Available:" FontSize="10" Width="54"/>
+                            <Label Content="Quantity:" FontSize="10" Width="54"/>
                             <TextBox Height="20" Width="120"
-                                Text="{Binding Available, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                 TextWrapping="Wrap"
                                 BorderBrush="Gray">
                                 <Validation.ErrorTemplate>

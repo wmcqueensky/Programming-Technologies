@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Presentation.View.ProductDetailView"
+﻿<UserControl x:Class="Presentation.View.CatalogDetailView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,7 +8,7 @@
              mc:Ignorable="d" Width="220" Height="340">
 
     <UserControl.DataContext>
-        <ObjectDataProvider ObjectType="viewmodels:ProductDetailViewModel">
+        <ObjectDataProvider ObjectType="viewmodels:CatalogDetailViewModel">
             <ObjectDataProvider.ConstructorParameters>
                 <x:Null/>
                 <x:Null/>
@@ -20,14 +20,14 @@
 
         <GroupBox Width="220"
                   HorizontalAlignment="Center"
-                  Header="Product details:" Margin="0,16,0,76">
+                  Header="Catalog details:" Margin="0,16,0,76">
             <StackPanel
                         VerticalAlignment="Top"
                         Background="White" Height="233">
 
-                <Label Content="Product name:" HorizontalAlignment="Center"/>
+                <Label Content="Catalog Price:" HorizontalAlignment="Center"/>
                 <TextBox Height="20" Width="120"
-                         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                         Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                          TextWrapping="Wrap"
                          BorderBrush="Gray">
                     <Validation.ErrorTemplate>
@@ -39,11 +39,9 @@
                         </ControlTemplate>
                     </Validation.ErrorTemplate>
                 </TextBox>
-
-
             </StackPanel>
         </GroupBox>
         <Button Content="Update" Background="Azure" HorizontalAlignment="Center" Margin="0,269,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="90"
-            Command="{Binding UpdateProduct}"/>
+            Command="{Binding UpdateCatalog}"/>
     </Grid>
 </UserControl>

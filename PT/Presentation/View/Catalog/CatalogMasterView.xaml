@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Presentation.View.EmployeeMasterView"
+﻿<UserControl x:Class="Presentation.View.CatalogMasterView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,7 +9,7 @@
              mc:Ignorable="d" d:DesignWidth="800" Height="500">
 
     <UserControl.DataContext>
-        <ObjectDataProvider ObjectType="viewmodels:EmployeeMasterViewModel">
+        <ObjectDataProvider ObjectType="viewmodels:CatalogMasterViewModel">
             <ObjectDataProvider.ConstructorParameters>
                 <x:Null/>
                 <x:Null/>
@@ -23,45 +23,46 @@
             <RowDefinition Height="79*"/>
         </Grid.RowDefinitions>
         <Button Content="Catalogs" Margin="636,0,74,0" VerticalAlignment="Top" Height="50"
-        Command="{Binding SwitchToStateMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                Command="{Binding SwitchToStateMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
         <Button Content="States" Margin="636,0,74,0" VerticalAlignment="Top" Height="50"
-        Command="{Binding SwitchToCustomerMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                Command="{Binding SwitchToCustomerMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
         <Button Content="Events" Margin="446,0,264,0" VerticalAlignment="Top" Height="50"
-        Command="{Binding SwitchToEventMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                Command="{Binding SwitchToEventMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
         <Button Content="Products" HorizontalAlignment="Left" Margin="264,0,0,0" VerticalAlignment="Top" Width="90" Height="50"
-        Command="{Binding SwitchToProductMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                Command="{Binding SwitchToProductMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
         <Button Content="Customers" HorizontalAlignment="Left" Margin="264,0,0,0" VerticalAlignment="Top" Width="90" Height="50"
-        Command="{Binding SwitchToCustomersMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                Command="{Binding SwitchToCustomersMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
         <Button Content="Employees" HorizontalAlignment="Left" Margin="264,0,0,0" VerticalAlignment="Top" Width="90" Height="50"
-        Command="{Binding SwitchToEmployeesMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                Command="{Binding SwitchToEmployeesMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+   
         
         <ListView Margin="10,127,450,40" 
-                    ItemsSource="{Binding Employees, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    ItemsSource="{Binding Catalogs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     SelectedItem="{Binding SelectedDetailViewModel}" SelectionChanged="ListView_SelectionChanged" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.RowSpan="2"
                     >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="EmployeeId" Width="110" DisplayMemberBinding="{Binding EmployeeId}"/>
-                    <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Surname" Width="110" DisplayMemberBinding="{Binding Surname}" />
+                    <GridViewColumn Header="CatalogId" Width="110" DisplayMemberBinding="{Binding CatalogId}"/>
+                    <GridViewColumn Header="Price" Width="110" DisplayMemberBinding="{Binding Price}" />
                 </GridView>
             </ListView.View>
         </ListView>
 
-        <view:EmployeeDetailView
+        <view:CatalogDetailView
                         Margin="355,92,217,48"
                         DataContext="{Binding SelectedDetailViewModel}" Height="340" Width="220" Grid.RowSpan="2"
                         />
         <Button Content="Delete" Background="Azure" HorizontalAlignment="Left" Margin="420,58,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="90"
-            Command="{Binding RemoveEmployee}" Click="Button_Click" Grid.Row="1"/>
+            Command="{Binding RemoveCatalog}" Click="Button_Click" Grid.Row="1"/>
         <Button Content="Add" Background="Azure" HorizontalAlignment="Left" Margin="641,252,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="91"
-            Command="{Binding CreateEmployee}" Click="Button_Click"/>
+            Command="{Binding CreateCatalog}" Click="Button_Click"/>
         <StackPanel Margin="594,142,0,0"
             VerticalAlignment="Top"
             Background="White" Height="92" HorizontalAlignment="Left" Width="186">
+            
             <Label Content="Name:" FontSize="10" Width="57"/>
             <TextBox Height="20" Width="120"
-                Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                 TextWrapping="Wrap"
                 BorderBrush="Gray">
                 <Validation.ErrorTemplate>
@@ -73,22 +74,6 @@
                     </ControlTemplate>
                 </Validation.ErrorTemplate>
             </TextBox>
-
-            <Label Content="Surname:" FontSize="10" Width="57"/>
-            <TextBox Height="20" Width="120"
-                Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                TextWrapping="Wrap"
-                BorderBrush="Gray">
-                <Validation.ErrorTemplate>
-                    <ControlTemplate>
-                        <StackPanel>
-                            <AdornedElementPlaceholder x:Name="placeholder"/>
-                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                        </StackPanel>
-                    </ControlTemplate>
-                </Validation.ErrorTemplate>
-            </TextBox>
-
         </StackPanel>
     </Grid>
 </UserControl>
