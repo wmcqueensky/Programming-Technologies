@@ -18,4 +18,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="View\Customer\" />
+  </ItemGroup>
+
 </Project>

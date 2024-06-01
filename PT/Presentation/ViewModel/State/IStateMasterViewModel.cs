@@ -18,11 +18,11 @@ public interface IStateMasterViewModel
 
     public ObservableCollection<IStateDetailViewModel> States { get; set; }
 
-    public int Id { get; set; }
+    public int StateId { get; set; }
 
-    public int ProductId { get; set; }
+    public int CatalogId { get; set; }
 
-    public bool Available { get; set; }
+    public int Quantity { get; set; }
 
     public bool IsStateSelected { get; set; }
 

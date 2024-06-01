@@ -73,8 +73,8 @@ public class PresentationTests
         IProductDetailViewModel detail = IProductDetailViewModel.CreateViewModel(1, "Pan Tadeusz", "Super ksiazka", 3.5f,
             operation, _informer);
 
-        Assert.AreEqual(1, detail.Id);
-        Assert.AreEqual("Pan Tadeusz", detail.ProductName);
+        Assert.AreEqual(1, detail.ProductId);
+        Assert.AreEqual("Pan Tadeusz", detail.Name);
         Assert.AreEqual("Super ksiazka", detail.Description);
         Assert.AreEqual(3.5f, detail.Price);
 
@@ -89,9 +89,9 @@ public class PresentationTests
 
         IStateMasterViewModel master = IStateMasterViewModel.CreateViewModel(operation, _informer);
 
-        master.Id = 1;
-        master.ProductId = 1;
-        master.Available = true;
+        master.StateId = 1;
+        master.CatalogId = 1;
+        master.Quantity = true;
 
         Assert.IsNotNull(master.CreateState);
         Assert.IsNotNull(master.RemoveState);
@@ -107,9 +107,9 @@ public class PresentationTests
 
         IStateDetailViewModel detail = IStateDetailViewModel.CreateViewModel(1, 1, true, operation, _informer);
 
-        Assert.AreEqual(1, detail.Id);
-        Assert.AreEqual(1, detail.ProductId);
-        Assert.IsTrue(detail.Available);
+        Assert.AreEqual(1, detail.StateId);
+        Assert.AreEqual(1, detail.CatalogId);
+        Assert.IsTrue(detail.Quantity);
 
         Assert.IsTrue(detail.UpdateState.CanExecute(null));
     }

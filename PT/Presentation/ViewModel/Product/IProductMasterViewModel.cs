@@ -20,10 +20,6 @@ public interface IProductMasterViewModel
 
     string Name { get; set; }
 
-    string Description { get; set; }
-
-    float Price { get; set; }
-
     bool IsProductSelected { get; set; }
 
     Visibility IsProductDetailVisible { get; set; }

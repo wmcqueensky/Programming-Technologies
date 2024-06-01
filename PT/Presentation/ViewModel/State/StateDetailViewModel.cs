@@ -13,37 +13,37 @@ internal class StateDetailViewModel : IViewModel, IStateDetailViewModel
 
     private int _id;
 
-    public int Id
+    public int StateId
     {
         get => _id;
         set
         {
             _id = value;
-            OnPropertyChanged(nameof(Id));
+            OnPropertyChanged(nameof(StateId));
         }
     }
 
     private int _productId;
 
-    public int ProductId
+    public int CatalogId
     {
         get => _productId;
         set
         {
             _productId = value;
-            OnPropertyChanged(nameof(ProductId));
+            OnPropertyChanged(nameof(CatalogId));
         }
     }
 
-    private bool _available;
+    private int _quantity;
 
-    public bool Available
+    public int Quantity
     {
-        get => _available;
+        get => _quantity;
         set
         {
-            _available = value;
-            OnPropertyChanged(nameof(Available));
+            _quantity = value;
+            OnPropertyChanged(nameof(Quantity));
         }
     }
 
@@ -55,11 +55,11 @@ internal class StateDetailViewModel : IViewModel, IStateDetailViewModel
         this._informer = informer ?? new PopupErrorInformer();
     }
 
-    public StateDetailViewModel(int id, int productId, bool available, IStateModelOperation? model = null, IErrorInformer? informer = null)
+    public StateDetailViewModel(int id, int productId, int quantity, IStateModelOperation? model = null, IErrorInformer? informer = null)
     {
-        this.Id = id;
-        this.ProductId = productId;
-        this.Available = available;
+        this.StateId = id;
+        this.CatalogId = productId;
+        this.Quantity = quantity;
 
         this.UpdateState = new OnClickCommand(e => this.Update(), c => this.CanUpdate());
 
@@ -71,7 +71,7 @@ internal class StateDetailViewModel : IViewModel, IStateDetailViewModel
     {
         Task.Run(() =>
         {
-            this._modelOperation.UpdateState(this.Id, this.ProductId, this.Available);
+            this._modelOperation.UpdateState(this.StateId, this.CatalogId, this.Quantity);
 
             this._informer.InformSuccess("State successfully updated!");
         });
@@ -80,7 +80,7 @@ internal class StateDetailViewModel : IViewModel, IStateDetailViewModel
     private bool CanUpdate()
     {
         return !(
-            string.IsNullOrWhiteSpace(this.Available.ToString())
+            string.IsNullOrWhiteSpace(this.Quantity.ToString())
         );
     }
 }

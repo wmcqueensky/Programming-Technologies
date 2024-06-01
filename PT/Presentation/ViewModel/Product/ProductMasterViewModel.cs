@@ -7,11 +7,16 @@ namespace Presentation.ViewModel;
 
 internal class ProductMasterViewModel : IViewModel, IProductMasterViewModel
 {
-    public ICommand SwitchToUserMasterPage { get; set; }
+    public ICommand SwitchToCustomerMasterPage { get; set; }
 
     public ICommand SwitchToStateMasterPage { get; set; }
 
     public ICommand SwitchToEventMasterPage { get; set; }
+
+    public ICommand SwitchToCatalogMasterPage { get; set; }
+
+    public ICommand SwitchToEmployeeMasterPage { get; set; }
+
 
     public ICommand CreateProduct { get; set; }
 
@@ -42,30 +47,6 @@ internal class ProductMasterViewModel : IViewModel, IProductMasterViewModel
         {
             _name = value;
             OnPropertyChanged(nameof(Name));
-        }
-    }
-
-    private float _price;
-
-    public float Price
-    {
-        get => _price;
-        set
-        {
-            _price = value;
-            OnPropertyChanged(nameof(Price));
-        }
-    }
-
-    private string _description;
-
-    public string Description
-    {
-        get => _description;
-        set
-        {
-            _description = value;
-            OnPropertyChanged(nameof(Description));
         }
     }
 
@@ -111,9 +92,12 @@ internal class ProductMasterViewModel : IViewModel, IProductMasterViewModel
 
     public ProductMasterViewModel(IProductModelOperation? model = null, IErrorInformer? informer = null)
     {
-        this.SwitchToUserMasterPage = new SwitchViewCommand("UserMasterView");
+        this.SwitchToEmployeeMasterPage = new SwitchViewCommand("EmployeeMasterView");
         this.SwitchToStateMasterPage = new SwitchViewCommand("StateMasterView");
         this.SwitchToEventMasterPage = new SwitchViewCommand("EventMasterView");
+        this.SwitchToCatalogMasterPage = new SwitchViewCommand("CatalogMasterView");
+        this.SwitchToCustomerMasterPage = new SwitchViewCommand("CustomerMasterView");
+
 
         this.CreateProduct = new OnClickCommand(e => this.StoreProduct(), c => this.CanStoreProduct());
         this.RemoveProduct = new OnClickCommand(e => this.DeleteProduct());
@@ -131,10 +115,7 @@ internal class ProductMasterViewModel : IViewModel, IProductMasterViewModel
     private bool CanStoreProduct()
     {
         return !(
-            string.IsNullOrWhiteSpace(this.Name) ||
-            string.IsNullOrWhiteSpace(this.Description) ||
-            string.IsNullOrWhiteSpace(this.Price.ToString()) ||
-            this.Price <= 0
+            string.IsNullOrWhiteSpace(this.Name)
         );
     }
 
@@ -144,7 +125,7 @@ internal class ProductMasterViewModel : IViewModel, IProductMasterViewModel
         {
             int lastId = await this._modelOperation.GetProductsCount() + 1;
 
-            await this._modelOperation.AddProduct(lastId, this.Name, this.Description, this.Price);
+            await this._modelOperation.AddProduct(lastId, this.Name);
 
             this.LoadProducts();
 
@@ -159,7 +140,7 @@ internal class ProductMasterViewModel : IViewModel, IProductMasterViewModel
         {
             try
             {
-                await this._modelOperation.DeleteProduct(this.SelectedDetailViewModel.Id);
+                await this._modelOperation.DeleteProduct(this.SelectedDetailViewModel.ProductId);
 
                 this.LoadProducts();
 
@@ -182,7 +163,7 @@ internal class ProductMasterViewModel : IViewModel, IProductMasterViewModel
 
             foreach (IProductModel p in Products.Values)
             {
-                this._products.Add(new ProductDetailViewModel(p.Id, p.ProductName, p.ProductDescription, p.Price));
+                this._products.Add(new ProductDetailViewModel(p.ProductId, p.Name));
             }
         });
 

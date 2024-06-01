@@ -13,49 +13,25 @@ internal class ProductDetailViewModel : IViewModel, IProductDetailViewModel
 
     private int _id;
 
-    public int Id
+    public int ProductId
     {
         get => _id;
         set
         {
             _id = value;
-            OnPropertyChanged(nameof(Id));
+            OnPropertyChanged(nameof(ProductId));
         }
     }
 
     private string _productName;
 
-    public string ProductName
+    public string Name
     {
         get => _productName;
         set
         {
             _productName = value;
-            OnPropertyChanged(nameof(ProductName));
-        }
-    }
-
-    private float _price;
-
-    public float Price
-    {
-        get => _price;
-        set
-        {
-            _price = value;
-            OnPropertyChanged(nameof(Price));
-        }
-    }
-
-    private string _description;
-
-    public string Description
-    {
-        get => _description;
-        set
-        {
-            _description = value;
-            OnPropertyChanged(nameof(Description));
+            OnPropertyChanged(nameof(Name));
         }
     }
 
@@ -67,12 +43,10 @@ internal class ProductDetailViewModel : IViewModel, IProductDetailViewModel
         this._informer = informer ?? new PopupErrorInformer();
     }
 
-    public ProductDetailViewModel(int id, string name, string description, float price, IProductModelOperation? model = null, IErrorInformer? informer = null)
+    public ProductDetailViewModel(int id, string name, IProductModelOperation? model = null, IErrorInformer? informer = null)
     {
-        this.Id = id;
-        this.ProductName = name;
-        this.Description = description;
-        this.Price = price;
+        this.ProductId = id;
+        this.Name = name;
 
         this.UpdateProduct = new OnClickCommand(e => this.Update(), c => this.CanUpdate());
 
@@ -84,7 +58,7 @@ internal class ProductDetailViewModel : IViewModel, IProductDetailViewModel
     {
         Task.Run(() =>
         {
-            this._modelOperation.UpdateProduct(this.Id, this.ProductName, this.Description, this.Price);
+            this._modelOperation.UpdateProduct(this.ProductId, this.Name);
 
             this._informer.InformSuccess("Product successfully updated!");
         });
@@ -93,11 +67,7 @@ internal class ProductDetailViewModel : IViewModel, IProductDetailViewModel
     private bool CanUpdate()
     {
         return !(
-            string.IsNullOrWhiteSpace(this.ProductName) ||
-            string.IsNullOrWhiteSpace(this.Description) ||
-            string.IsNullOrWhiteSpace(this.Price.ToString()) ||
-            string.IsNullOrWhiteSpace(this.Description.ToString()) ||
-            this.Price == 0
+            string.IsNullOrWhiteSpace(this.Name)
         );
     }
 }

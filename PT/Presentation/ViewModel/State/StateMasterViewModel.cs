@@ -7,11 +7,15 @@ namespace Presentation.ViewModel;
 
 internal class StateMasterViewModel : IViewModel, IStateMasterViewModel
 {
-    public ICommand SwitchToUserMasterPage { get; set; }
-
     public ICommand SwitchToProductMasterPage { get; set; }
 
     public ICommand SwitchToEventMasterPage { get; set; }
+
+    public ICommand SwitchToCustomerMasterPage { get; set; }
+
+    public ICommand SwitchToCatalogMasterPage { get; set; }
+
+    public ICommand SwitchToEmployeeMasterPage { get; set; }
 
     public ICommand CreateState { get; set; }
 
@@ -35,37 +39,37 @@ internal class StateMasterViewModel : IViewModel, IStateMasterViewModel
 
     private int _id;
 
-    public int Id
+    public int StateId
     {
         get => _id;
         set
         {
             _id = value;
-            OnPropertyChanged(nameof(Id));
+            OnPropertyChanged(nameof(StateId));
         }
     }
 
     private int _productId;
 
-    public int ProductId
+    public int CatalogId
     {
         get => _productId;
         set
         {
             _productId = value;
-            OnPropertyChanged(nameof(ProductId));
+            OnPropertyChanged(nameof(CatalogId));
         }
     }
 
-    private bool _available;
+    private int _quantity;
 
-    public bool Available
+    public int Quantity
     {
-        get => _available;
+        get => _quantity;
         set
         {
-            _available = value;
-            OnPropertyChanged(nameof(Available));
+            _quantity = value;
+            OnPropertyChanged(nameof(Quantity));
         }
     }
 
@@ -111,9 +115,11 @@ internal class StateMasterViewModel : IViewModel, IStateMasterViewModel
 
     public StateMasterViewModel(IStateModelOperation? model = null, IErrorInformer? informer = null)
     {
-        this.SwitchToUserMasterPage = new SwitchViewCommand("UserMasterView");
         this.SwitchToProductMasterPage = new SwitchViewCommand("ProductMasterView");
         this.SwitchToEventMasterPage = new SwitchViewCommand("EventMasterView");
+        this.SwitchToEmployeeMasterPage = new SwitchViewCommand("EmployeeMasterView");
+        this.SwitchToCatalogMasterPage = new SwitchViewCommand("CatalogMasterView");
+        this.SwitchToCustomerMasterPage = new SwitchViewCommand("CustomerMasterView");
 
         this.CreateState = new OnClickCommand(e => this.StoreState(), c => this.CanStoreState());
         this.RemoveState = new OnClickCommand(e => this.DeleteState());
@@ -131,7 +137,7 @@ internal class StateMasterViewModel : IViewModel, IStateMasterViewModel
     private bool CanStoreState()
     {
         return !(
-            string.IsNullOrWhiteSpace(this.ProductId.ToString())
+            string.IsNullOrWhiteSpace(this.CatalogId.ToString())
         );
     }
 
@@ -143,7 +149,7 @@ internal class StateMasterViewModel : IViewModel, IStateMasterViewModel
             {
                 int lastId = await this._modelOperation.GetStatesCount() + 1;
 
-                await this._modelOperation.AddState(lastId, this.ProductId, this.Available);
+                await this._modelOperation.AddState(lastId, this.CatalogId, this.Quantity);
 
                 this.LoadStates();
 
@@ -162,7 +168,7 @@ internal class StateMasterViewModel : IViewModel, IStateMasterViewModel
         {
             try
             {
-                await this._modelOperation.DeleteState(this.SelectedDetailViewModel.Id);
+                await this._modelOperation.DeleteState(this.SelectedDetailViewModel.StateId);
 
                 this.LoadStates();
 
@@ -185,7 +191,7 @@ internal class StateMasterViewModel : IViewModel, IStateMasterViewModel
 
             foreach (IStateModel s in States.Values)
             {
-                this._states.Add(new StateDetailViewModel(s.StateId, s.ProductId, s.Available));
+                this._states.Add(new StateDetailViewModel(s.StateId, s.CatalogId, s.Quantity));
             }
         });
 
