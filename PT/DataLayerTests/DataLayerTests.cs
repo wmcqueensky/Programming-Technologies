@@ -63,3 +63,26 @@ namespace DataLayerTests
             await _dataRepository.DeleteState(stateId);
             await _dataRepository.DeleteCatalog(catalogId);
         }
+
+        [TestMethod]
+        public async Task CatalogTests()
+        {
+            int catalogId = 12;
+
+            await _dataRepository.AddCatalog(catalogId, 25.99m);
+
+            ICatalog catalog = await _dataRepository.GetCatalog(catalogId);
+
+            Assert.IsNotNull(catalog);
+            Assert.AreEqual(catalogId, catalog.CatalogId);
+            Assert.AreEqual(25.99m, catalog.Price);
+
+            Assert.IsNotNull(await _dataRepository.GetAllCatalogs());
+            //Assert.IsTrue(await _dataRepository.GetCatalogsCount() > 0);
+
+            await _dataRepository.DeleteCatalog(catalogId);
+        }
+
+
+    }
+}
