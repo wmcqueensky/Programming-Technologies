@@ -7,11 +7,15 @@ namespace Presentation.ViewModel;
 
 internal class EventMasterViewModel : IViewModel, IEventMasterViewModel
 {
-    public ICommand SwitchToUserMasterPage { get; set; }
+    public ICommand SwitchToEmployeeMasterPage { get; set; }
 
     public ICommand SwitchToProductMasterPage { get; set; }
 
     public ICommand SwitchToStateMasterPage { get; set; }
+
+    public ICommand SwitchToCatalogMasterPage { get; set; }
+
+    public ICommand SwitchToCustomerMasterPage { get; set; }
 
     public ICommand PlacedEvent { get; set; }
 
@@ -47,15 +51,39 @@ internal class EventMasterViewModel : IViewModel, IEventMasterViewModel
         }
     }
 
-    private int _userId;
+    private int _employeeId;
 
-    public int UserId
+    public int EmployeeId
     {
-        get => _userId;
+        get => _employeeId;
         set
         {
-            _userId = value;
-            OnPropertyChanged(nameof(UserId));
+            _employeeId = value;
+            OnPropertyChanged(nameof(EmployeeId));
+        }
+    }
+
+    private int _customerId;
+
+    public int CustomerId
+    {
+        get => _customerId;
+        set
+        {
+            _customerId = value;
+            OnPropertyChanged(nameof(CustomerId));
+        }
+    }
+
+    private int _productId;
+
+    public int ProductId
+    {
+        get => _productId;
+        set
+        {
+            _productId = value;
+            OnPropertyChanged(nameof(ProductId));
         }
     }
 
@@ -101,9 +129,11 @@ internal class EventMasterViewModel : IViewModel, IEventMasterViewModel
 
     public EventMasterViewModel(IEventModelOperation? model = null, IErrorInformer? informer = null)
     {
-        this.SwitchToUserMasterPage = new SwitchViewCommand("UserMasterView");
+        this.SwitchToEmployeeMasterPage = new SwitchViewCommand("UserMasterView");
         this.SwitchToStateMasterPage = new SwitchViewCommand("StateMasterView");
         this.SwitchToProductMasterPage = new SwitchViewCommand("ProductMasterView");
+        this.SwitchToCatalogMasterPage = new SwitchViewCommand("CatalogMasterView");
+        this.SwitchToCustomerMasterPage = new SwitchViewCommand("CustomerMasterView");
 
         this.PlacedEvent = new OnClickCommand(e => this.StorePlaceEvent(), c => this.CanPlaceEvent());
         this.PayedEvent = new OnClickCommand(e => this.StorePayEvent(), c => this.CanPayEvent());
@@ -123,7 +153,7 @@ internal class EventMasterViewModel : IViewModel, IEventMasterViewModel
     {
         return !(
             string.IsNullOrWhiteSpace(this.StateId.ToString()) ||
-            string.IsNullOrWhiteSpace(this.UserId.ToString())
+            string.IsNullOrWhiteSpace(this.EmployeeId.ToString())
         );
     }
 
@@ -131,7 +161,7 @@ internal class EventMasterViewModel : IViewModel, IEventMasterViewModel
     {
         return !(
             string.IsNullOrWhiteSpace(this.StateId.ToString()) ||
-            string.IsNullOrWhiteSpace(this.UserId.ToString())
+            string.IsNullOrWhiteSpace(this.EmployeeId.ToString())
         );
     }
 
@@ -143,7 +173,7 @@ internal class EventMasterViewModel : IViewModel, IEventMasterViewModel
             {
                 int lastId = await this._modelOperation.GetEventsCount() + 1;
 
-                await this._modelOperation.AddEvent(lastId, this.StateId, this.UserId, "PlacedEvent");
+                await this._modelOperation.AddEvent(lastId, this.StateId, this.EmployeeId, this.CustomerId, this.ProductId);
 
                 this.LoadEvents();
 
@@ -162,7 +192,7 @@ internal class EventMasterViewModel : IViewModel, IEventMasterViewModel
         {
             int lastId = await this._modelOperation.GetEventsCount() + 1;
 
-            await this._modelOperation.AddEvent(lastId, this.StateId, this.UserId, "PayedEvent");
+            await this._modelOperation.AddEvent(lastId, this.StateId, this.EmployeeId, this.CustomerId, this.ProductId);
 
             this.LoadEvents();
 
@@ -174,7 +204,7 @@ internal class EventMasterViewModel : IViewModel, IEventMasterViewModel
     {
         Task.Run(async () =>
         {
-            await this._modelOperation.DeleteEvent(this.SelectedDetailViewModel.Id);
+            await this._modelOperation.DeleteEvent(this.SelectedDetailViewModel.EventId);
 
             this.LoadEvents();
 
@@ -192,7 +222,7 @@ internal class EventMasterViewModel : IViewModel, IEventMasterViewModel
 
             foreach (IEventModel e in Events.Values)
             {
-                this._events.Add(new EventDetailViewModel(e.Id, e.StateId, e.UserId, e.Type));
+                this._events.Add(new EventDetailViewModel(e.EventId, e.StateId, e.EmployeeId, e.CustomerId, e.ProductId));
             }
         });
 

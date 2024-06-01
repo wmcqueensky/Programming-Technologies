@@ -20,7 +20,11 @@ public interface IEventMasterViewModel
 
     int StateId { get; set; }
 
-    int UserId { get; set; }
+    int EmployeeId { get; set; }
+
+    int CustomerId { get; set; }
+
+    int ProductId { get; set; }
 
     public ICommand RemoveEvent { get; set; }
 

@@ -185,7 +185,7 @@ internal class CustomerMasterViewModel : IViewModel, ICustomerMasterViewModel
 
             foreach (ICustomerModel c in customers.Values)
             {
-                this._customers.Add(new CustomerDetailViewModel(c.CustomerId, c.Name, c.Surname));
+                this._customers.Add(new CustomerDetailViewModel(c.CustomerId, c.Name, c.Surname, c.Balance));
             }
         });
 

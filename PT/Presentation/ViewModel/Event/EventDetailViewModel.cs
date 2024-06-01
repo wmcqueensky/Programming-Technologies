@@ -11,15 +11,15 @@ internal class EventDetailViewModel : IViewModel, IEventDetailViewModel
 
     private readonly IErrorInformer _informer;
 
-    private int _id;
+    private int _eventId;
 
-    public int Id
+    public int EventId
     {
-        get => _id;
+        get => _eventId;
         set
         {
-            _id = value;
-            OnPropertyChanged(nameof(Id));
+            _eventId = value;
+            OnPropertyChanged(nameof(EventId));
         }
     }
 
@@ -35,15 +35,39 @@ internal class EventDetailViewModel : IViewModel, IEventDetailViewModel
         }
     }
 
-    private int _userId;
+    private int _employeeId;
 
-    public int UserId
+    public int EmployeeId
     {
-        get => _userId;
+        get => _employeeId;
         set
         {
-            _userId = value;
-            OnPropertyChanged(nameof(UserId));
+            _employeeId = value;
+            OnPropertyChanged(nameof(EmployeeId));
+        }
+    }
+
+    private int _customerId;
+
+    public int CustomerId
+    {
+        get => _customerId;
+        set
+        {
+            _customerId = value;
+            OnPropertyChanged(nameof(CustomerId));
+        }
+    }
+
+    private int _productId;
+
+    public int ProductId
+    {
+        get => _productId;
+        set
+        {
+            _productId = value;
+            OnPropertyChanged(nameof(ProductId));
         }
     }
 
@@ -78,26 +102,26 @@ internal class EventDetailViewModel : IViewModel, IEventDetailViewModel
         this._modelOperation = IEventModelOperation.CreateModelOperation();
         this._informer = informer ?? new PopupErrorInformer();
     }
-
-    public EventDetailViewModel(int id, int stateId, int userId, string type, IEventModelOperation? model = null, IErrorInformer? informer = null)
+    public EventDetailViewModel(int id, int stateId, int employeeId, int customerId, int productId, IEventModelOperation? model = null, IErrorInformer? informer = null)
     {
         this.UpdateEvent = new OnClickCommand(e => this.Update(), c => this.CanUpdate());
 
         this._modelOperation = IEventModelOperation.CreateModelOperation();
         this._informer = informer ?? new PopupErrorInformer();
 
-        this.Id = id;
+        this.EventId = id;
         this.StateId = stateId;
-        this.UserId = userId;
+        this.EmployeeId = employeeId;
+        this.CustomerId = customerId;
+        this.EmployeeId = productId;
         this.EventDate = DateTime.Now;
-        this.Type = type;
     }
 
     private void Update()
     {
         Task.Run(async () =>
         {
-            await this._modelOperation.UpdateEvent(this.Id, this.StateId, this.UserId, this.Type);
+            await this._modelOperation.UpdateEvent(this.EventId, this.StateId, this.EmployeeId, this.CustomerId, this.ProductId);
 
             this._informer.InformSuccess("Event successfully updated!");
         });

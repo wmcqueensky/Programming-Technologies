@@ -122,7 +122,7 @@ public class PresentationTests
         IEventMasterViewModel master = IEventMasterViewModel.CreateViewModel(operation, _informer);
 
         master.StateId = 1;
-        master.UserId = 1;
+        master.EmployeeId = 1;
     }
 
     [TestMethod]
