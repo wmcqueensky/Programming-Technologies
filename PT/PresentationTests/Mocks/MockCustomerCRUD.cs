@@ -12,7 +12,7 @@ namespace PresentationTests.Mocks
     {
         private readonly MockDataRepository _testRepository = new MockDataRepository();
 
-        public MockEmployeeCRUD() {}
+        public MockCustomerCRUD() {}
 
         public async Task AddCustomer(int id, string firstName, string lastName, decimal balance)
         {
@@ -26,7 +26,7 @@ namespace PresentationTests.Mocks
 
         public async Task<ICustomerModel> GetCustomerAsyncMethodSyntax(int id)
         {
-            return await _testRepository.GetEmployeeAsyncMethodSyntax(id);
+            return await Task.Run(() => _testRepository.GetCustomer(id).Result);
         }
 
         public async Task UpdateCustomer(int id, string firstName, string lastName, decimal balance)

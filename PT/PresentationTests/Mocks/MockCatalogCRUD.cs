@@ -12,6 +12,8 @@ namespace PresentationTests.Mocks
     {
         private MockDataRepository _dataRepository = new MockDataRepository();
 
+        MockCatalogCRUD() { }
+
         public async Task AddCatalog(int id, decimal price)
         {
             await _dataRepository.AddCatalog(id, price);

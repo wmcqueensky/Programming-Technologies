@@ -1,8 +1,9 @@
-﻿using Service.API;
+﻿using Presentation.Model.API;
+using Service.API;
 
-namespace ServiceTest.FakeItems
+namespace ServiceTest.Mocks
 {
-    internal class MockEventDTO : IEventDTO
+    internal class MockEventDTO : IEventModel
     {
         public MockEventDTO(int id, int stateId, int employeeId, int customerid, int productid)
         {

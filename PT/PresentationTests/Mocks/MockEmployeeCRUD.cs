@@ -53,7 +53,7 @@ namespace PresentationTests.Mocks
 
         public async Task<int> GetEmployeesCount()
         {
-            return await _testRepository.GetEmployeeCount();
+            return await _testRepository.GetEmployeesCount();
         }
     }
 }
