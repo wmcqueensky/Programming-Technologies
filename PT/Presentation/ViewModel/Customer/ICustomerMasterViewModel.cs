@@ -22,6 +22,9 @@ namespace Presentation.ViewModel
 
         string Surname { get; set; }
 
+        decimal Balance { get; set; }
+
+
         bool IsCustomerSelected { get; set; }
 
         Visibility IsCustomerDetailVisible { get; set; }
