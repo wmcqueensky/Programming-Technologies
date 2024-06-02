@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace PresentationTests.Mocks
 {
-    internal class MockCatalogCRUD : ICatalogModelOperation
+    public class MockCatalogCRUD : ICatalogModelOperation
     {
         private MockDataRepository _dataRepository = new MockDataRepository();
 
-        MockCatalogCRUD() { }
+        public MockCatalogCRUD() { }
 
         public async Task AddCatalog(int id, decimal price)
         {

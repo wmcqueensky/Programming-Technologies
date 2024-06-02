@@ -4,7 +4,11 @@ namespace PresentationTests;
 
 public interface IGenerator
 {
-    void GenerateUserModels(IUserMasterViewModel viewModel);
+    void GenerateEmployeeModels(IEmployeeMasterViewModel viewModel);
+
+    void GenerateCustomerModels(ICustomerMasterViewModel viewModel);
+
+    void GenerateCatalogModels(ICatalogMasterViewModel viewModel);
 
     void GenerateProductModels(IProductMasterViewModel viewModel);
 
