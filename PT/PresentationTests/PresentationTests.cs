@@ -12,7 +12,7 @@ public class PresentationTests
     [TestMethod]
     public void UserMasterViewModelTests()
     {
-        IUserModelOperation operation = new  FakeUserCRUD();
+        IUserModelOperation operation = new  MockUserCRUD();
 
         IUserMasterViewModel viewModel = IUserMasterViewModel.CreateViewModel(operation, _informer);
         viewModel.FirstName = "John";
@@ -29,7 +29,7 @@ public class PresentationTests
     [TestMethod]
     public void UserDetailViewModelTests()
     {
-        IUserModelOperation operation = new FakeUserCRUD();
+        IUserModelOperation operation = new MockUserCRUD();
 
         IUserDetailViewModel detail = IUserDetailViewModel.CreateViewModel(1, "John", "Doe", operation, _informer);
 
@@ -44,7 +44,7 @@ public class PresentationTests
     public void ProductMasterViewModelTests()
     {
 
-        IProductModelOperation operation = new FakeProductCRUD();
+        IProductModelOperation operation = new MockProductCRUD();
 
         IProductMasterViewModel master = IProductMasterViewModel.CreateViewModel(operation, _informer);
 
@@ -68,7 +68,7 @@ public class PresentationTests
     public void ProductDetailViewModelTests()
     {
 
-        IProductModelOperation operation = new FakeProductCRUD();
+        IProductModelOperation operation = new MockProductCRUD();
 
         IProductDetailViewModel detail = IProductDetailViewModel.CreateViewModel(1, "Pan Tadeusz", "Super ksiazka", 3.5f,
             operation, _informer);
@@ -85,7 +85,7 @@ public class PresentationTests
     public void StateMasterViewModelTests()
     {
 
-        IStateModelOperation operation = new FakeStateCRUD();
+        IStateModelOperation operation = new MockStateCRUD();
 
         IStateMasterViewModel master = IStateMasterViewModel.CreateViewModel(operation, _informer);
 
@@ -103,7 +103,7 @@ public class PresentationTests
     [TestMethod]
     public void StateDetailViewModelTests()
     {
-        IStateModelOperation operation = new FakeStateCRUD();
+        IStateModelOperation operation = new MockStateCRUD();
 
         IStateDetailViewModel detail = IStateDetailViewModel.CreateViewModel(1, 1, true, operation, _informer);
 
@@ -117,7 +117,7 @@ public class PresentationTests
     [TestMethod]
     public void EventMasterViewModelTests()
     {
-        IEventModelOperation operation = new FakeEventCRUD();
+        IEventModelOperation operation = new MockEventCRUD();
 
         IEventMasterViewModel master = IEventMasterViewModel.CreateViewModel(operation, _informer);
 
@@ -129,7 +129,7 @@ public class PresentationTests
     public void EventDetailViewModelTests()
     {
 
-        IEventModelOperation operation = new FakeEventCRUD();
+        IEventModelOperation operation = new MockEventCRUD();
 
         IEventDetailViewModel detail = IEventDetailViewModel.CreateViewModel(1, 1, 1, "PlacedEvent", operation, _informer);
 
@@ -146,17 +146,17 @@ public class PresentationTests
     {
         IGenerator fixedGenerator = new FixedGenerator();
 
-        IUserModelOperation userOperation = new FakeUserCRUD();
+        IUserModelOperation userOperation = new MockUserCRUD();
         IUserMasterViewModel userViewModel = IUserMasterViewModel.CreateViewModel(userOperation, _informer);
 
-        IProductModelOperation productOperation = new FakeProductCRUD();
+        IProductModelOperation productOperation = new MockProductCRUD();
         IProductMasterViewModel productViewModel = IProductMasterViewModel.CreateViewModel(productOperation, _informer);
 
 
-        IStateModelOperation stateOperation = new FakeStateCRUD();
+        IStateModelOperation stateOperation = new MockStateCRUD();
         IStateMasterViewModel stateViewModel = IStateMasterViewModel.CreateViewModel(stateOperation, _informer);
         ;
-        IEventModelOperation eventOperation = new FakeEventCRUD();
+        IEventModelOperation eventOperation = new MockEventCRUD();
         IEventMasterViewModel eventViewModel = IEventMasterViewModel.CreateViewModel(eventOperation, _informer);
 
         fixedGenerator.GenerateUserModels(userViewModel);
@@ -175,17 +175,17 @@ public class PresentationTests
     {
         IGenerator randomGenerator = new RandomGenerator();
 
-        IUserModelOperation userOperation = new FakeUserCRUD();
+        IUserModelOperation userOperation = new MockUserCRUD();
         IUserMasterViewModel userViewModel = IUserMasterViewModel.CreateViewModel(userOperation, _informer);
 
-        IProductModelOperation productOperation = new FakeProductCRUD();
+        IProductModelOperation productOperation = new MockProductCRUD();
         IProductMasterViewModel productViewModel = IProductMasterViewModel.CreateViewModel(productOperation, _informer);
 
 
-        IStateModelOperation stateOperation = new FakeStateCRUD();
+        IStateModelOperation stateOperation = new MockStateCRUD();
         IStateMasterViewModel stateViewModel = IStateMasterViewModel.CreateViewModel(stateOperation, _informer);
 
-        IEventModelOperation eventOperation = new FakeEventCRUD();
+        IEventModelOperation eventOperation = new MockEventCRUD();
         IEventMasterViewModel eventViewModel = IEventMasterViewModel.CreateViewModel(eventOperation, _informer);
 
         randomGenerator.GenerateUserModels(userViewModel);

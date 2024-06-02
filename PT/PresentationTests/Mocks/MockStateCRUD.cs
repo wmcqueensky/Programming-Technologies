@@ -1,19 +1,21 @@
 ﻿using Presentation.Model.API;
+using PresentationTests.Mocks;
+using Service.API;
 
 namespace PresentationTests.FakeItems
 {
-    internal class FakeStateCRUD : IStateModelOperation
+    internal class MockStateCRUD : IStateModelOperation
     {
-        private readonly FakeDataRepository _testRepository = new FakeDataRepository();
+        private readonly MockDataRepository _testRepository = new MockDataRepository();
 
-        public FakeStateCRUD()
+        public MockStateCRUD()
         {
         }
 
 
-        public async Task AddState(int id, int productId, bool available)
+        public async Task AddState(int id, int catalogid, int quantity)
         {
-            await _testRepository.AddState(id, productId, available);
+            await _testRepository.AddState(id, catalogid, quantity);
         }
 
         public async Task<IStateModel> GetState(int id)
@@ -21,9 +23,9 @@ namespace PresentationTests.FakeItems
             return await this._testRepository.GetState(id);
         }
 
-        public async Task UpdateState(int id, int productId, bool available)
+        public async Task UpdateState(int id, int catalogid, int quantity)
         {
-            await this._testRepository.UpdateState(id, productId, available);
+            await _testRepository.UpdateState(id, catalogid, quantity);
         }
 
         public async Task DeleteState(int id)

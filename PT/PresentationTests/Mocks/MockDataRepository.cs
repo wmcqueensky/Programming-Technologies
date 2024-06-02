@@ -1,8 +1,11 @@
 ﻿using Presentation.Model.API;
+using PresentationTests.FakeItems;
+using Service.API;
+using ServiceTest.FakeItems;
 
-namespace PresentationTests.FakeItems;
+namespace PresentationTests.Mocks;
 
-internal class FakeDataRepository
+internal class MockDataRepository
 {
     public Dictionary<int, IUserModel> Users = new Dictionary<int, IUserModel>();
 
@@ -12,10 +15,17 @@ internal class FakeDataRepository
 
     public Dictionary<int, IStateModel> States = new Dictionary<int, IStateModel>();
 
+    public Dictionary<int, IEmployeeModel> Employees = new Dictionary<int, IEmployeeModel>();
+
+    public Dictionary<int, ICustomerModel> Customers = new Dictionary<int, ICustomerModel>();
+
+    public Dictionary<int, ICatalogModel> Catalogs = new Dictionary<int, ICatalogModel>();
+
+
 
     public async Task AddUser(int id, string firstName, string lastName)
     {
-        this.Users.Add(id, new FakeUserDTO(id, firstName, lastName));
+        this.Users.Add(id, new MockUserDTO(id, firstName, lastName));
     }
 
     public async Task<IUserModel> GetUser(int id)
@@ -54,7 +64,7 @@ internal class FakeDataRepository
 
     public async Task AddProduct(int id, string name, string description, float price)
     {
-        this.Products.Add(id, new FakeProductDTO(id, name, description, price));
+        this.Products.Add(id, new MockProductDTO(id, name, description, price));
     }
 
     public async Task<IProductModel> GetProduct(int id)
@@ -89,7 +99,7 @@ internal class FakeDataRepository
 
     public async Task AddState(int id, int productId, bool available)
     {
-        this.States.Add(id, new FakeStateDTO(id, productId, available));
+        this.States.Add(id, new MockStateDTO(id, productId, available));
     }
 
     public async Task<IStateModel> GetState(int id)
@@ -117,40 +127,4 @@ internal class FakeDataRepository
     {
         return await Task.FromResult(this.States.Count);
     }
-
-
-
-
-    public async Task AddEvent(int id, int stateId, int userId, string type)
-    {
-        this.Events.Add(id, new FakeEventDTO(id, stateId, userId, type));
-    }
-
-    public async Task<IEventModel> GetEvent(int id)
-    {
-        return await Task.FromResult(this.Events[id]);
-    }
-
-    public async Task UpdateEvent(int id, int stateId, int userId, string type)
-    {
-        ((FakeEventDTO)this.Events[id]).StateId = stateId;
-        ((FakeEventDTO)this.Events[id]).UserId = userId;
-        ((FakeEventDTO)this.Events[id]).Type = type;
-    }
-
-    public async Task DeleteEvent(int id)
-    {
-        this.Events.Remove(id);
-    }
-
-    public async Task<Dictionary<int, IEventModel>> GetAllEvents()
-    {
-        return await Task.FromResult(this.Events);
-    }
-
-    public async Task<int> GetEventsCount()
-    {
-        return await Task.FromResult(this.Events.Count);
-    }
-
 }

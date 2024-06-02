@@ -1,30 +1,32 @@
 ﻿using Presentation.Model.API;
+using PresentationTests.Mocks;
+using Service.API;
 
 namespace PresentationTests.FakeItems
 {
-    internal class FakeEventCRUD : IEventModelOperation
+    internal class MockEventCRUD : IEventModelOperation
     {
-        private readonly FakeDataRepository _testRepository = new FakeDataRepository();
+        private readonly MockDataRepository _testRepository = new MockDataRepository();
 
-        public FakeEventCRUD()
+        public MockEventCRUD()
         {
         }
 
-        public async Task AddEvent(int id, int stateId, int userId, string type)
+        public async Task AddEvent(int id, int stateId, int employeeId, int customerid, int productid)
         {
-            await this._testRepository.AddEvent(id, stateId, userId, type);
+            await this._testRepository.AddEvent(id, stateId, employeeId, customerid, productid);
         }
 
-        public async Task<IEventModel> GetEvent(int id, string type)
+        public async Task<IEventModel> GetEvent(int id)
         {
             return await this._testRepository.GetEvent(id);
         }
 
-        public async Task UpdateEvent(int id, int stateId, int userId, string type)
+        public async Task UpdateEvent(int id, int stateId, int employeeId, int customerid, int productide)
         {
-            await this._testRepository.UpdateEvent(id, stateId, userId, type);
+            await this._testRepository.UpdateEvent(id, stateId, employeeId, customerid, productide);
         }
-
+        
         public async Task DeleteEvent(int id)
         {
             await this._testRepository.DeleteEvent(id);
@@ -36,7 +38,7 @@ namespace PresentationTests.FakeItems
 
             foreach (IEventModel currentEvent in (await this._testRepository.GetAllEvents()).Values)
             {
-                result.Add(currentEvent.Id, (IEventModel)currentEvent);
+                result.Add(currentEvent.EventId, (IEventModel)currentEvent);
             }
 
             return result;

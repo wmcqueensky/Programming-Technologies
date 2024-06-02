@@ -10,7 +10,7 @@ internal class RandomGenerator : IGenerator
 
     public void GenerateUserModels(IUserMasterViewModel viewModel)
     {
-        IUserModelOperation operation = new FakeUserCRUD();
+        IUserModelOperation operation = new MockUserCRUD();
 
         for (int i = 1; i <= 10; i++)
         {
@@ -20,7 +20,7 @@ internal class RandomGenerator : IGenerator
 
     public void GenerateProductModels(IProductMasterViewModel viewModel)
     {
-        IProductModelOperation operation = new FakeProductCRUD();
+        IProductModelOperation operation = new MockProductCRUD();
 
         for (int i = 1; i <= 10; i++)
         {
@@ -30,7 +30,7 @@ internal class RandomGenerator : IGenerator
 
     public void GenerateStateModels(IStateMasterViewModel viewModel)
     {
-        IStateModelOperation operation = new FakeStateCRUD();
+        IStateModelOperation operation = new MockStateCRUD();
 
         for (int i = 1; i <= 10; i++)
         {
@@ -40,7 +40,7 @@ internal class RandomGenerator : IGenerator
 
     public void GenerateEventModels(IEventMasterViewModel viewModel)
     {
-        IEventModelOperation operation = new FakeEventCRUD();
+        IEventModelOperation operation = new MockEventCRUD();
 
         for (int i = 1; i <= 10; i++)
         {
