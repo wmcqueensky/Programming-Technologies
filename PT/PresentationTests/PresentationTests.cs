@@ -1,6 +1,7 @@
 using Presentation.Model.API;
 using Presentation.ViewModel;
 using PresentationTests.FakeItems;
+using PresentationTests.Mocks;
 
 namespace PresentationTests;
 
@@ -10,35 +11,98 @@ public class PresentationTests
     private readonly IErrorInformer _informer = new TextErrorInformer();
 
     [TestMethod]
-    public void UserMasterViewModelTests()
+    public void EmployeeMasterViewModelTests()
     {
-        IUserModelOperation operation = new  MockUserCRUD();
+        IEmployeeModelOperation operation = new  MockEmployeeCRUD();
 
-        IUserMasterViewModel viewModel = IUserMasterViewModel.CreateViewModel(operation, _informer);
-        viewModel.FirstName = "John";
-        viewModel.LastName = "Doe";
+        IEmployeeMasterViewModel viewModel = IEmployeeMasterViewModel.CreateViewModel(operation, _informer);
+        viewModel.Name = "John";
+        viewModel.Surname = "Doe";
 
-        Assert.IsNotNull(viewModel.CreateUser);
-        Assert.IsNotNull(viewModel.RemoveUser);
+        Assert.IsNotNull(viewModel.CreateEmployee);
+        Assert.IsNotNull(viewModel.RemoveEmployee);
 
-        Assert.IsTrue(viewModel.CreateUser.CanExecute(null));
+        Assert.IsTrue(viewModel.CreateEmployee.CanExecute(null));
 
-        Assert.IsTrue(viewModel.RemoveUser.CanExecute(null));
+        Assert.IsTrue(viewModel.RemoveEmployee.CanExecute(null));
     }
 
     [TestMethod]
-    public void UserDetailViewModelTests()
+    public void EmployeeDetailViewModelTests()
     {
-        IUserModelOperation operation = new MockUserCRUD();
+        IEmployeeModelOperation operation = new MockEmployeeCRUD();
 
-        IUserDetailViewModel detail = IUserDetailViewModel.CreateViewModel(1, "John", "Doe", operation, _informer);
+        IEmployeeDetailViewModel detail = IEmployeeDetailViewModel.CreateViewModel(1, "John", "Doe", operation, _informer);
 
-        Assert.AreEqual(1, detail.Id);
-        Assert.AreEqual("John", detail.FirstName);
-        Assert.AreEqual("Doe", detail.LastName);
+        Assert.AreEqual(1, detail.EmployeeId);
+        Assert.AreEqual("John", detail.Name);
+        Assert.AreEqual("Doe", detail.Surname);
 
-        Assert.IsTrue(detail.UpdateUser.CanExecute(null));
+        Assert.IsTrue(detail.UpdateEmployee.CanExecute(null));
     }
+
+    [TestMethod]
+    public void CustomerMasterViewModelTests()
+    {
+        ICustomerModelOperation operation = new MockCustomerCRUD();
+
+        ICustomerMasterViewModel viewModel = ICustomerMasterViewModel.CreateViewModel(operation, _informer);
+        viewModel.Name = "John";
+        viewModel.Surname = "Doe";
+        viewModel.Balance = 100;
+
+        Assert.IsNotNull(viewModel.CreateCustomer);
+        Assert.IsNotNull(viewModel.RemoveCustomer);
+
+        Assert.IsTrue(viewModel.CreateCustomer.CanExecute(null));
+
+        Assert.IsTrue(viewModel.RemoveCustomer.CanExecute(null));
+    }
+
+    [TestMethod]
+    public void CustomerDetailViewModelTests()
+    {
+        ICustomerModelOperation operation = new MockCustomerCRUD();
+
+        ICustomerDetailViewModel detail = ICustomerDetailViewModel.CreateViewModel(1, "John", "Doe", 100, operation, _informer);
+
+        Assert.AreEqual(1, detail.CustomerId);
+        Assert.AreEqual("John", detail.Name);
+        Assert.AreEqual("Doe", detail.Surname);
+        Assert.AreEqual(100, detail.Balance);
+
+        Assert.IsTrue(detail.UpdateCustomer.CanExecute(null));
+    }
+
+    [TestMethod]
+    public void CatalogMasterViewModelTests()
+    {
+        ICatalogModelOperation operation = new MockCatalogCRUD();
+
+        ICatalogMasterViewModel viewModel = ICatalogMasterViewModel.CreateViewModel(operation, _informer);
+
+        Assert.IsNotNull(viewModel.CreateCatalog);
+        Assert.IsNotNull(viewModel.RemoveCatalog);
+
+        Assert.IsTrue(viewModel.CreateCatalog.CanExecute(null));
+
+        Assert.IsTrue(viewModel.RemoveCatalog.CanExecute(null));
+    }
+
+
+    [TestMethod]
+    public void CatalogDetailViewModelTests()
+    {
+        ICatalogModelOperation operation = new MockCatalogCRUD();
+
+        ICatalogDetailViewModel detail = ICatalogDetailViewModel.CreateViewModel(1, 12, operation, _informer);
+
+        Assert.AreEqual(1, detail.CatalogId);
+        Assert.AreEqual(12, detail.Price);
+
+        Assert.IsTrue(detail.UpdateCatalog.CanExecute(null));
+    }
+
 
     [TestMethod]
     public void ProductMasterViewModelTests()
@@ -48,16 +112,13 @@ public class PresentationTests
 
         IProductMasterViewModel master = IProductMasterViewModel.CreateViewModel(operation, _informer);
 
-        master.Name = "Pan Tadeusz";
-        master.Description = "Super ksiazka";
-        master.Price = 3.5f;
+        master.Name = "Onion";
+       
 
         Assert.IsNotNull(master.CreateProduct);
         Assert.IsNotNull(master.RemoveProduct);
 
         Assert.IsTrue(master.CreateProduct.CanExecute(null));
-
-        master.Price = -1;
 
         Assert.IsFalse(master.CreateProduct.CanExecute(null));
 
@@ -70,13 +131,10 @@ public class PresentationTests
 
         IProductModelOperation operation = new MockProductCRUD();
 
-        IProductDetailViewModel detail = IProductDetailViewModel.CreateViewModel(1, "Pan Tadeusz", "Super ksiazka", 3.5f,
-            operation, _informer);
+        IProductDetailViewModel detail = IProductDetailViewModel.CreateViewModel(1, "Onion", operation, _informer);
 
         Assert.AreEqual(1, detail.ProductId);
-        Assert.AreEqual("Pan Tadeusz", detail.Name);
-        Assert.AreEqual("Super ksiazka", detail.Description);
-        Assert.AreEqual(3.5f, detail.Price);
+        Assert.AreEqual("Onion", detail.Name);
 
         Assert.IsTrue(detail.UpdateProduct.CanExecute(null));
     }
@@ -91,7 +149,7 @@ public class PresentationTests
 
         master.StateId = 1;
         master.CatalogId = 1;
-        master.Quantity = true;
+        master.Quantity = 1;
 
         Assert.IsNotNull(master.CreateState);
         Assert.IsNotNull(master.RemoveState);
@@ -105,11 +163,11 @@ public class PresentationTests
     {
         IStateModelOperation operation = new MockStateCRUD();
 
-        IStateDetailViewModel detail = IStateDetailViewModel.CreateViewModel(1, 1, true, operation, _informer);
+        IStateDetailViewModel detail = IStateDetailViewModel.CreateViewModel(1, 1, 1, operation, _informer);
 
         Assert.AreEqual(1, detail.StateId);
         Assert.AreEqual(1, detail.CatalogId);
-        Assert.IsTrue(detail.Quantity);
+        Assert.AreEqual(1, detail.Quantity);
 
         Assert.IsTrue(detail.UpdateState.CanExecute(null));
     }
@@ -123,6 +181,8 @@ public class PresentationTests
 
         master.StateId = 1;
         master.EmployeeId = 1;
+        master.CustomerId = 1;
+        master.ProductId = 1;
     }
 
     [TestMethod]
@@ -131,12 +191,13 @@ public class PresentationTests
 
         IEventModelOperation operation = new MockEventCRUD();
 
-        IEventDetailViewModel detail = IEventDetailViewModel.CreateViewModel(1, 1, 1, "PlacedEvent", operation, _informer);
+        IEventDetailViewModel detail = IEventDetailViewModel.CreateViewModel(1, 1, 1, 1, 1, operation, _informer);
 
-        Assert.AreEqual(1, detail.Id);
+        Assert.AreEqual(1, detail.EventId);
         Assert.AreEqual(1, detail.StateId);
-        Assert.AreEqual(1, detail.UserId);
-        Assert.AreEqual("PlacedEvent", detail.Type);
+        Assert.AreEqual(1, detail.EmployeeId);
+        Assert.AreEqual(1, detail.CustomerId);
+        Assert.AreEqual(1, detail.ProductId);
 
         Assert.IsTrue(detail.UpdateEvent.CanExecute(null));
     }
@@ -146,41 +207,56 @@ public class PresentationTests
     {
         IGenerator fixedGenerator = new FixedGenerator();
 
-        IUserModelOperation userOperation = new MockUserCRUD();
-        IUserMasterViewModel userViewModel = IUserMasterViewModel.CreateViewModel(userOperation, _informer);
+        IEmployeeModelOperation employeeOperation = new MockEmployeeCRUD();
+        IEmployeeMasterViewModel employeeViewModel = IEmployeeMasterViewModel.CreateViewModel(employeeOperation, _informer);
+
+        ICustomerModelOperation customerOperation = new MockCustomerCRUD();
+        ICustomerMasterViewModel customerViewModel = ICustomerMasterViewModel.CreateViewModel(customerOperation, _informer);
+
+        ICatalogModelOperation catalogOperation = new MockCatalogCRUD();
+        ICatalogMasterViewModel catalogViewModel = ICatalogMasterViewModel.CreateViewModel(catalogOperation, _informer);
 
         IProductModelOperation productOperation = new MockProductCRUD();
         IProductMasterViewModel productViewModel = IProductMasterViewModel.CreateViewModel(productOperation, _informer);
 
-
         IStateModelOperation stateOperation = new MockStateCRUD();
         IStateMasterViewModel stateViewModel = IStateMasterViewModel.CreateViewModel(stateOperation, _informer);
-        ;
+
         IEventModelOperation eventOperation = new MockEventCRUD();
         IEventMasterViewModel eventViewModel = IEventMasterViewModel.CreateViewModel(eventOperation, _informer);
 
-        fixedGenerator.GenerateUserModels(userViewModel);
+        fixedGenerator.GenerateEmployeeModels(employeeViewModel);
+        fixedGenerator.GenerateCustomerModels(customerViewModel);
+        fixedGenerator.GenerateCatalogModels(catalogViewModel);
         fixedGenerator.GenerateProductModels(productViewModel);
         fixedGenerator.GenerateStateModels(stateViewModel);
         fixedGenerator.GenerateEventModels(eventViewModel);
 
-        Assert.AreEqual(2, userViewModel.Users.Count);
+        Assert.AreEqual(2, employeeViewModel.Employees.Count);
+        Assert.AreEqual(2, customerViewModel.Customers.Count);
+        Assert.AreEqual(2, catalogViewModel.Catalogs.Count);
         Assert.AreEqual(2, productViewModel.Products.Count);
         Assert.AreEqual(2, stateViewModel.States.Count);
         Assert.AreEqual(2, eventViewModel.Events.Count);
     }
+
 
     [TestMethod]
     public void DataRandomGenerationMethodTests()
     {
         IGenerator randomGenerator = new RandomGenerator();
 
-        IUserModelOperation userOperation = new MockUserCRUD();
-        IUserMasterViewModel userViewModel = IUserMasterViewModel.CreateViewModel(userOperation, _informer);
+        IEmployeeModelOperation employeeOperation = new MockEmployeeCRUD();
+        IEmployeeMasterViewModel employeeViewModel = IEmployeeMasterViewModel.CreateViewModel(employeeOperation, _informer);
+
+        ICustomerModelOperation customerOperation = new MockCustomerCRUD();
+        ICustomerMasterViewModel customerViewModel = ICustomerMasterViewModel.CreateViewModel(customerOperation, _informer);
+
+        ICatalogModelOperation catalogOperation = new MockCatalogCRUD();
+        ICatalogMasterViewModel catalogViewModel = ICatalogMasterViewModel.CreateViewModel(catalogOperation, _informer);
 
         IProductModelOperation productOperation = new MockProductCRUD();
         IProductMasterViewModel productViewModel = IProductMasterViewModel.CreateViewModel(productOperation, _informer);
-
 
         IStateModelOperation stateOperation = new MockStateCRUD();
         IStateMasterViewModel stateViewModel = IStateMasterViewModel.CreateViewModel(stateOperation, _informer);
@@ -188,16 +264,21 @@ public class PresentationTests
         IEventModelOperation eventOperation = new MockEventCRUD();
         IEventMasterViewModel eventViewModel = IEventMasterViewModel.CreateViewModel(eventOperation, _informer);
 
-        randomGenerator.GenerateUserModels(userViewModel);
+        randomGenerator.GenerateEmployeeModels(employeeViewModel);
+        randomGenerator.GenerateCustomerModels(customerViewModel);
+        randomGenerator.GenerateCatalogModels(catalogViewModel);
         randomGenerator.GenerateProductModels(productViewModel);
         randomGenerator.GenerateStateModels(stateViewModel);
         randomGenerator.GenerateEventModels(eventViewModel);
 
-        Assert.AreEqual(10, userViewModel.Users.Count);
+        Assert.AreEqual(10, employeeViewModel.Employees.Count);
+        Assert.AreEqual(10, customerViewModel.Customers.Count);
+        Assert.AreEqual(10, catalogViewModel.Catalogs.Count);
         Assert.AreEqual(10, productViewModel.Products.Count);
         Assert.AreEqual(10, stateViewModel.States.Count);
         Assert.AreEqual(10, eventViewModel.Events.Count);
     }
+
 
 
 }
