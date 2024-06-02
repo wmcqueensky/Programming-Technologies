@@ -1,6 +1,7 @@
 ﻿using Presentation.Model.API;
 using Presentation.ViewModel;
 using PresentationTests.FakeItems;
+using PresentationTests.Mocks;
 
 namespace PresentationTests;
 
@@ -8,13 +9,33 @@ internal class RandomGenerator : IGenerator
 {
     private readonly IErrorInformer _informer = new TextErrorInformer();
 
-    public void GenerateUserModels(IUserMasterViewModel viewModel)
+    public void GenerateEmployeeModels(IEmployeeMasterViewModel viewModel)
     {
-        IUserModelOperation operation = new MockUserCRUD();
+        IEmployeeModelOperation operation = new MockEmployeeCRUD();
 
         for (int i = 1; i <= 10; i++)
         {
-            viewModel.Users.Add(IUserDetailViewModel.CreateViewModel(i, RandomString(10), RandomString(10), operation, _informer));
+            viewModel.Employees.Add(IEmployeeDetailViewModel.CreateViewModel(i, RandomString(5), RandomString(5), operation, _informer));
+        }
+    }
+
+    public void GenerateCustomerModels(ICustomerMasterViewModel viewModel)
+    {
+        ICustomerModelOperation operation = new MockCustomerCRUD();
+
+        for (int i = 1; i <= 10; i++)
+        {
+            viewModel.Customers.Add(ICustomerDetailViewModel.CreateViewModel(i, RandomString(5), RandomString(5), RandomNumber<int>(3), operation, _informer));
+        }
+    }
+
+    public void GenerateCatalogModels(ICatalogMasterViewModel viewModel)
+    {
+        ICatalogModelOperation operation = new MockCatalogCRUD();
+
+        for (int i = 1; i <= 10; i++)
+        {
+            viewModel.Catalogs.Add(ICatalogDetailViewModel.CreateViewModel(i, RandomNumber<int>(2), operation, _informer));
         }
     }
 
@@ -24,7 +45,7 @@ internal class RandomGenerator : IGenerator
 
         for (int i = 1; i <= 10; i++)
         {
-            viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(i, RandomString(10), RandomString(10), RandomNumber<float>(4), operation, _informer));
+            viewModel.Products.Add(IProductDetailViewModel.CreateViewModel(i, RandomString(5), operation, _informer));
         }
     }
 
@@ -34,7 +55,7 @@ internal class RandomGenerator : IGenerator
 
         for (int i = 1; i <= 10; i++)
         {
-            viewModel.States.Add(IStateDetailViewModel.CreateViewModel(i, i, RandomBool(), operation, _informer));
+            viewModel.States.Add(IStateDetailViewModel.CreateViewModel(i, RandomNumber<int>(1), RandomNumber<int>(1), operation, _informer));
         }
     }
 
@@ -44,29 +65,13 @@ internal class RandomGenerator : IGenerator
 
         for (int i = 1; i <= 10; i++)
         {
-            viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(i, i, i, "PlacedEvent", operation, _informer));
+            viewModel.Events.Add(IEventDetailViewModel.CreateViewModel(i, RandomNumber<int>(1), RandomNumber<int>(1), RandomNumber<int>(1), RandomNumber<int>(1), operation, _informer));
         }
     }
 
     private string RandomString(int length)
     {
         var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-        var randomText = new char[length];
-
-        Random random = new Random();
-
-        for (int i = 0; i < length; i++)
-        {
-            randomText[i] = chars[random.Next(chars.Length)];
-        }
-
-        return new string(randomText);
-    }
-
-    private string RandomStringWithNumber(int length)
-    {
-        var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
         var randomText = new char[length];
 
@@ -98,17 +103,4 @@ internal class RandomGenerator : IGenerator
 
         return randomNumber;
     }
-
-    private bool RandomBool()
-    {
-        Random random = new Random();
-
-        if (random.Next(0, 2) == 0)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
 }
