@@ -52,6 +52,10 @@ namespace DataLayerTests
             await _dataRepository.DeleteProduct(productId);
         }
 
-        
+        [TestMethod]
+        public async Task GetAllProductsTest()
+        {
+            Assert.IsNotNull(await _dataRepository.GetAllProducts());
+        }
     }
 }
