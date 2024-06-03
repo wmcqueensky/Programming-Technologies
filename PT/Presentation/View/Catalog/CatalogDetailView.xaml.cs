@@ -4,11 +4,11 @@ using System.Windows.Controls;
 namespace Presentation.View
 {
     /// <summary>
-    /// Interaction logic for UserDetailView.xaml
+    /// Interaction logic for CatalogDetailView.xaml
     /// </summary>
-    public partial class UserDetailView : UserControl
+    public partial class CatalogDetailView : UserControl
     {
-        public UserDetailView()
+        public CatalogDetailView()
         {
             InitializeComponent();
         }

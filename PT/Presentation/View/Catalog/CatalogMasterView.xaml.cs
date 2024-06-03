@@ -4,11 +4,11 @@ using System.Windows.Controls;
 namespace Presentation.View
 {
     /// <summary>
-    /// Interaction logic for UserMasterView.xaml
+    /// Interaction logic for CatalogMasterView.xaml
     /// </summary>
-    public partial class UserMasterView : UserControl
+    public partial class CatalogMasterView : UserControl
     {
-        public UserMasterView()
+        public CatalogMasterView()
         {
             InitializeComponent();
         }
