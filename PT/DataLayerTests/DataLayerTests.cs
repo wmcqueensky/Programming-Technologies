@@ -233,5 +233,22 @@ namespace DataLayerTests
 
             await _dataRepository.DeleteCatalog(customerId);
         }
+
+
+        [TestMethod]
+        public async Task AddEmployeeTest()
+        {
+            int employeegId = 12;
+            decimal price = 25.99m;
+
+            await _dataRepository.AddCatalog(employeegId, price);
+            ICatalog employee = await _dataRepository.GetCatalog(employeegId);
+
+            Assert.IsNotNull(employee);
+            Assert.AreEqual(employeegId, employee.CatalogId);
+            Assert.AreEqual(price, employee.Price);
+
+            await _dataRepository.DeleteCatalog(employeegId);
+        }
     }
 }
