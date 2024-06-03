@@ -193,5 +193,45 @@ namespace DataLayerTests
 
             await _dataRepository.DeleteProduct(productId);
         }
+
+
+        [TestMethod]
+        public async Task UpdateStateTest()
+        {
+            int catalogId = 4;
+            int stateId = 4;
+            int initialQuantity = 50;
+            int updatedQuantity = 75;
+
+            await _dataRepository.AddCatalog(catalogId, 39.99m);
+            await _dataRepository.AddState(stateId, catalogId, initialQuantity);
+
+            await _dataRepository.UpdateState(stateId, catalogId, updatedQuantity);
+
+            IState updatedState = await _dataRepository.GetState(stateId);
+
+            Assert.IsNotNull(updatedState);
+            Assert.AreEqual(updatedQuantity, updatedState.Quantity);
+
+            await _dataRepository.DeleteState(stateId);
+            await _dataRepository.DeleteCatalog(catalogId);
+        }
+
+
+        [TestMethod]
+        public async Task AddCustomerTest()
+        {
+            int customerId = 12;
+            decimal price = 25.99m;
+
+            await _dataRepository.AddCatalog(customerId, price);
+            ICatalog customer = await _dataRepository.GetCatalog(customerId);
+
+            Assert.IsNotNull(customer);
+            Assert.AreEqual(customerId, customer.CatalogId);
+            Assert.AreEqual(price, customer.Price);
+
+            await _dataRepository.DeleteCatalog(customerId);
+        }
     }
 }
