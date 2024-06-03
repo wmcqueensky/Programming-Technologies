@@ -57,5 +57,26 @@ namespace DataLayerTests
         {
             Assert.IsNotNull(await _dataRepository.GetAllProducts());
         }
+
+
+        [TestMethod]
+        public async Task AddStateTest()
+        {
+            int catalogId = 3;
+            int stateId = 3;
+            int quantity = 100;
+
+            await _dataRepository.AddCatalog(catalogId, 49.99m);
+            await _dataRepository.AddState(stateId, catalogId, quantity);
+            IState state = await _dataRepository.GetState(stateId);
+
+            Assert.IsNotNull(state);
+            Assert.AreEqual(stateId, state.StateId);
+            Assert.AreEqual(catalogId, state.CatalogId);
+            Assert.AreEqual(quantity, state.Quantity);
+
+            await _dataRepository.DeleteState(stateId);
+            await _dataRepository.DeleteCatalog(catalogId);
+        }
     }
 }
