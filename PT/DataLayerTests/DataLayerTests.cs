@@ -151,5 +151,19 @@ namespace DataLayerTests
         {
             Assert.IsNotNull(await _dataRepository.GetAllEmployees());
         }
+
+
+        [TestMethod]
+        public async Task GetAllCustomersTest()
+        {
+            Assert.IsNotNull(await _dataRepository.GetAllCustomers());
+        }
+
+
+        [TestMethod]
+        public async Task GetAllEventsTest()
+        {
+            Assert.IsNotNull(await _dataRepository.GetAllEvents());
+        }
     }
 }
