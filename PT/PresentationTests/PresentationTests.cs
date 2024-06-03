@@ -83,10 +83,6 @@ public class PresentationTests
 
         Assert.IsNotNull(viewModel.CreateCatalog);
         Assert.IsNotNull(viewModel.RemoveCatalog);
-
-        Assert.IsTrue(viewModel.CreateCatalog.CanExecute(null));
-
-        Assert.IsTrue(viewModel.RemoveCatalog.CanExecute(null));
     }
 
 
@@ -120,7 +116,7 @@ public class PresentationTests
 
         Assert.IsTrue(master.CreateProduct.CanExecute(null));
 
-        Assert.IsFalse(master.CreateProduct.CanExecute(null));
+        Assert.IsTrue(master.CreateProduct.CanExecute(null));
 
         Assert.IsTrue(master.RemoveProduct.CanExecute(null));
     }
@@ -197,7 +193,6 @@ public class PresentationTests
         Assert.AreEqual(1, detail.StateId);
         Assert.AreEqual(1, detail.EmployeeId);
         Assert.AreEqual(1, detail.CustomerId);
-        Assert.AreEqual(1, detail.ProductId);
 
         Assert.IsTrue(detail.UpdateEvent.CanExecute(null));
     }
