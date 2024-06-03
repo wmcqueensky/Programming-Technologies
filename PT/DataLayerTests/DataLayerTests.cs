@@ -105,5 +105,21 @@ namespace DataLayerTests
         {
             Assert.IsNotNull(await _dataRepository.GetAllStates());
         }
+
+        [TestMethod]
+        public async Task AddCatalogTest()
+        {
+            int catalogId = 12;
+            decimal price = 25.99m;
+
+            await _dataRepository.AddCatalog(catalogId, price);
+            ICatalog catalog = await _dataRepository.GetCatalog(catalogId);
+
+            Assert.IsNotNull(catalog);
+            Assert.AreEqual(catalogId, catalog.CatalogId);
+            Assert.AreEqual(price, catalog.Price);
+
+            await _dataRepository.DeleteCatalog(catalogId);
+        }
     }
 }
