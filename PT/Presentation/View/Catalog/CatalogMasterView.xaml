@@ -17,29 +17,36 @@
         </ObjectDataProvider>
     </UserControl.DataContext>
 
-    <Grid Background="White" Margin="0,0,0,0">
+    <Grid Background="LightGreen" Margin="0,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="171*"/>
             <RowDefinition Height="79*"/>
         </Grid.RowDefinitions>
-        <Button Content="Catalogs" Margin="636,0,74,0" VerticalAlignment="Top" Height="50"
-                Command="{Binding SwitchToStateMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
-        <Button Content="States" Margin="636,0,74,0" VerticalAlignment="Top" Height="50"
-                Command="{Binding SwitchToCustomerMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
-        <Button Content="Events" Margin="446,0,264,0" VerticalAlignment="Top" Height="50"
-                Command="{Binding SwitchToEventMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
-        <Button Content="Products" HorizontalAlignment="Left" Margin="264,0,0,0" VerticalAlignment="Top" Width="90" Height="50"
-                Command="{Binding SwitchToProductMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
-        <Button Content="Customers" HorizontalAlignment="Left" Margin="264,0,0,0" VerticalAlignment="Top" Width="90" Height="50"
-                Command="{Binding SwitchToCustomersMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
-        <Button Content="Employees" HorizontalAlignment="Left" Margin="264,0,0,0" VerticalAlignment="Top" Width="90" Height="50"
-                Command="{Binding SwitchToEmployeesMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
-   
-        
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
+            <Button Content="Catalogs" Width="120" Height="50" Margin="5"
+                    Background="ForestGreen" Foreground="White" BorderBrush="Yellow"
+                    Command="{Binding SwitchToCatalogMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+            <Button Content="States" Width="120" Height="50" Margin="5"
+                    Background="ForestGreen" Foreground="White" BorderBrush="Yellow"
+                    Command="{Binding SwitchToStateMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+            <Button Content="Events" Width="120" Height="50" Margin="5"
+                    Background="ForestGreen" Foreground="White" BorderBrush="Yellow"
+                    Command="{Binding SwitchToEventMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+            <Button Content="Products" Width="120" Height="50" Margin="5"
+                    Background="ForestGreen" Foreground="White" BorderBrush="Yellow"
+                    Command="{Binding SwitchToProductMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+            <Button Content="Customers" Width="120" Height="50" Margin="5"
+                    Background="ForestGreen" Foreground="White" BorderBrush="Yellow"
+                    Command="{Binding SwitchToCustomerMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+            <Button Content="Employees" Width="120" Height="50" Margin="5"
+                    Background="ForestGreen" Foreground="White" BorderBrush="Yellow"
+                    Command="{Binding SwitchToEmployeeMasterPage}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+        </StackPanel>
+
         <ListView Margin="10,127,450,40" 
-                    ItemsSource="{Binding Catalogs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    SelectedItem="{Binding SelectedDetailViewModel}" SelectionChanged="ListView_SelectionChanged" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.RowSpan="2"
-                    >
+                  ItemsSource="{Binding Catalogs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedDetailViewModel}" SelectionChanged="ListView_SelectionChanged" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.RowSpan="2">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="CatalogId" Width="110" DisplayMemberBinding="{Binding CatalogId}"/>
@@ -48,23 +55,25 @@
             </ListView.View>
         </ListView>
 
-        <view:CatalogDetailView
-                        Margin="355,92,217,48"
-                        DataContext="{Binding SelectedDetailViewModel}" Height="340" Width="220" Grid.RowSpan="2"
-                        />
-        <Button Content="Delete" Background="Azure" HorizontalAlignment="Left" Margin="420,58,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="90"
-            Command="{Binding RemoveCatalog}" Click="Button_Click" Grid.Row="1"/>
-        <Button Content="Add" Background="Azure" HorizontalAlignment="Left" Margin="641,252,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="91"
-            Command="{Binding CreateCatalog}" Click="Button_Click"/>
+        <view:CatalogDetailView Margin="355,92,217,48"
+                                 DataContext="{Binding SelectedDetailViewModel}" Height="340" Width="220" Grid.RowSpan="2"/>
+
+        <Button Content="Delete" Background="ForestGreen" Foreground="White" BorderBrush="Yellow"
+                HorizontalAlignment="Left" Margin="420,58,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="90"
+                Command="{Binding RemoveCatalog}" Click="Button_Click" Grid.Row="1"/>
+        <Button Content="Add" Background="ForestGreen" Foreground="White" BorderBrush="Yellow"
+                HorizontalAlignment="Left" Margin="641,252,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="91"
+                Command="{Binding CreateCatalog}" Click="Button_Click"/>
+
         <StackPanel Margin="594,142,0,0"
-            VerticalAlignment="Top"
-            Background="White" Height="92" HorizontalAlignment="Left" Width="186">
-            
-            <Label Content="Name:" FontSize="10" Width="57"/>
+                    VerticalAlignment="Top"
+                    Background="White" Height="92" HorizontalAlignment="Left" Width="186">
+
+            <Label Content="Price:" FontSize="10" Width="57"/>
             <TextBox Height="20" Width="120"
-                Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                TextWrapping="Wrap"
-                BorderBrush="Gray">
+                     Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                     TextWrapping="Wrap"
+                     BorderBrush="Gray">
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>

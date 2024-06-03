@@ -1,12 +1,12 @@
 ﻿<UserControl
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Presentation.View"
-      xmlns:viewmodels="clr-namespace:Presentation.ViewModel" x:Class="Presentation.View.StateDetailView"
-      mc:Ignorable="d" 
-      d:DesignHeight="340" d:DesignWidth="220">
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:Presentation.View"
+    xmlns:viewmodels="clr-namespace:Presentation.ViewModel" x:Class="Presentation.View.StateDetailView"
+    mc:Ignorable="d" 
+    d:DesignHeight="340" d:DesignWidth="220">
 
     <UserControl.DataContext>
         <ObjectDataProvider ObjectType="viewmodels:StateDetailViewModel">
@@ -17,20 +17,20 @@
         </ObjectDataProvider>
     </UserControl.DataContext>
 
-    <Grid Background="White" Height="340" VerticalAlignment="Bottom">
+    <Grid Background="LightGreen" Height="340" VerticalAlignment="Bottom">
 
         <GroupBox Width="220"
-                    HorizontalAlignment="Center"
-                    Header="State details:" Margin="0,16,0,76">
+                  HorizontalAlignment="Center"
+                  Header="State details:" Margin="0,16,0,76" Background="LightGreen">
             <StackPanel
                         VerticalAlignment="Top"
-                        Background="White" Height="233">
+                        Background="LightGreen" Height="233">
 
-                <Label Content="Product id:" HorizontalAlignment="Center"/>
+                <Label Content="Product id:" HorizontalAlignment="Center" Foreground="DarkGreen"/>
                 <TextBox Height="20" Width="120"
-                            Text="{Binding ProductId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                            TextWrapping="Wrap"
-                            BorderBrush="Gray">
+                         Text="{Binding ProductId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                         TextWrapping="Wrap"
+                         BorderBrush="Gray">
                     <Validation.ErrorTemplate>
                         <ControlTemplate>
                             <StackPanel>
@@ -41,11 +41,11 @@
                     </Validation.ErrorTemplate>
                 </TextBox>
 
-                <Label Content="Quantity:" HorizontalAlignment="Center"/>
+                <Label Content="Quantity:" HorizontalAlignment="Center" Foreground="DarkGreen"/>
                 <TextBox Height="20" Width="120"
-                            Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                            TextWrapping="Wrap"
-                            BorderBrush="Gray">
+                         Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                         TextWrapping="Wrap"
+                         BorderBrush="Gray">
                     <Validation.ErrorTemplate>
                         <ControlTemplate>
                             <StackPanel>
@@ -59,7 +59,9 @@
 
             </StackPanel>
         </GroupBox>
-        <Button Content="Update" Background="Azure" HorizontalAlignment="Center" Margin="0,269,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="90"
-                    Command="{Binding UpdateState}"/>
+        <Button Content="Update" Background="ForestGreen" Foreground="White" BorderBrush="Yellow"
+                HorizontalAlignment="Center" Margin="0,269,0,0" VerticalAlignment="Top"
+                RenderTransformOrigin="0.227,0.242" Height="26" Width="90"
+                Command="{Binding UpdateState}"/>
     </Grid>
 </UserControl>
