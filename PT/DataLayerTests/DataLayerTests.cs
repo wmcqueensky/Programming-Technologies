@@ -99,5 +99,11 @@ namespace DataLayerTests
             await _dataRepository.DeleteState(stateId);
             await _dataRepository.DeleteCatalog(catalogId);
         }
+
+        [TestMethod]
+        public async Task GetAllStatesTest()
+        {
+            Assert.IsNotNull(await _dataRepository.GetAllStates());
+        }
     }
 }
