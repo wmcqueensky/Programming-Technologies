@@ -16,16 +16,10 @@
         </ObjectDataProvider>
     </UserControl.DataContext>
 
-    <Grid Background="White" Height="340" VerticalAlignment="Bottom">
-
-        <GroupBox Width="220"
-                  HorizontalAlignment="Center"
-                  Header="Employee details:" Margin="0,16,0,76">
-            <StackPanel
-                        VerticalAlignment="Top"
-                        Background="White" Height="233">
-
-                <Label Content="Name:" HorizontalAlignment="Center"/>
+    <Grid Background="LightGreen" Height="340" VerticalAlignment="Bottom">
+        <GroupBox Width="220" HorizontalAlignment="Center" Header="Employee details:" Margin="0,16,0,76" Background="LightGreen">
+            <StackPanel VerticalAlignment="Top" Background="LightGreen" Height="233">
+                <Label Content="Name:" HorizontalAlignment="Center" Foreground="DarkGreen"/>
                 <TextBox Height="20" Width="120"
                          Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                          TextWrapping="Wrap"
@@ -40,7 +34,7 @@
                     </Validation.ErrorTemplate>
                 </TextBox>
 
-                <Label Content="Surname:" HorizontalAlignment="Center"/>
+                <Label Content="Surname:" HorizontalAlignment="Center" Foreground="DarkGreen"/>
                 <TextBox Height="20" Width="120"
                          Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                          TextWrapping="Wrap"
@@ -54,11 +48,12 @@
                         </ControlTemplate>
                     </Validation.ErrorTemplate>
                 </TextBox>
-
-
             </StackPanel>
         </GroupBox>
-        <Button Content="Update" Background="Azure" HorizontalAlignment="Center" Margin="0,269,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="90"
-            Command="{Binding UpdateEmployee}"/>
+
+        <Button Content="Update" Background="ForestGreen" Foreground="White" BorderBrush="Yellow"
+                HorizontalAlignment="Center" Margin="0,269,0,0" VerticalAlignment="Top"
+                RenderTransformOrigin="0.227,0.242" Height="26" Width="90"
+                Command="{Binding UpdateEmployee}"/>
     </Grid>
 </UserControl>

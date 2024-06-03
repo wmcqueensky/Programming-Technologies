@@ -16,16 +16,16 @@
         </ObjectDataProvider>
     </UserControl.DataContext>
 
-    <Grid Background="White" Height="340" VerticalAlignment="Bottom">
-
+    <Grid Background="LightGreen" Height="340" VerticalAlignment="Bottom">
         <GroupBox Width="220"
                   HorizontalAlignment="Center"
-                  Header="Catalog details:" Margin="0,16,0,76">
+                  Header="Catalog details:" Margin="0,16,0,76"
+                  Background="LightGreen">
             <StackPanel
                         VerticalAlignment="Top"
-                        Background="White" Height="233">
+                        Background="LightGreen" Height="233">
 
-                <Label Content="Catalog Price:" HorizontalAlignment="Center"/>
+                <Label Content="Catalog Price:" HorizontalAlignment="Center" Foreground="DarkGreen"/>
                 <TextBox Height="20" Width="120"
                          Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                          TextWrapping="Wrap"
@@ -41,7 +41,9 @@
                 </TextBox>
             </StackPanel>
         </GroupBox>
-        <Button Content="Update" Background="Azure" HorizontalAlignment="Center" Margin="0,269,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="90"
-            Command="{Binding UpdateCatalog}"/>
+        <Button Content="Update" Background="ForestGreen" Foreground="White" BorderBrush="Yellow"
+                HorizontalAlignment="Center" Margin="0,269,0,0" VerticalAlignment="Top"
+                RenderTransformOrigin="0.227,0.242" Height="26" Width="90"
+                Command="{Binding UpdateCatalog}"/>
     </Grid>
 </UserControl>

@@ -16,19 +16,19 @@
             </ObjectDataProvider.ConstructorParameters>
         </ObjectDataProvider>
     </UserControl.DataContext>
-    
-    
-    <Grid Background="White" Height="340" VerticalAlignment="Bottom">
+
+
+    <Grid Background="LightGreen" Height="340" VerticalAlignment="Bottom">
 
         <GroupBox Width="220"
                   HorizontalAlignment="Center"
-                  Header="Event details:" Margin="0,0,0,41">
+                  Header="Event details:" Margin="0,0,0,41" Background="LightGreen">
             <StackPanel
                         VerticalAlignment="Top"
-                        Background="White" Height="300">
-                <Label Content="Event id:" HorizontalAlignment="Center"/>
+                        Background="LightGreen" Height="300">
+                <Label Content="Event id:" HorizontalAlignment="Center" Foreground="DarkGreen"/>
                 <TextBox Height="20" Width="120"
-                         Text="{Binding Id, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                         Text="{Binding EventId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                          TextWrapping="Wrap"
                          BorderBrush="Gray" IsReadOnly="True">
                     <Validation.ErrorTemplate>
@@ -41,7 +41,7 @@
                     </Validation.ErrorTemplate>
                 </TextBox>
 
-                <Label Content="State id:" HorizontalAlignment="Center"/>
+                <Label Content="State id:" HorizontalAlignment="Center" Foreground="DarkGreen"/>
                 <TextBox Height="20" Width="120"
                          Text="{Binding StateId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                          TextWrapping="Wrap"
@@ -56,7 +56,7 @@
                     </Validation.ErrorTemplate>
                 </TextBox>
 
-                <Label Content="Employee id:" HorizontalAlignment="Center"/>
+                <Label Content="Employee id:" HorizontalAlignment="Center" Foreground="DarkGreen"/>
                 <TextBox Height="20" Width="120"
                          Text="{Binding EmployeeId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                          TextWrapping="Wrap"
@@ -71,7 +71,7 @@
                     </Validation.ErrorTemplate>
                 </TextBox>
 
-                <Label Content="Customer id:" Width="80"/>
+                <Label Content="Customer id:" Width="80" Foreground="DarkGreen"/>
                 <TextBox Height="20" Width="120"
                 Text="{Binding CustomerId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                 TextWrapping="Wrap"
@@ -86,7 +86,7 @@
                     </Validation.ErrorTemplate>
                 </TextBox>
 
-                <Label Content="Product id:" Width="80"/>
+                <Label Content="Product id:" Width="80" Foreground="DarkGreen"/>
                 <TextBox Height="20" Width="120"
 Text="{Binding ProductId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 TextWrapping="Wrap"
@@ -101,7 +101,7 @@ TextWrapping="Wrap"
                     </Validation.ErrorTemplate>
                 </TextBox>
 
-                <Label Content="Event date:" Width="70"/>
+                <Label Content="Event date:" Width="70" Foreground="DarkGreen"/>
                 <TextBox Height="20" Width="120"
                     Text="{Binding EventDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat={}{0:MM/dd/yyyy}}"
                     TextWrapping="Wrap"
@@ -118,7 +118,6 @@ TextWrapping="Wrap"
 
             </StackPanel>
         </GroupBox>
-        <Button Content="Update" Background="Azure" HorizontalAlignment="Center" Margin="0,304,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="90"
-            Command="{Binding UpdateEvent}"/>
+        <Button Content="Update" Background="ForestGreen" Foreground="White" BorderBrush="Yellow" HorizontalAlignment="Center" Margin="0,304,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.242" Height="26" Width="90" Command="{Binding UpdateEvent}"/>
     </Grid>
 </UserControl>
