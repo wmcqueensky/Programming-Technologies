@@ -165,5 +165,33 @@ namespace DataLayerTests
         {
             Assert.IsNotNull(await _dataRepository.GetAllEvents());
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception), "This product does not exist!")]
+        public async Task GetNonExistentProductTest()
+        {
+            await _dataRepository.GetProduct(-1);
+        }
+
+        [TestMethod]
+        public async Task UpdateProductTest()
+        {
+            int productId = 13;
+            string productName = "Old Name";
+            string updatedName = "New Name";
+
+            await _dataRepository.AddProduct(productId, productName);
+            IProduct product = await _dataRepository.GetProduct(productId);
+
+            product.Name = updatedName;
+            await _dataRepository.UpdateProduct(productId, updatedName);
+
+            IProduct updatedProduct = await _dataRepository.GetProduct(productId);
+
+            Assert.IsNotNull(updatedProduct);
+            Assert.AreEqual(updatedName, updatedProduct.Name);
+
+            await _dataRepository.DeleteProduct(productId);
+        }
     }
 }
