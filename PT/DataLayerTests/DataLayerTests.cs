@@ -138,5 +138,18 @@ namespace DataLayerTests
 
             await _dataRepository.DeleteCatalog(catalogId);
         }
+
+
+        [TestMethod]
+        public async Task GetAllCatalogsTest()
+        {
+            Assert.IsNotNull(await _dataRepository.GetAllCatalogs());
+        }
+
+        [TestMethod]
+        public async Task GetAllEmployeesTest()
+        {
+            Assert.IsNotNull(await _dataRepository.GetAllEmployees());
+        }
     }
 }
