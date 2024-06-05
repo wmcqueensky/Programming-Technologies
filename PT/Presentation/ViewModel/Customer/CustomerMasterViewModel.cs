@@ -127,7 +127,6 @@ internal class CustomerMasterViewModel : IViewModel, ICustomerMasterViewModel
         this.Customers = new ObservableCollection<ICustomerDetailViewModel>();
 
         this._modelOperation = model ?? ICustomerModelOperation.CreateModelOperation();
-        this._informer = informer ?? new PopupErrorInformer();
 
         this.IsCustomerSelected = false;
 

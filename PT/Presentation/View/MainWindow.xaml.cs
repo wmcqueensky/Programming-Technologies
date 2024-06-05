@@ -8,11 +8,14 @@ namespace Presentation.View
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
-            InitializeComponent();
-
             this.DataContext = new MainWindowViewModel();
+            IViewModel.Informer = new PopupErrorInformer();
+            InitializeComponent();
+            
+            
         }
     }
 }

@@ -9,7 +9,6 @@ internal class ProductDetailViewModel : IViewModel, IProductDetailViewModel
 
     private readonly IProductModelOperation _modelOperation;
 
-    private readonly IErrorInformer _informer;
 
     private int _id;
 
@@ -40,7 +39,6 @@ internal class ProductDetailViewModel : IViewModel, IProductDetailViewModel
         this.UpdateProduct = new OnClickCommand(e => this.Update(), c => this.CanUpdate());
 
         this._modelOperation = model ?? IProductModelOperation.CreateModelOperation();
-        this._informer = informer ?? new PopupErrorInformer();
     }
 
     public ProductDetailViewModel(int id, string name, IProductModelOperation? model = null, IErrorInformer? informer = null)
@@ -51,7 +49,7 @@ internal class ProductDetailViewModel : IViewModel, IProductDetailViewModel
         this.UpdateProduct = new OnClickCommand(e => this.Update(), c => this.CanUpdate());
 
         this._modelOperation = model ?? IProductModelOperation.CreateModelOperation();
-        this._informer = informer ?? new PopupErrorInformer();
+
     }
 
     private void Update()
@@ -60,7 +58,7 @@ internal class ProductDetailViewModel : IViewModel, IProductDetailViewModel
         {
             this._modelOperation.UpdateProduct(this.ProductId, this.Name);
 
-            this._informer.InformSuccess("Product successfully updated!");
+            Informer.InformSuccess("Product successfully updated!");
         });
     }
 
