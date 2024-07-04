@@ -36,15 +36,49 @@
            Foreground="DarkGreen"/>
 
             <Button 
-                Height="160" Width="347" Margin="0,15,0,0" 
-                Name="startButton" Content="Enter Greengrocers" FontSize="21"
-                Command="{Binding StartAppCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                Background="ForestGreen" Foreground="White" BorderBrush="Yellow" Click="startButton_Click"/>
+    Height="160" Width="347" Margin="0,15,0,0" 
+    Name="startButton" Content="Enter Greengrocers" FontSize="21"
+    Command="{Binding StartAppCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" 
+    Background="ForestGreen" Foreground="White">
+                <Button.BorderBrush>
+                    <SolidColorBrush Color="Yellow"/>
+                </Button.BorderBrush>
+                <Button.BorderThickness>
+                    <Thickness>2</Thickness>
+                </Button.BorderThickness>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}" 
+                    CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
             <Button 
-                Height="40" Width="140" Margin="0,15,0,0"
-                Name="exitButton" Content="Exit"
-                Command="{Binding ExitAppCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"
-                Background="DarkGreen" Foreground="White" BorderBrush="PaleVioletRed"/>
+    Height="40" Width="140" Margin="0,15,0,0"
+    Name="exitButton" Content="Exit"
+    Command="{Binding ExitAppCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"
+    Background="DarkGreen" Foreground="White">
+                <Button.BorderBrush>
+                    <SolidColorBrush Color="PaleVioletRed"/>
+                </Button.BorderBrush>
+                <Button.BorderThickness>
+                    <Thickness>2</Thickness>
+                </Button.BorderThickness>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}" 
+                    CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="0" 

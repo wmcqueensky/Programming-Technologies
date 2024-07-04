@@ -9,7 +9,6 @@ internal class StateDetailViewModel : IViewModel, IStateDetailViewModel
 
     private readonly IStateModelOperation _modelOperation;
 
-    private readonly IErrorInformer _informer;
 
     private int _id;
 
@@ -52,7 +51,7 @@ internal class StateDetailViewModel : IViewModel, IStateDetailViewModel
         this.UpdateState = new OnClickCommand(e => this.Update(), c => this.CanUpdate());
 
         this._modelOperation = IStateModelOperation.CreateModelOperation();
-        this._informer = informer ?? new PopupErrorInformer();
+
     }
 
     public StateDetailViewModel(int id, int productId, int quantity, IStateModelOperation? model = null, IErrorInformer? informer = null)
@@ -64,7 +63,7 @@ internal class StateDetailViewModel : IViewModel, IStateDetailViewModel
         this.UpdateState = new OnClickCommand(e => this.Update(), c => this.CanUpdate());
 
         this._modelOperation = IStateModelOperation.CreateModelOperation();
-        this._informer = informer ?? new PopupErrorInformer();
+
     }
 
     private void Update()
@@ -73,7 +72,7 @@ internal class StateDetailViewModel : IViewModel, IStateDetailViewModel
         {
             this._modelOperation.UpdateState(this.StateId, this.CatalogId, this.Quantity);
 
-            this._informer.InformSuccess("State successfully updated!");
+            Informer.InformSuccess("State successfully updated!");
         });
     }
 

@@ -9,7 +9,6 @@ internal class CatalogDetailViewModel : IViewModel, ICatalogDetailViewModel
 
     private readonly ICatalogModelOperation _modelOperation;
 
-    private readonly IErrorInformer _informer;
 
     private int _catalogId;
 
@@ -40,7 +39,7 @@ internal class CatalogDetailViewModel : IViewModel, ICatalogDetailViewModel
         this.UpdateCatalog = new OnClickCommand(e => this.Update(), c => this.CanUpdate());
 
         this._modelOperation = model ?? ICatalogModelOperation.CreateModelOperation();
-        this._informer = informer ?? new PopupErrorInformer();
+
     }
 
     public CatalogDetailViewModel(int id, decimal price, ICatalogModelOperation? model = null, IErrorInformer? informer = null)
@@ -51,7 +50,7 @@ internal class CatalogDetailViewModel : IViewModel, ICatalogDetailViewModel
         this.UpdateCatalog = new OnClickCommand(e => this.Update(), c => this.CanUpdate());
 
         this._modelOperation = model ?? ICatalogModelOperation.CreateModelOperation();
-        this._informer = informer ?? new PopupErrorInformer();
+
     }
 
     private void Update()
@@ -60,7 +59,7 @@ internal class CatalogDetailViewModel : IViewModel, ICatalogDetailViewModel
         {
             this._modelOperation.UpdateCatalog(this.CatalogId, this.Price);
 
-            this._informer.InformSuccess("Catalog successfully updated!");
+            Informer.InformSuccess("Catalog successfully updated!");
         });
     }
 

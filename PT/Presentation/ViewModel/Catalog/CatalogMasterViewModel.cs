@@ -101,7 +101,6 @@ internal class CatalogMasterViewModel : IViewModel, ICatalogMasterViewModel
         this.Catalogs = new ObservableCollection<ICatalogDetailViewModel>();
 
         this._modelOperation = model ?? ICatalogModelOperation.CreateModelOperation();
-        this._informer = informer ?? new PopupErrorInformer();
 
         this.IsCatalogSelected = false;
 

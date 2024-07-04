@@ -23,7 +23,6 @@ internal class EmployeeMasterViewModel : IViewModel, IEmployeeMasterViewModel
 
     private readonly IEmployeeModelOperation _modelOperation;
 
-    private readonly IErrorInformer _informer;
 
     private ObservableCollection<IEmployeeDetailViewModel> _employees;
 
@@ -116,7 +115,7 @@ internal class EmployeeMasterViewModel : IViewModel, IEmployeeMasterViewModel
         this.Employees = new ObservableCollection<IEmployeeDetailViewModel>();
 
         this._modelOperation = model ?? IEmployeeModelOperation.CreateModelOperation();
-        this._informer = informer ?? new PopupErrorInformer();
+
 
         this.IsEmployeeSelected = false;
 
@@ -139,7 +138,7 @@ internal class EmployeeMasterViewModel : IViewModel, IEmployeeMasterViewModel
 
             await this._modelOperation.AddEmployee(lastId, this.Name, this.Surname);
 
-            this._informer.InformSuccess("Employee successfully created!");
+            Informer.InformSuccess("Employee successfully created!");
 
             this.LoadEmployees();
         });
@@ -153,13 +152,13 @@ internal class EmployeeMasterViewModel : IViewModel, IEmployeeMasterViewModel
             {
                 await this._modelOperation.DeleteEmployee(this.SelectedDetailViewModel.EmployeeId);
 
-                this._informer.InformSuccess("Employee successfully deleted!");
+                Informer.InformSuccess("Employee successfully deleted!");
 
                 this.LoadEmployees();
             }
             catch (Exception e)
             {
-                this._informer.InformError("Error while deleting Employee! Remember to remove all associated events!");
+                Informer.InformError("Error while deleting Employee! Remember to remove all associated events!");
             }
         });
     }

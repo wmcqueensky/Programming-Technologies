@@ -9,7 +9,7 @@ internal class CustomerDetailViewModel : IViewModel, ICustomerDetailViewModel
 
     private readonly ICustomerModelOperation _modelOperation;
 
-    private readonly IErrorInformer _informer;
+
 
     private int _customerId;
 
@@ -64,7 +64,7 @@ internal class CustomerDetailViewModel : IViewModel, ICustomerDetailViewModel
         this.UpdateCustomer = new OnClickCommand(e => this.Update(), c => this.CanUpdate());
 
         this._modelOperation = model ?? ICustomerModelOperation.CreateModelOperation();
-        this._informer = informer ?? new PopupErrorInformer();
+
     }
 
     public CustomerDetailViewModel(int id, string firstName, string lastName, decimal balance, ICustomerModelOperation? model = null, IErrorInformer? informer = null)
@@ -77,7 +77,7 @@ internal class CustomerDetailViewModel : IViewModel, ICustomerDetailViewModel
         this.UpdateCustomer = new OnClickCommand(e => this.Update(), c => this.CanUpdate());
 
         this._modelOperation = model ?? ICustomerModelOperation.CreateModelOperation();
-        this._informer = informer ?? new PopupErrorInformer();
+
     }
 
     private void Update()
@@ -86,7 +86,7 @@ internal class CustomerDetailViewModel : IViewModel, ICustomerDetailViewModel
         {
             this._modelOperation.UpdateCustomer(this.CustomerId, this.Name, this.Surname, this.Balance);
 
-            this._informer.InformSuccess("Customer successfully updated!");
+            Informer.InformSuccess("Customer successfully updated!");
         });
     }
 

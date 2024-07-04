@@ -8,7 +8,6 @@ internal class EmployeeDetailViewModel : IViewModel, IEmployeeDetailViewModel
 
     private readonly IEmployeeModelOperation _modelOperation;
 
-    private readonly IErrorInformer _informer;
 
     private int _employeeId;
     public int EmployeeId
@@ -50,7 +49,7 @@ internal class EmployeeDetailViewModel : IViewModel, IEmployeeDetailViewModel
         this.UpdateEmployee = new OnClickCommand(e => this.Update(), c => this.CanUpdate());
 
         this._modelOperation = model ?? IEmployeeModelOperation.CreateModelOperation();
-        this._informer = informer ?? new PopupErrorInformer();
+
     }
 
     public EmployeeDetailViewModel(int id, string firstName, string lastName, IEmployeeModelOperation? model = null, IErrorInformer? informer = null)
@@ -62,7 +61,7 @@ internal class EmployeeDetailViewModel : IViewModel, IEmployeeDetailViewModel
         this.UpdateEmployee = new OnClickCommand(e => this.Update(), c => this.CanUpdate());
 
         this._modelOperation = model ?? IEmployeeModelOperation.CreateModelOperation();
-        this._informer = informer ?? new PopupErrorInformer();
+
     }
 
     private void Update()
@@ -71,7 +70,7 @@ internal class EmployeeDetailViewModel : IViewModel, IEmployeeDetailViewModel
         {
             this._modelOperation.UpdateEmployee(this.EmployeeId, this.Name, this.Surname);
 
-            this._informer.InformSuccess("Employee successfully updated!");
+            Informer.InformSuccess("Employee successfully updated!");
         });
     }
 
