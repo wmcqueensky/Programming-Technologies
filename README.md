@@ -1,7 +1,5 @@
 # Programming Technology Lab
 
-## Future WPF C# Project
-
 ## Team
 
 | Name Surname (initials) | GUID                                     |
